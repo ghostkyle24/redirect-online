@@ -213,6 +213,13 @@ function WhatsAppWebSim({ onBack }) {
     ]
   }));
   const chat = chats[selected];
+  // CORREÇÃO: Declarar sortedMessages aqui
+  const sortedMessages = chat && chat.messages ? [...chat.messages].sort((a, b) => {
+    const [hA, mA] = a.time.split(":").map(Number);
+    const [hB, mB] = b.time.split(":").map(Number);
+    return hB * 60 + mB - (hA * 60 + mA);
+  }) : [];
+
   return (
     <div style={{
       minHeight: '80vh',
@@ -375,7 +382,7 @@ function WhatsAppWebSim({ onBack }) {
   );
 }
 
-function WhatsAppSim(props) {
+function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
   const [option, setOption] = useState('clone');
   const [phone, setPhone] = useState('');
   const [device, setDevice] = useState('');
@@ -439,7 +446,7 @@ function WhatsAppSim(props) {
       setImei('');
       setOption('clone');
       setShowMonitor(false);
-      if (props.onBack) props.onBack();
+      if (onBack) onBack();
     }} />;
   }
 
