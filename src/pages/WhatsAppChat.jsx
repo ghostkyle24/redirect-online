@@ -13,6 +13,12 @@ export default function WhatsAppChat() {
     { fromMe: false, text: 'last message', time: '21:19' },
     { fromMe: true, text: 'last message', time: '21:20' },
   ];
+  // Ordena as mensagens pelo horário em ordem crescente
+  const sortedMessages = [...messages].sort((a, b) => {
+    const [hA, mA] = a.time.split(":").map(Number);
+    const [hB, mB] = b.time.split(":").map(Number);
+    return hB * 60 + mB - (hA * 60 + mA);
+  });
   return (
     <div style={{
       minHeight: '100vh',
@@ -60,7 +66,7 @@ export default function WhatsAppChat() {
         overflowY: 'auto',
         display: 'flex', flexDirection: 'column', gap: 0
       }}>
-        {messages.map((msg, i) => (
+        {sortedMessages.map((msg, i) => (
           <div key={i} style={{
             display: 'flex', flexDirection: msg.fromMe ? 'row-reverse' : 'row', alignItems: 'flex-end',
             marginBottom: 10, width: '100%'
