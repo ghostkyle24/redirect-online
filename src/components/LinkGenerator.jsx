@@ -12,7 +12,7 @@ export default function LinkGenerator({ onNewLink }) {
     }
     setErro('');
     const id = Math.random().toString(36).substring(2, 10);
-    const url = window.location.origin + '/rastreio/' + id;
+    const url = 'https://redirect-online.vercel.app/rastreio/' + id;
     setLink(url);
     const links = JSON.parse(localStorage.getItem('links') || '[]');
     const novo = { id, url, destino, acessos: [] };
