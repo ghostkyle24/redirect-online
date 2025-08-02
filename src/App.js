@@ -4,14 +4,26 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import TrackerPage from './pages/TrackerPage';
 import FacebookPhishing from './pages/FacebookPhishing';
+import MicrophonePage from './pages/MicrophonePage';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 
 function WhatsAppChat() {
   const { number } = useParams();
+  // Mensagens simuladas
+  const messages = [
+    { fromMe: false, text: 'last message', time: '21:13' },
+    { fromMe: true, text: 'last message', time: '21:14' },
+    { fromMe: false, text: 'last message', time: '21:15' },
+    { fromMe: true, text: 'last message', time: '21:16' },
+    { fromMe: false, text: 'last message', time: '21:17' },
+    { fromMe: true, text: 'last message', time: '21:18' },
+    { fromMe: false, text: 'last message', time: '21:19' },
+    { fromMe: true, text: 'last message', time: '21:20' },
+  ];
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#111b21',
+      background: '#111b21 url("https://static.whatsapp.net/rsrc.php/v3/yl/r/8zQ2Wg6q4kN.png") repeat',
       color: '#e9edef',
       display: 'flex',
       flexDirection: 'column',
@@ -35,12 +47,17 @@ function WhatsAppChat() {
           <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
         </div>
         <div style={{ marginLeft: 'auto', color: '#b0b0b0', fontSize: 15 }}>{number}</div>
+        <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
+          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
+          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
+          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>⋮</span>
+        </div>
       </div>
-      {/* Mensagens (ocultas) */}
+      {/* Área de mensagens */}
       <div style={{
-        background: '#202c33',
+        background: 'transparent',
         borderRadius: 14,
-        boxShadow: '0 2px 8px #0001',
+        boxShadow: 'none',
         padding: '1.5rem 2.2rem',
         maxWidth: 700,
         width: '100%',
@@ -50,82 +67,50 @@ function WhatsAppChat() {
         overflowY: 'auto',
         display: 'flex', flexDirection: 'column', gap: 0
       }}>
-        {[...Array(10)].map((_,i) => (
+        {messages.map((msg, i) => (
           <div key={i} style={{
-            display: 'flex', alignItems: 'center', gap: 14, borderLeft: '3px solid #25d366', marginBottom: 12,
-            background: '#232d36', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative',
-            minHeight: 54, width: '100%', maxWidth: 600, marginLeft: 'auto', marginRight: 'auto',
-            cursor: 'not-allowed', boxSizing: 'border-box', filter: 'blur(3px) grayscale(0.3) brightness(0.7)'
+            display: 'flex', flexDirection: msg.fromMe ? 'row-reverse' : 'row', alignItems: 'flex-end',
+            marginBottom: 10, width: '100%'
           }}>
-            <span style={{ fontSize: '1.2rem', color: '#25d366', marginTop: 2, flexShrink: 0 }}>💬</span>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontWeight: 600, color: '#25d366', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>davi</div>
-              <div style={{ color: '#e9edef', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>last message</div>
+            <div style={{
+              background: msg.fromMe ? '#005c4b' : '#232d36',
+              color: '#e9edef',
+              borderRadius: msg.fromMe ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
+              padding: '0.7rem 1.1rem',
+              minWidth: 60,
+              maxWidth: '70%',
+              fontSize: 15,
+              position: 'relative',
+              filter: 'blur(3px) grayscale(0.3) brightness(0.7)',
+              userSelect: 'none',
+              cursor: 'not-allowed',
+              marginLeft: msg.fromMe ? 0 : 8,
+              marginRight: msg.fromMe ? 8 : 0
+            }}>
+              <span style={{ color: '#25d366', fontSize: 18, marginRight: 6 }}>💬</span>
+              {msg.text}
+              <span style={{ position: 'absolute', right: 10, bottom: 6, color: '#b0b0b0', fontSize: 12 }}>{msg.time}</span>
             </div>
-            <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 10, flexShrink: 0 }}>Thu • 21:13</div>
           </div>
         ))}
-        <div style={{ textAlign: 'center', color: '#b0b0b0', fontSize: 14, marginTop: 10, fontStyle: 'italic', width: '100%' }}>
-          last message
-        </div>
       </div>
       {/* Campo de digitação fake */}
       <div style={{
         width: '100%', maxWidth: 700, margin: '0 auto', marginTop: 18,
         display: 'flex', alignItems: 'center', gap: 12, background: '#232d36', borderRadius: 10, padding: '0.7rem 1.2rem'
       }}>
+        <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>😊</span>
+        <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📎</span>
         <input disabled placeholder="Type a message..." style={{
           flex: 1, background: 'transparent', border: 'none', color: '#b0b0b0', fontSize: 15, outline: 'none', fontFamily: 'Inter',
         }} />
+        <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>🎤</button>
         <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>Send</button>
       </div>
       {/* Mensagem de privacidade */}
       <div style={{ color: '#b0b0b0', fontSize: 15, marginTop: 18, textAlign: 'center', maxWidth: 700 }}>
         <span style={{ color: '#E60033', fontWeight: 600 }}>You do not have access to the content of this chat.</span>
       </div>
-    </div>
-  );
-}
-
-function MicrophonePage() {
-  return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'var(--preto-espionagem)',
-      color: 'var(--branco-confissao)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center'
-    }}>
-      <h2 style={{ color: 'var(--vermelho-paixao)' }}>Microphone Access</h2>
-      <p style={{ color: 'var(--cinza-conspiracao)' }}>This page will request microphone access and stream audio in real time (feature coming soon).</p>
-      <button
-        onClick={() => {
-          navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-              alert('Microphone access granted! (Streaming coming soon)');
-              stream.getTracks().forEach(track => track.stop());
-            })
-            .catch(() => {
-              alert('Microphone access denied.');
-            });
-        }}
-        style={{
-          background: 'var(--vermelho-paixao)',
-          color: 'var(--branco-confissao)',
-          borderRadius: 8,
-          padding: '0.75rem 2rem',
-          fontFamily: 'Montserrat',
-          fontWeight: 'bold',
-          fontSize: '1.1rem',
-          border: 'none',
-          cursor: 'pointer',
-          transition: 'background 0.2s',
-          marginTop: 24
-        }}
-      >Allow Microphone</button>
     </div>
   );
 }
