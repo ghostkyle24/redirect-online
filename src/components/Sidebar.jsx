@@ -10,7 +10,7 @@ const items = [
   { label: 'Real-time Microphone', icon: <FaMicrophone />, path: '#' },
 ];
 
-export default function Sidebar({ active = 'Spy Location', onSelect }) {
+export default function Sidebar({ active = 'Home', onSelect, items }) {
   const [open, setOpen] = useState(false);
 
   function handleSelect(label) {
@@ -40,7 +40,7 @@ export default function Sidebar({ active = 'Spy Location', onSelect }) {
         </ul>
       </nav>
       <button className="sidebar__toggle" onClick={() => setOpen(!open)}>
-        <FaBars size={24} />
+        <FaBook size={24} />
       </button>
     </>
   );

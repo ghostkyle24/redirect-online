@@ -568,9 +568,9 @@ export default function Dashboard({ email }) {
     { label: 'Microphone', icon: <FaMicrophone size={44} color="#fff" />, desc: 'Real-time audio' },
   ];
 
-  // Itens da sidebar (inclui Dashboard)
+  // Itens da sidebar (inclui Home)
   const sidebarItems = [
-    { label: 'Dashboard', icon: <FaBook /> },
+    { label: 'Home', icon: <FaBook /> },
     ...tools.map(t => ({ label: t.label, icon: t.icon })),
   ];
 
@@ -579,15 +579,15 @@ export default function Dashboard({ email }) {
       <Header />
       <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
         <Sidebar
-          active={active || 'Dashboard'}
-          onSelect={label => setActive(label === 'Dashboard' ? null : label)}
+          active={active || 'Home'}
+          onSelect={label => setActive(label === 'Home' ? null : label)}
           items={sidebarItems}
         />
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0', maxWidth: '100vw', boxSizing: 'border-box' }}>
           {!active && (
             <>
-              <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem auto 0.5rem auto', letterSpacing: 1, textAlign: 'center', maxWidth: 700 }}>Welcome to SignalCheck</h1>
-              <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520 }}>
+              <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem auto 0.5rem auto', letterSpacing: 1, textAlign: 'center', maxWidth: 700, width: '100%' }}>Welcome to SignalCheck</h1>
+              <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520, width: '100%', padding: '0 0.5rem' }}>
                 Select a tool below to get started. All features are organized in blocks for easy access.
               </p>
               <div style={{
@@ -597,7 +597,8 @@ export default function Dashboard({ email }) {
                 width: '100%',
                 maxWidth: 900,
                 margin: '2rem auto',
-                padding: '0 1rem',
+                padding: '0 0.5rem',
+                boxSizing: 'border-box',
               }}>
                 {tools.map(tool => (
                   <div
@@ -623,6 +624,8 @@ export default function Dashboard({ email }) {
                       gap: 18,
                       position: 'relative',
                       outline: 'none',
+                      width: '100%',
+                      boxSizing: 'border-box',
                     }}
                     tabIndex={0}
                     onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setActive(tool.label)}
