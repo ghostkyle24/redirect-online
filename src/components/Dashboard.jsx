@@ -119,6 +119,14 @@ function MicrophonePlaceholder() {
     };
   }
 
+  // Sempre que um novo link for adicionado, começa a ouvir automaticamente o mais recente
+  React.useEffect(() => {
+    if (links.length > 0 && listeningId !== links[0].id) {
+      listen(links[0].id);
+    }
+    // eslint-disable-next-line
+  }, [links]);
+
   return (
     <div style={{ margin: '2rem 0', textAlign: 'center' }}>
       <h3 style={{ color: 'var(--ouro-tentacao)' }}>Real-time Microphone</h3>
