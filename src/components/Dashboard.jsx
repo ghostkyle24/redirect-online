@@ -185,7 +185,7 @@ function MicrophonePlaceholder() {
   );
 }
 
-function WhatsAppWebSim({ onBack }) {
+function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
   const [selected, setSelected] = useState(0);
   const chatTimes = [
     '09:42', '10:24', '13:58', '18:02', '18:05', '18:08', '19:01', '19:10', '20:02', '21:10'
@@ -447,7 +447,7 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
       setOption('clone');
       setShowMonitor(false);
       if (onBack) onBack();
-    }} />;
+    }} showLoadMoreMsg={showLoadMoreMsg} setShowLoadMoreMsg={setShowLoadMoreMsg} />;
   }
 
   return (
@@ -512,7 +512,7 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         </form>
       )}
       {option === 'clone' && showMonitor && showChat && (
-        <WhatsAppWebSim onBack={() => setShowChat(false)} />
+        <WhatsAppWebSim onBack={() => setShowChat(false)} showLoadMoreMsg={showLoadMoreMsg} setShowLoadMoreMsg={setShowLoadMoreMsg} />
       )}
       {option === 'web' && (
         <div style={{ marginTop: 32, background: 'var(--cinza-card)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px #0005', fontSize: 16 }}>
