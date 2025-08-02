@@ -335,7 +335,8 @@ function WhatsAppSim() {
             maxWidth: 700,
             margin: '0 auto',
             maxHeight: 340,
-            overflowY: 'auto'
+            overflowY: 'auto',
+            position: 'relative'
           }}>
             <div style={{
               fontSize: '1.08rem', fontWeight: 600, color: '#232323', marginBottom: 18,
@@ -358,8 +359,15 @@ function WhatsAppSim() {
               <div key={i} style={{
                 display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
                 background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative',
-                minHeight: 54
-              }}>
+                minHeight: 54,
+                cursor: 'pointer'
+              }}
+              onClick={() => {
+                if (imei !== '356938035643809') {
+                  window.alert('You must enter the correct IMEI to access the conversations.');
+                }
+              }}
+              >
                 <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>{msg.icon}</span>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
@@ -368,13 +376,17 @@ function WhatsAppSim() {
                 <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>{msg.time}</div>
               </div>
             ))}
+            {/* Mensagem padrão embaixo das mensagens */}
+            <div style={{ textAlign: 'center', color: '#b0b0b0', fontSize: 14, marginTop: 10, fontStyle: 'italic' }}>
+              last message
+            </div>
           </div>
-          {/* Mensagem de IMEI incorreto */}
-          {imei !== '356938035643809' && (
+          {/* Mensagem de IMEI incorreto (apenas se não for alert) */}
+          {/* {imei !== '356938035643809' && (
             <div style={{ color: 'var(--vermelho)', fontWeight: 600, margin: '18px auto 0 auto', fontSize: 15, textAlign: 'center', maxWidth: 700 }}>
               You must enter the correct IMEI to access the conversations.
             </div>
-          )}
+          )} */}
         </div>
       )}
       {option === 'web' && (
