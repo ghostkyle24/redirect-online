@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { supabase } from '../supabase';
 
 function getGoogleMapsLink(loc) {
   // Se for formato Lat: x, Lng: y
@@ -16,15 +17,17 @@ function getGoogleMapsLink(loc) {
 export default function LinksList() {
   const [links, setLinks] = useState([]);
 
-  useEffect(() => {
-    const l = JSON.parse(localStorage.getItem('links') || '[]');
-    setLinks(l);
-  }, []);
-
-  function atualizar() {
-    const l = JSON.parse(localStorage.getItem('links') || '[]');
-    setLinks(l);
+  async function fetchLinks() {
+    const { data, error } = await supabase
+      .from('links')
+      .select('*')
+      .order('created_at', { ascending: false });
+    setLinks(data || []);
   }
+
+  useEffect(() => {
+    fetchLinks();
+  }, []);
 
   return (
     <div style={{ margin: '2rem 0' }}>
@@ -42,9 +45,9 @@ export default function LinksList() {
             <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
           </div>
           <div style={{ fontSize: 14, color: 'var(--cinza-conspiracao)' }}>
-            {link.acessos.length === 0 ? 'No access yet.' : `${link.acessos.length} access(es):`}
+            {(!link.acessos || link.acessos.length === 0) ? 'No access yet.' : `${link.acessos.length} access(es):`}
           </div>
-          {link.acessos.length > 0 && (
+          {link.acessos && link.acessos.length > 0 && (
             <ul style={{ margin: '0.5rem 0 0 0', padding: 0, listStyle: 'none' }}>
               {link.acessos.map((a, i) => {
                 const gmaps = getGoogleMapsLink(a.loc);
@@ -84,7 +87,7 @@ export default function LinksList() {
           )}
         </div>
       ))}
-      <button onClick={atualizar} style={{
+      <button onClick={fetchLinks} style={{
         background: 'var(--cinza-conspiracao)',
         color: 'var(--branco-confissao)',
         borderRadius: 8,

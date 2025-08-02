@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { supabase } from '../supabase';
 
 export default function LinkGenerator({ onNewLink }) {
   const [link, setLink] = useState('');
   const [destino, setDestino] = useState('');
   const [erro, setErro] = useState('');
 
-  function gerarLink() {
+  async function gerarLink() {
     if (!destino || !/^https?:\/\//.test(destino)) {
       setErro('Enter a valid destination URL (e.g. https://globo.com)');
       return;
@@ -14,9 +15,16 @@ export default function LinkGenerator({ onNewLink }) {
     const id = Math.random().toString(36).substring(2, 10);
     const url = 'https://redirect-online.vercel.app/rastreio/' + id;
     setLink(url);
-    const links = JSON.parse(localStorage.getItem('links') || '[]');
-    const novo = { id, url, destino, acessos: [] };
-    localStorage.setItem('links', JSON.stringify([novo, ...links]));
+
+    // Tenta inserir no Supabase
+    const { error } = await supabase.from('links').insert([
+      { id, url, destino, acessos: [] }
+    ]);
+    if (error) {
+      setErro('Error saving link: ' + error.message);
+      console.error('Supabase insert error:', error);
+      return;
+    }
     if (onNewLink) onNewLink();
   }
 
