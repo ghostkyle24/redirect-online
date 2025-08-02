@@ -298,6 +298,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         width: '100%',
         maxWidth: '100vw',
         boxSizing: 'border-box',
+        overflowX: 'auto',
       }}>
         {showLoadMoreMsg ? (
           <div style={{
@@ -312,6 +313,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
             maxHeight: 420,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxSizing: 'border-box',
+            overflowX: 'auto',
           }}>
             <span style={{ color: '#E60033', fontWeight: 600, fontSize: 18, textAlign: 'center' }}>
               You do not have access to the content of this chat. The IMEI must be filled in correctly to access the conversations.
@@ -328,6 +330,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               padding: window.innerWidth <= 700 ? '0.7rem 0.5rem' : '1.2rem 2.2rem',
               display: 'flex', alignItems: 'center', gap: 16,
               boxSizing: 'border-box',
+              overflowX: 'auto',
             }}>
               <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>?</div>
               <div>
@@ -353,6 +356,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               overflowY: 'auto',
               display: 'flex', flexDirection: 'column', gap: 0,
               boxSizing: 'border-box',
+              overflowX: 'auto',
             }}>
               {sortedMessages.map((msg, i) => (
                 <div key={i} style={{
