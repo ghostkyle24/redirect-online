@@ -297,7 +297,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         minHeight: 520,
         width: window.innerWidth <= 700 ? '100vw' : '100%',
         boxSizing: 'border-box',
-        overflowX: 'hidden',
+        overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
         padding: window.innerWidth <= 700 ? '0 0.5rem' : 0,
       }}>
         {showLoadMoreMsg ? (
@@ -312,7 +312,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
             maxHeight: 420,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxSizing: 'border-box',
-            overflowX: 'hidden',
+            overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
           }}>
             <span style={{ color: '#E60033', fontWeight: 600, fontSize: 18, textAlign: 'center' }}>
               You do not have access to the content of this chat. The IMEI must be filled in correctly to access the conversations.
@@ -320,86 +320,86 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
           </div>
         ) : (
           <>
-            {/* Barra superior do chat */}
-            <div style={{
-              width: '100%',
-              background: '#202c33',
+        {/* Barra superior do chat */}
+        <div style={{
+          width: '100%',
+          background: '#202c33',
               borderRadius: window.innerWidth <= 700 ? '0' : '0 14px 0 0',
-              boxShadow: '0 2px 8px #0001',
+          boxShadow: '0 2px 8px #0001',
               padding: window.innerWidth <= 700 ? '0.7rem 0.2rem' : '1.2rem 2.2rem',
               display: 'flex', alignItems: 'center', gap: 16,
               boxSizing: 'border-box',
-              overflowX: 'hidden',
-            }}>
-              <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>?</div>
-              <div>
-                <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>Unknown</div>
-                <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
-              </div>
-              <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
-                <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
-                <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
-                <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>⋮</span>
-              </div>
-            </div>
-            {/* Mensagens (ocultas) */}
-            <div style={{
-              background: 'transparent',
-              borderRadius: 14,
-              boxShadow: 'none',
+              overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
+        }}>
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>?</div>
+          <div>
+            <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>Unknown</div>
+            <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
+          </div>
+          <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>⋮</span>
+          </div>
+        </div>
+        {/* Mensagens (ocultas) */}
+        <div style={{
+          background: 'transparent',
+          borderRadius: 14,
+          boxShadow: 'none',
               padding: window.innerWidth <= 700 ? '0.7rem 0.1rem' : '1.5rem 2.2rem',
-              width: '100%',
-              minHeight: 320,
-              maxHeight: 420,
-              overflowY: 'auto',
+          width: '100%',
+          minHeight: 320,
+          maxHeight: 420,
+          overflowY: 'auto',
+              overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
               display: 'flex', flexDirection: 'column', gap: 0,
               boxSizing: 'border-box',
-              overflowX: 'hidden',
-            }}>
+        }}>
               {sortedMessages.map((msg, i) => (
-                <div key={i} style={{
-                  display: 'flex', flexDirection: msg.fromMe ? 'row-reverse' : 'row', alignItems: 'flex-end',
-                  marginBottom: 10, width: '100%'
-                }}>
-                  <div style={{
-                    background: msg.fromMe ? '#005c4b' : '#232d36',
-                    color: '#e9edef',
-                    borderRadius: msg.fromMe ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
-                    padding: '0.7rem 1.1rem',
-                    minWidth: 60,
-                    maxWidth: '70%',
-                    fontSize: 15,
-                    position: 'relative',
-                    filter: 'blur(3px) grayscale(0.3) brightness(0.7)',
-                    userSelect: 'none',
-                    cursor: 'not-allowed',
-                    marginLeft: msg.fromMe ? 0 : 8,
+            <div key={i} style={{
+              display: 'flex', flexDirection: msg.fromMe ? 'row-reverse' : 'row', alignItems: 'flex-end',
+              marginBottom: 10, width: '100%'
+            }}>
+              <div style={{
+                background: msg.fromMe ? '#005c4b' : '#232d36',
+                color: '#e9edef',
+                borderRadius: msg.fromMe ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
+                padding: '0.7rem 1.1rem',
+                minWidth: 60,
+                maxWidth: '70%',
+                fontSize: 15,
+                position: 'relative',
+                filter: 'blur(3px) grayscale(0.3) brightness(0.7)',
+                userSelect: 'none',
+                cursor: 'not-allowed',
+                marginLeft: msg.fromMe ? 0 : 8,
                     marginRight: msg.fromMe ? 8 : 0,
                     boxSizing: 'border-box',
-                  }}>
-                    <span style={{ color: '#25d366', fontSize: 18, marginRight: 6 }}>💬</span>
-                    {msg.text}
-                    <span style={{ position: 'absolute', right: 10, bottom: 6, color: '#b0b0b0', fontSize: 12 }}>{msg.time}</span>
-                  </div>
-                </div>
-              ))}
+              }}>
+                <span style={{ color: '#25d366', fontSize: 18, marginRight: 6 }}>💬</span>
+                {msg.text}
+                <span style={{ position: 'absolute', right: 10, bottom: 6, color: '#b0b0b0', fontSize: 12 }}>{msg.time}</span>
+              </div>
             </div>
-            {/* Campo de digitação fake */}
-            <div style={{
-              width: '100%', maxWidth: 700, margin: '0 auto', marginTop: 18,
-              display: 'flex', alignItems: 'center', gap: 12, background: '#232d36', borderRadius: 10, padding: '0.7rem 1.2rem'
-            }}>
-              <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📎</span>
-              <input disabled placeholder="Type a message..." style={{
-                flex: 1, background: 'transparent', border: 'none', color: '#b0b0b0', fontSize: 15, outline: 'none', fontFamily: 'Inter',
-              }} />
-              <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>Send</button>
-            </div>
-            {/* Mensagem de privacidade */}
-            <div style={{ color: '#b0b0b0', fontSize: 15, marginTop: 18, textAlign: 'center', maxWidth: 700 }}>
-              <span style={{ color: '#E60033', fontWeight: 600 }}>You do not have access to the content of this chat. The IMEI must be filled in correctly to access the conversations.</span>
-            </div>
-            <button onClick={onBack} style={{ margin: '32px auto 0 auto', background: '#232d36', color: '#25d366', border: 'none', borderRadius: 8, padding: '0.7rem 2.2rem', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'block' }}>Back</button>
+          ))}
+        </div>
+        {/* Campo de digitação fake */}
+        <div style={{
+          width: '100%', maxWidth: 700, margin: '0 auto', marginTop: 18,
+          display: 'flex', alignItems: 'center', gap: 12, background: '#232d36', borderRadius: 10, padding: '0.7rem 1.2rem'
+        }}>
+          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📎</span>
+          <input disabled placeholder="Type a message..." style={{
+            flex: 1, background: 'transparent', border: 'none', color: '#b0b0b0', fontSize: 15, outline: 'none', fontFamily: 'Inter',
+          }} />
+          <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>Send</button>
+        </div>
+        {/* Mensagem de privacidade */}
+        <div style={{ color: '#b0b0b0', fontSize: 15, marginTop: 18, textAlign: 'center', maxWidth: 700 }}>
+          <span style={{ color: '#E60033', fontWeight: 600 }}>You do not have access to the content of this chat. The IMEI must be filled in correctly to access the conversations.</span>
+        </div>
+        <button onClick={onBack} style={{ margin: '32px auto 0 auto', background: '#232d36', color: '#25d366', border: 'none', borderRadius: 8, padding: '0.7rem 2.2rem', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'block' }}>Back</button>
           </>
         )}
       </div>
@@ -579,7 +579,7 @@ export default function Dashboard({ email }) {
   return (
     <>
       <Header />
-      <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
         <Sidebar
           active={active || 'Home'}
           onSelect={label => setActive(label === 'Home' ? null : label)}
@@ -592,12 +592,12 @@ export default function Dashboard({ email }) {
               <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520, width: '100%', padding: '0 0.5rem' }}>
                 Select a tool below to get started. All features are organized in blocks for easy access.
               </p>
-              <div style={{
+      <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
                 gap: '2rem',
                 width: '100%',
-                maxWidth: 900,
+        maxWidth: 900,
                 margin: '2rem auto',
                 padding: '0 0.5rem',
                 boxSizing: 'border-box',
@@ -612,9 +612,9 @@ export default function Dashboard({ email }) {
                       boxShadow: '0 4px 24px 0 #0007',
                       border: '1.5px solid #232323',
                       padding: '2.2rem 1.2rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
                       justifyContent: 'center',
                       cursor: 'pointer',
                       transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
@@ -622,7 +622,7 @@ export default function Dashboard({ email }) {
                       fontWeight: 600,
                       color: '#fff',
                       minHeight: 150,
-                      textAlign: 'center',
+                textAlign: 'center',
                       gap: 18,
                       position: 'relative',
                       outline: 'none',
@@ -658,7 +658,7 @@ export default function Dashboard({ email }) {
           {active === 'Instagram' && (
             <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center' }}>
               <b>Instagram</b> coming soon...
-            </div>
+          </div>
           )}
         </div>
       </div>
