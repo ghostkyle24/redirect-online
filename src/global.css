@@ -1,91 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root {
-  --vermelho-paixao: #E60033;
-  --preto-espionagem: #0D1021;
-  --cinza-conspiracao: #4C4C4C;
-  --branco-confissao: #F5F6FA;
-  --ouro-tentacao: #00c6ff;
-  --rosa-oculto: #FF8FA3;
+  --vermelho: #E60033;
+  --preto: #0D0D0D;
+  --cinza-escuro: #181A1B;
+  --cinza-card: rgba(30,32,40,0.85);
+  --branco: #FFFFFF;
+  --cinza-claro: #B0B0B0;
+  --borda: #232323;
   --sucesso: #00C48C;
   --aviso: #FF8C00;
   --erro: #FF0033;
-  --fundo-destaque: rgba(30,32,60,0.7);
-  --glass-blur: blur(8px);
-  --card-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
 }
 
 body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--preto);
+  color: var(--branco);
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #0d1021 0%, #23243a 100%);
-  color: var(--branco-confissao);
-  font-family: 'Inter', 'Roboto', Arial, sans-serif;
   min-height: 100vh;
-  letter-spacing: 0.01em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', 'Inter', Arial, sans-serif;
-  color: var(--branco-confissao);
-  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  color: var(--vermelho);
+  margin: 0 0 0.7em 0;
+  letter-spacing: 0.01em;
 }
 
 a {
-  color: var(--ouro-tentacao);
+  color: var(--vermelho);
   text-decoration: none;
   transition: color 0.2s;
 }
 a:hover {
-  color: var(--vermelho-paixao);
+  color: #ff3355;
 }
 
 button {
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  cursor: pointer;
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--vermelho);
+  color: var(--branco);
   border: none;
-  outline: none;
-  border-radius: 12px;
+  border-radius: 10px;
+  padding: 0.7rem 1.7rem;
+  font-size: 1rem;
   font-weight: 600;
+  box-shadow: 0 2px 8px 0 #E6003322;
   transition: box-shadow 0.2s, background 0.2s;
-  box-shadow: 0 2px 12px 0 rgba(0,198,255,0.08);
 }
-button:active {
-  box-shadow: 0 0 16px 2px var(--ouro-tentacao);
+button:hover, button:focus {
+  background: #ff3355;
+  box-shadow: 0 0 12px 2px #E60033;
 }
 
 input, select, textarea {
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  border-radius: 10px;
-  border: 1.5px solid var(--cinza-conspiracao);
-  background: rgba(255,255,255,0.04);
-  color: var(--branco-confissao);
-  padding: 0.7rem 1rem;
+  font-family: 'Inter', Arial, sans-serif;
+  border-radius: 8px;
+  border: 1.5px solid var(--cinza-claro);
+  background: var(--cinza-escuro);
+  color: var(--branco);
+  padding: 0.6rem 1rem;
   font-size: 1rem;
   margin-bottom: 0.7rem;
   transition: border 0.2s, box-shadow 0.2s;
 }
 input:focus, select:focus, textarea:focus {
-  border: 1.5px solid var(--ouro-tentacao);
-  box-shadow: 0 0 8px 0 var(--ouro-tentacao);
+  border: 1.5px solid var(--vermelho);
+  box-shadow: 0 0 8px 0 var(--vermelho);
   outline: none;
 }
 
 .card-glass {
-  background: var(--fundo-destaque);
-  border-radius: 18px;
-  box-shadow: var(--card-shadow);
-  backdrop-filter: var(--glass-blur);
-  border: 1.5px solid rgba(255,255,255,0.08);
+  background: var(--cinza-card);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 #0005;
+  border: 1.5px solid var(--borda);
   padding: 2rem 1.5rem;
   margin-bottom: 2rem;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
-  background: #181a2a;
+  background: #181a1b;
 }
 ::-webkit-scrollbar-thumb {
   background: #23243a;
@@ -94,7 +93,7 @@ input:focus, select:focus, textarea:focus {
 
 @media (max-width: 700px) {
   body {
-    font-size: 1.05rem;
+    font-size: 1.01rem;
   }
   .card-glass {
     padding: 1.2rem 0.7rem;

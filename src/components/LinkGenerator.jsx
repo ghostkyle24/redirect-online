@@ -75,15 +75,15 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
         />
       )}
       <button onClick={gerarLink} style={{
-        background: 'linear-gradient(90deg, #00c6ff 0%, #0072ff 100%)',
+        background: 'var(--vermelho)',
         color: '#fff',
         border: 'none',
-        borderRadius: 12,
-        padding: '0.9rem 2.2rem',
-        fontSize: '1.1rem',
+        borderRadius: 10,
+        padding: '0.7rem 1.7rem',
+        fontSize: '1rem',
         fontFamily: 'Inter',
         fontWeight: 600,
-        boxShadow: '0 2px 12px 0 rgba(0,198,255,0.18)',
+        boxShadow: '0 2px 8px 0 #E6003322',
         transition: 'box-shadow 0.2s, background 0.2s',
         marginTop: 8
       }}>{onlyFacebook ? 'Generate Facebook link' : (tipo === 'location' ? 'Generate tracking link' : 'Generate Facebook phishing link')}</button>
