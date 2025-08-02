@@ -537,7 +537,7 @@ export default function Dashboard({ email }) {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
       <Sidebar active={active} onSelect={setActive} />
-      <div style={{
+      <div className="dashboard-main" style={{
         flex: 1,
         marginLeft: 220,
         padding: '2.5rem 1rem 1.5rem 1rem',
