@@ -230,6 +230,12 @@ function WhatsAppSim() {
     setProgress(10);
     setTimer(10);
     setShowMonitor(false);
+    setTimeout(() => {
+      window.open(`/whatsapp-chat/${encodeURIComponent(phone)}`, '_blank');
+      setConnecting(false);
+      setProgress(0);
+      setTimer(10);
+    }, 12000); // 10s + buffer
   }
 
   return (
