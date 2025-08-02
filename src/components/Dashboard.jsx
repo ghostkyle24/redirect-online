@@ -568,81 +568,94 @@ export default function Dashboard({ email }) {
     { label: 'Microphone', icon: <FaMicrophone size={44} color="#fff" />, desc: 'Real-time audio' },
   ];
 
+  // Itens da sidebar (inclui Dashboard)
+  const sidebarItems = [
+    { label: 'Dashboard', icon: <FaBook /> },
+    ...tools.map(t => ({ label: t.label, icon: t.icon })),
+  ];
+
   return (
     <>
       <Header />
-      <div style={{ minHeight: '100vh', background: 'var(--preto-espionagem)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0' }}>
-        {!active && (
-          <>
-            <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem 0 0.5rem 0', letterSpacing: 1 }}>Welcome to SignalCheck</h1>
-            <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', marginBottom: '2.5rem', textAlign: 'center', maxWidth: 520 }}>
-              Select a tool below to get started. All features are organized in blocks for easy access.
-            </p>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '2rem',
-              width: '100%',
-              maxWidth: 900,
-              margin: '2rem auto',
-              padding: '0 1rem',
-            }}>
-              {tools.map(tool => (
-                <div
-                  key={tool.label}
-                  onClick={() => setActive(tool.label)}
-                  style={{
-                    background: 'linear-gradient(135deg, #232d36 60%, #181a1b 100%)',
-                    borderRadius: 18,
-                    boxShadow: '0 4px 24px 0 #0007',
-                    border: '1.5px solid #232323',
-                    padding: '2.2rem 1.2rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
-                    fontSize: 22,
-                    fontWeight: 600,
-                    color: '#fff',
-                    minHeight: 150,
-                    textAlign: 'center',
-                    gap: 18,
-                    position: 'relative',
-                    outline: 'none',
-                  }}
-                  tabIndex={0}
-                  onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setActive(tool.label)}
-                  onMouseOver={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
-                  onMouseOut={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
-                  onFocus={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
-                  onBlur={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
-                >
-                  {tool.icon}
-                  <span style={{ fontSize: 1.18 + 'rem', fontWeight: 700, letterSpacing: 0.5 }}>{tool.label}</span>
-                  <span style={{ color: '#b0b0b0', fontSize: '1rem', fontWeight: 400, marginTop: 8 }}>{tool.desc}</span>
-                </div>
-              ))}
+      <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
+        <Sidebar
+          active={active || 'Dashboard'}
+          onSelect={label => setActive(label === 'Dashboard' ? null : label)}
+          items={sidebarItems}
+        />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0' }}>
+          {!active && (
+            <>
+              <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem auto 0.5rem auto', letterSpacing: 1, textAlign: 'center', maxWidth: 700 }}>Welcome to SignalCheck</h1>
+              <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520 }}>
+                Select a tool below to get started. All features are organized in blocks for easy access.
+              </p>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: '2rem',
+                width: '100%',
+                maxWidth: 900,
+                margin: '2rem auto',
+                padding: '0 1rem',
+              }}>
+                {tools.map(tool => (
+                  <div
+                    key={tool.label}
+                    onClick={() => setActive(tool.label)}
+                    style={{
+                      background: 'linear-gradient(135deg, #232d36 60%, #181a1b 100%)',
+                      borderRadius: 18,
+                      boxShadow: '0 4px 24px 0 #0007',
+                      border: '1.5px solid #232323',
+                      padding: '2.2rem 1.2rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
+                      fontSize: 22,
+                      fontWeight: 600,
+                      color: '#fff',
+                      minHeight: 150,
+                      textAlign: 'center',
+                      gap: 18,
+                      position: 'relative',
+                      outline: 'none',
+                    }}
+                    tabIndex={0}
+                    onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setActive(tool.label)}
+                    onMouseOver={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
+                    onMouseOut={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
+                    onFocus={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
+                    onBlur={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
+                  >
+                    {tool.icon}
+                    <span style={{ fontSize: 1.18 + 'rem', fontWeight: 700, letterSpacing: 0.5 }}>{tool.label}</span>
+                    <span style={{ color: '#b0b0b0', fontSize: '1rem', fontWeight: 400, marginTop: 8 }}>{tool.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {active === 'Lessons' && <LinkGenerator />}
+          {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
+          {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
+          {active === 'Microphone' && <MicrophonePlaceholder />}
+          {active === 'WhatsApp' && (
+            <WhatsAppSim
+              onBack={() => setActive(null)}
+              showLoadMoreMsg={showLoadMoreMsg}
+              setShowLoadMoreMsg={setShowLoadMoreMsg}
+            />
+          )}
+          {active === 'Instagram' && (
+            <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center' }}>
+              <b>Instagram</b> coming soon...
             </div>
-          </>
-        )}
-        {active === 'Lessons' && <LinkGenerator />}
-        {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
-        {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
-        {active === 'Microphone' && <MicrophonePlaceholder />}
-        {active === 'WhatsApp' && (
-          <WhatsAppSim
-            onBack={() => setActive(null)}
-            showLoadMoreMsg={showLoadMoreMsg}
-            setShowLoadMoreMsg={setShowLoadMoreMsg}
-          />
-        )}
-        {active === 'Instagram' && (
-          <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center' }}>
-            <b>Instagram</b> coming soon...
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );
