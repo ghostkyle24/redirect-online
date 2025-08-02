@@ -270,7 +270,7 @@ function WhatsAppWebSim({ onBack }) {
             <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>Unknown</div>
             <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
           </div>
-          <div style={{ marginLeft: 'auto', color: '#b0b0b0', fontSize: 15 }}>{number}</div>
+          <div style={{ marginLeft: 'auto', color: '#b0b0b0', fontSize: 15 }}>+1 000 000 0000</div>
           <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
             <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
             <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
@@ -397,7 +397,7 @@ function WhatsAppSim() {
   }
 
   if (showChat) {
-    return <WhatsAppWebSim number={chatNumber} onBack={() => setShowChat(false)} />;
+    return <WhatsAppWebSim onBack={() => setShowChat(false)} />;
   }
 
   return (
@@ -462,7 +462,7 @@ function WhatsAppSim() {
         </form>
       )}
       {option === 'clone' && showMonitor && showChat && (
-        <WhatsAppWebSim number={chatNumber} onBack={() => setShowChat(false)} />
+        <WhatsAppWebSim onBack={() => setShowChat(false)} />
       )}
       {option === 'web' && (
         <div style={{ marginTop: 32, background: 'var(--cinza-card)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px #0005', fontSize: 16 }}>
