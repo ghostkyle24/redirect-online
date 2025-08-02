@@ -434,6 +434,11 @@ function WhatsAppSim() {
   if (showChat) {
     return <WhatsAppWebSim onBack={() => {
       setShowChat(false);
+      setPhone('');
+      setDevice('');
+      setImei('');
+      setOption('clone');
+      setShowMonitor(false);
       if (props.onBack) props.onBack();
     }} />;
   }
@@ -515,8 +520,12 @@ function WhatsAppSim() {
 }
 
 export default function Dashboard({ email }) {
-  const [active, setActive] = useState('Spy Location');
+  const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || 'Spy Location');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = React.useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('dashboardActiveTab', active);
+  }, [active]);
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
