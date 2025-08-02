@@ -326,7 +326,7 @@ function WhatsAppSim() {
               ))}
             </div>
           </div>
-          {/* Bloco separado para histórico de conversas com scroll */}
+          {/* Bloco separado para histórico de conversas com scroll e alinhamento simétrico */}
           <div style={{
             background: '#fff',
             borderRadius: '0 0 14px 14px',
@@ -336,31 +336,33 @@ function WhatsAppSim() {
             margin: '0 auto',
             maxHeight: 340,
             overflowY: 'auto',
-            position: 'relative'
+            position: 'relative',
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            gap: 0
           }}>
             <div style={{
               fontSize: '1.08rem', fontWeight: 600, color: '#232323', marginBottom: 18,
-              display: 'flex', alignItems: 'center', gap: 8
+              display: 'flex', alignItems: 'center', gap: 8, width: '100%', justifyContent: 'flex-start'
             }}>
               <span role="img" aria-label="chat">📱</span>
               Detailed Conversation History (last 3 days, except today)
             </div>
             {/* Mensagens simuladas */}
             {[
-              {icon:'💬',text:'mission accomplished ✅',time:'Thu • 21:13'},
-              {icon:'📄',text:'Document sent',time:'Thu • 12:19'},
-              {icon:'👏',text:'Applauded',time:'Thu • 10:01'},
-              {icon:'📄',text:'',time:'Thu • 09:40'},
-              {icon:'💬',text:'another message',time:'Thu • 09:30'},
-              {icon:'💬',text:'one more message',time:'Thu • 09:20'},
-              {icon:'💬',text:'and another one',time:'Thu • 09:10'},
+              {icon:'💬',text:'last message',time:'Thu • 21:13'},
+              {icon:'📄',text:'last message',time:'Thu • 12:19'},
+              {icon:'👏',text:'last message',time:'Thu • 10:01'},
+              {icon:'📄',text:'last message',time:'Thu • 09:40'},
+              {icon:'💬',text:'last message',time:'Thu • 09:30'},
+              {icon:'💬',text:'last message',time:'Thu • 09:20'},
+              {icon:'💬',text:'last message',time:'Thu • 09:10'},
               {icon:'💬',text:'last message',time:'Thu • 09:00'}
             ].map((msg,i) => (
               <div key={i} style={{
-                display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
+                display: 'flex', alignItems: 'center', gap: 14, borderLeft: '3px solid #00c48c', marginBottom: 12,
                 background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative',
-                minHeight: 54,
-                cursor: 'pointer'
+                minHeight: 54, width: '100%', maxWidth: 600, marginLeft: 'auto', marginRight: 'auto',
+                cursor: 'pointer', boxSizing: 'border-box'
               }}
               onClick={() => {
                 if (imei !== '356938035643809') {
@@ -368,16 +370,16 @@ function WhatsAppSim() {
                 }
               }}
               >
-                <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>{msg.icon}</span>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
-                  <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>{msg.text}</div>
+                <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2, flexShrink: 0 }}>{msg.icon}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>davi</div>
+                  <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{msg.text}</div>
                 </div>
-                <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>{msg.time}</div>
+                <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 10, flexShrink: 0 }}>{msg.time}</div>
               </div>
             ))}
             {/* Mensagem padrão embaixo das mensagens */}
-            <div style={{ textAlign: 'center', color: '#b0b0b0', fontSize: 14, marginTop: 10, fontStyle: 'italic' }}>
+            <div style={{ textAlign: 'center', color: '#b0b0b0', fontSize: 14, marginTop: 10, fontStyle: 'italic', width: '100%' }}>
               last message
             </div>
           </div>
