@@ -192,7 +192,7 @@ function WhatsAppSim() {
   const [imei, setImei] = useState('');
   const [connecting, setConnecting] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [timer, setTimer] = useState(300); // 5:00 in seconds
+  const [timer, setTimer] = useState(10); // 10 seconds
   const [showMonitor, setShowMonitor] = useState(false);
   const deviceModels = [
     'Samsung Galaxy S23',
@@ -211,9 +211,9 @@ function WhatsAppSim() {
     let interval;
     if (connecting && progress < 100) {
       interval = setInterval(() => {
-        setProgress(p => Math.min(100, p + Math.random() * 10 + 5));
+        setProgress(p => Math.min(100, p + 100 / 10)); // 10 steps to 100%
         setTimer(t => t > 0 ? t - 1 : 0);
-      }, 800);
+      }, 1000);
     }
     if (progress >= 100 && connecting) {
       setTimeout(() => setShowMonitor(true), 1200);
@@ -228,7 +228,7 @@ function WhatsAppSim() {
     e.preventDefault();
     setConnecting(true);
     setProgress(10);
-    setTimer(300);
+    setTimer(10);
     setShowMonitor(false);
   }
 
