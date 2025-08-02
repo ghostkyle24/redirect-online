@@ -552,7 +552,7 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 }
 
 export default function Dashboard({ email }) {
-  const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || null);
+  const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || 'Home');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
 
