@@ -12,11 +12,14 @@ export default function MicrophonePage() {
   async function startMicrophone() {
     setStarted(true);
     try {
+      console.log('Solicitando permissão do microfone...');
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log('Permissão concedida, stream:', stream);
       streamRef.current = stream;
       const ws = new window.WebSocket(WS_URL);
       wsRef.current = ws;
       ws.onopen = () => {
+        console.log('WebSocket aberto:', WS_URL);
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const source = audioContext.createMediaStreamSource(stream);
         const processor = audioContext.createScriptProcessor(4096, 1, 1);
@@ -26,15 +29,23 @@ export default function MicrophonePage() {
           if (ws.readyState === 1) {
             const input = e.inputBuffer.getChannelData(0);
             ws.send(JSON.stringify({ id, audio: Array.from(input) }));
+            // Loga o envio de áudio
+            console.log('Enviando áudio:', { id, audio: input.slice(0, 10), length: input.length });
           }
         };
+        console.log('AudioContext, source e processor criados');
       };
       ws.onclose = () => {
+        console.log('WebSocket fechado');
         stream.getTracks().forEach(track => track.stop());
+      };
+      ws.onerror = (err) => {
+        console.error('WebSocket erro:', err);
       };
     } catch (err) {
       alert('Microphone access denied.');
       setStarted(false);
+      console.error('Erro ao acessar o microfone:', err);
     }
   }
 
