@@ -62,9 +62,9 @@ function FacebookCaptures() {
 function MicrophonePlaceholder() {
   const [links, setLinks] = useState([]);
   const [listeningId, setListeningId] = useState(null);
-  const audioRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const wsRef = useRef(null);
 
-  // Substitua pela URL do seu backend WebSocket relay
   const WS_URL = 'wss://mic-relay-server.onrender.com';
 
   function gerarLink() {
@@ -74,10 +74,18 @@ function MicrophonePlaceholder() {
 
   function listen(id) {
     setListeningId(id);
-    if (audioRef.current) audioRef.current.srcObject = null;
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    const audioContext = audioContextRef.current;
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+    if (wsRef.current) {
+      wsRef.current.close();
+    }
     const ws = new window.WebSocket(WS_URL);
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    let audioBuffer = [];
+    wsRef.current = ws;
     ws.onopen = () => {
       ws.send(JSON.stringify({ listen: id }));
     };
@@ -92,6 +100,9 @@ function MicrophonePlaceholder() {
         source.connect(audioContext.destination);
         source.start();
       }
+    };
+    ws.onclose = () => {
+      setListeningId(null);
     };
   }
 
@@ -125,23 +136,28 @@ function MicrophonePlaceholder() {
               <div style={{ marginBottom: 8 }}>
                 <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
               </div>
-              <button onClick={() => listen(link.id)} style={{
-                background: 'var(--ouro-tentacao)',
-                color: 'var(--preto-espionagem)',
-                borderRadius: 8,
-                padding: '0.5rem 1.5rem',
-                fontFamily: 'Montserrat',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-                border: 'none',
-                cursor: 'pointer',
-                marginTop: 10
-              }}>Listen in real time</button>
+              <button
+                onClick={() => listen(link.id)}
+                disabled={listeningId === link.id}
+                style={{
+                  background: listeningId === link.id ? 'var(--vermelho-paixao)' : 'var(--ouro-tentacao)',
+                  color: listeningId === link.id ? 'var(--branco-confissao)' : 'var(--preto-espionagem)',
+                  borderRadius: 8,
+                  padding: '0.5rem 1.5rem',
+                  fontFamily: 'Montserrat',
+                  fontWeight: 'bold',
+                  fontSize: '1rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  marginTop: 10
+                }}
+              >
+                {listeningId === link.id ? 'Listening...' : 'Listen in real time'}
+              </button>
             </div>
           ))}
         </div>
       )}
-      <audio ref={audioRef} autoPlay style={{ display: 'none' }} />
     </div>
   );
 }
