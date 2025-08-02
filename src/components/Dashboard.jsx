@@ -187,10 +187,13 @@ function MicrophonePlaceholder() {
 
 function WhatsAppWebSim({ onBack }) {
   const [selected, setSelected] = useState(0);
-  const chats = Array.from({ length: 10 }).map((_, i) => ({
+  const chatTimes = [
+    '09:42', '10:24', '13:58', '18:02', '18:05', '18:08', '19:01', '19:10', '20:02', '21:10'
+  ];
+  const chats = chatTimes.map((time, i) => ({
     name: 'Unknown',
     last: 'This message was not loaded, please wait...',
-    time: '21:1' + i,
+    time,
     avatar: '?',
     messages: [
       { fromMe: false, text: 'This message was not loaded, please wait...', time: '09:42' },
@@ -332,7 +335,6 @@ function WhatsAppWebSim({ onBack }) {
           width: '100%', maxWidth: 700, margin: '0 auto', marginTop: 18,
           display: 'flex', alignItems: 'center', gap: 12, background: '#232d36', borderRadius: 10, padding: '0.7rem 1.2rem'
         }}>
-          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>😊</span>
           <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📎</span>
           <input disabled placeholder="Type a message..." style={{
             flex: 1, background: 'transparent', border: 'none', color: '#b0b0b0', fontSize: 15, outline: 'none', fontFamily: 'Inter',
