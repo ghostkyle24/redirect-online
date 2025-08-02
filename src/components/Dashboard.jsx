@@ -192,11 +192,22 @@ function WhatsAppWebSim({ onBack }) {
     last: 'This message was not loaded, please wait...',
     time: '21:1' + i,
     avatar: '?',
-    messages: Array.from({ length: 8 }).map(() => ({
-      fromMe: Math.random() > 0.5,
-      text: 'This message was not loaded, please wait...',
-      time: '21:' + (10 + Math.floor(Math.random() * 50))
-    }))
+    messages: [
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '09:42' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '10:24' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '13:58' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '18:02' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '18:05' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '18:08' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '19:01' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '19:10' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '20:02' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '20:15' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '20:30' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '20:45' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '21:00' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '21:10' },
+    ]
   }));
   const chat = chats[selected];
   return (
@@ -270,7 +281,6 @@ function WhatsAppWebSim({ onBack }) {
             <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>Unknown</div>
             <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
           </div>
-          <div style={{ marginLeft: 'auto', color: '#b0b0b0', fontSize: 15 }}>+1 000 000 0000</div>
           <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
             <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
             <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
@@ -327,12 +337,11 @@ function WhatsAppWebSim({ onBack }) {
           <input disabled placeholder="Type a message..." style={{
             flex: 1, background: 'transparent', border: 'none', color: '#b0b0b0', fontSize: 15, outline: 'none', fontFamily: 'Inter',
           }} />
-          <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>🎤</button>
           <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>Send</button>
         </div>
         {/* Mensagem de privacidade */}
         <div style={{ color: '#b0b0b0', fontSize: 15, marginTop: 18, textAlign: 'center', maxWidth: 700 }}>
-          <span style={{ color: '#E60033', fontWeight: 600 }}>You do not have access to the content of this chat.</span>
+          <span style={{ color: '#E60033', fontWeight: 600 }}>You do not have access to the content of this chat. The IMEI must be filled in correctly to access the conversations.</span>
         </div>
         <button onClick={onBack} style={{ margin: '32px auto 0 auto', background: '#232d36', color: '#25d366', border: 'none', borderRadius: 8, padding: '0.7rem 2.2rem', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'block' }}>Back</button>
       </div>
