@@ -1,0 +1,48 @@
+:root {
+  --vermelho-paixao: #E60033;
+  --preto-espionagem: #0D0D0D;
+  --cinza-conspiracao: #4C4C4C;
+  --branco-confissao: #FFFFFF;
+  --ouro-tentacao: #C5A100;
+  --rosa-oculto: #FF8FA3;
+  --sucesso: #00C48C;
+  --aviso: #FF8C00;
+  --erro: #FF0033;
+  --fundo-destaque: #1A1A1A;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--preto-espionagem);
+  color: var(--branco-confissao);
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  color: var(--branco-confissao);
+  margin: 0;
+}
+
+a {
+  color: var(--branco-confissao);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--ouro-tentacao);
+}
+
+button {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+* {
+  box-sizing: border-box;
+}

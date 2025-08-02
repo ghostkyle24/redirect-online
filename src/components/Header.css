@@ -1,0 +1,37 @@
+.header {
+  background: var(--preto-espionagem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  border-bottom: 1px solid var(--cinza-conspiracao);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__brand {
+  color: var(--vermelho-paixao);
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.header__nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.header__link {
+  color: var(--branco-confissao);
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.header__link:hover {
+  color: var(--ouro-tentacao);
+}
