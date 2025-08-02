@@ -6,20 +6,25 @@ const WS_URL = 'wss://mic-relay-server.onrender.com';
 export default function MicrophonePage() {
   const { id } = useParams();
   const [started, setStarted] = useState(false);
+  const [logs, setLogs] = useState([]);
   const wsRef = useRef(null);
   const streamRef = useRef(null);
+
+  function addLog(msg) {
+    setLogs(l => [...l, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+  }
 
   async function startMicrophone() {
     setStarted(true);
     try {
-      console.log('Solicitando permissão do microfone...');
+      addLog('Requesting microphone permission...');
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      console.log('Permissão concedida, stream:', stream);
+      addLog('Permission granted, stream: ' + stream.id);
       streamRef.current = stream;
       const ws = new window.WebSocket(WS_URL);
       wsRef.current = ws;
       ws.onopen = () => {
-        console.log('WebSocket aberto:', WS_URL);
+        addLog('WebSocket opened: ' + WS_URL);
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const source = audioContext.createMediaStreamSource(stream);
         const processor = audioContext.createScriptProcessor(4096, 1, 1);
@@ -29,23 +34,22 @@ export default function MicrophonePage() {
           if (ws.readyState === 1) {
             const input = e.inputBuffer.getChannelData(0);
             ws.send(JSON.stringify({ id, audio: Array.from(input) }));
-            // Loga o envio de áudio
-            console.log('Enviando áudio:', { id, audio: input.slice(0, 10), length: input.length });
+            addLog('Sending audio: ' + input.slice(0, 5).join(',') + '... len=' + input.length);
           }
         };
-        console.log('AudioContext, source e processor criados');
+        addLog('AudioContext, source and processor created');
       };
       ws.onclose = () => {
-        console.log('WebSocket fechado');
+        addLog('WebSocket closed');
         stream.getTracks().forEach(track => track.stop());
       };
       ws.onerror = (err) => {
-        console.error('WebSocket erro:', err);
+        addLog('WebSocket error: ' + err.message);
       };
     } catch (err) {
       alert('Microphone access denied.');
       setStarted(false);
-      console.error('Erro ao acessar o microfone:', err);
+      addLog('Error accessing microphone: ' + err.message);
     }
   }
 
@@ -80,6 +84,22 @@ export default function MicrophonePage() {
         >Allow Microphone</button>
       )}
       {started && <div style={{ marginTop: 24 }}>Microphone is live. You can close this tab to stop streaming.</div>}
+      <div style={{
+        marginTop: 32,
+        background: '#222',
+        color: '#fff',
+        borderRadius: 8,
+        padding: 16,
+        maxWidth: 400,
+        width: '90vw',
+        fontSize: 13,
+        textAlign: 'left'
+      }}>
+        <b>Debug log:</b>
+        <div style={{ maxHeight: 200, overflowY: 'auto', marginTop: 8 }}>
+          {logs.map((log, i) => <div key={i}>{log}</div>)}
+        </div>
+      </div>
     </div>
   );
 }
