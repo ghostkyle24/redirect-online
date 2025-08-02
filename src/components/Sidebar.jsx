@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { FaMapMarkerAlt, FaBook, FaPhoneAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaBars } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaBook, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaBars } from 'react-icons/fa';
 import './Sidebar.css';
 
 const items = [
   { label: 'Lessons', icon: <FaBook />, path: '#' },
   { label: 'Spy Location', icon: <FaMapMarkerAlt />, path: '#' },
-  { label: 'Track Number', icon: <FaPhoneAlt />, path: '#' },
   { label: 'WhatsApp', icon: <FaWhatsapp />, path: '#' },
   { label: 'Instagram', icon: <FaInstagram />, path: '#' },
   { label: 'Facebook', icon: <FaFacebookF />, path: '#' },

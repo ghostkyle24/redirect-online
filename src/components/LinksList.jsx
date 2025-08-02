@@ -16,11 +16,13 @@ function getGoogleMapsLink(loc) {
 
 export default function LinksList() {
   const [links, setLinks] = useState([]);
+  const usuario = localStorage.getItem('usuario');
 
   async function fetchLinks() {
     const { data, error } = await supabase
       .from('links')
       .select('*')
+      .eq('email', usuario)
       .order('created_at', { ascending: false });
     setLinks(data || []);
   }
@@ -34,12 +36,9 @@ export default function LinksList() {
       <h3 style={{ color: 'var(--ouro-tentacao)' }}>Your tracking links</h3>
       {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)' }}>No links created yet.</p>}
       {links.map(link => (
-        <div key={link.id} style={{
-          background: 'var(--fundo-destaque)',
-          borderRadius: 10,
+        <div key={link.id} className="card-glass" style={{
           margin: '1rem 0',
           padding: '1rem',
-          boxShadow: '0 2px 8px rgba(76,76,76,0.08)'
         }}>
           <div style={{ marginBottom: 8 }}>
             <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>

