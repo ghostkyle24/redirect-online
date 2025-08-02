@@ -185,115 +185,157 @@ function MicrophonePlaceholder() {
   );
 }
 
-function WhatsAppChatSim({ number, onBack }) {
-  // Mensagens simuladas
-  const messages = [
-    { fromMe: false, text: 'last message', time: '21:13' },
-    { fromMe: true, text: 'last message', time: '21:14' },
-    { fromMe: false, text: 'last message', time: '21:15' },
-    { fromMe: true, text: 'last message', time: '21:16' },
-    { fromMe: false, text: 'last message', time: '21:17' },
-    { fromMe: true, text: 'last message', time: '21:18' },
-    { fromMe: false, text: 'last message', time: '21:19' },
-    { fromMe: true, text: 'last message', time: '21:20' },
-  ];
+function WhatsAppWebSim({ onBack }) {
+  const [selected, setSelected] = useState(0);
+  const chats = Array.from({ length: 10 }).map((_, i) => ({
+    name: 'Unknown',
+    last: 'This message was not loaded, please wait...',
+    time: '21:1' + i,
+    avatar: '?',
+    messages: Array.from({ length: 8 }).map(() => ({
+      fromMe: Math.random() > 0.5,
+      text: 'This message was not loaded, please wait...',
+      time: '21:' + (10 + Math.floor(Math.random() * 50))
+    }))
+  }));
+  const chat = chats[selected];
   return (
     <div style={{
-      minHeight: 420,
+      minHeight: '80vh',
       background: '#111b21 url("https://static.whatsapp.net/rsrc.php/v3/yl/r/8zQ2Wg6q4kN.png") repeat',
       color: '#e9edef',
       display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
+      flexDirection: 'row',
+      alignItems: 'stretch',
+      justifyContent: 'center',
       fontFamily: 'Inter, Arial, sans-serif',
       borderRadius: 16,
       boxShadow: '0 2px 8px #0001',
-      maxWidth: 700,
-      margin: '0 auto',
+      maxWidth: 1100,
+      margin: '32px auto',
       padding: 0
     }}>
-      {/* Barra superior */}
+      {/* Sidebar de chats */}
       <div style={{
-        width: '100%',
-        maxWidth: 700,
+        width: 320,
         background: '#202c33',
-        borderRadius: '0 0 14px 14px',
+        borderRadius: '16px 0 0 16px',
         boxShadow: '0 2px 8px #0001',
-        padding: '1.2rem 2.2rem',
-        display: 'flex', alignItems: 'center', gap: 16, marginTop: 0
+        display: 'flex', flexDirection: 'column', alignItems: 'stretch',
+        borderRight: '1.5px solid #232323',
+        minHeight: 520
       }}>
-        <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>D</div>
-        <div>
-          <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>davi</div>
-          <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
+        <div style={{ padding: '1.2rem 1.2rem 0.7rem 1.2rem', borderBottom: '1.5px solid #232323' }}>
+          <input disabled placeholder="Search or start new chat" style={{
+            width: '100%', background: '#232d36', border: 'none', borderRadius: 8, color: '#b0b0b0', fontSize: 15, padding: '0.7rem 1rem', outline: 'none', fontFamily: 'Inter', marginBottom: 8
+          }} />
         </div>
-        <div style={{ marginLeft: 'auto', color: '#b0b0b0', fontSize: 15 }}>{number}</div>
-        <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
-          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
-          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
-          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>⋮</span>
-        </div>
-      </div>
-      {/* Área de mensagens */}
-      <div style={{
-        background: 'transparent',
-        borderRadius: 14,
-        boxShadow: 'none',
-        padding: '1.5rem 2.2rem',
-        maxWidth: 700,
-        width: '100%',
-        margin: '32px auto 0 auto',
-        minHeight: 320,
-        maxHeight: 420,
-        overflowY: 'auto',
-        display: 'flex', flexDirection: 'column', gap: 0
-      }}>
-        {messages.map((msg, i) => (
-          <div key={i} style={{
-            display: 'flex', flexDirection: msg.fromMe ? 'row-reverse' : 'row', alignItems: 'flex-end',
-            marginBottom: 10, width: '100%'
-          }}>
-            <div style={{
-              background: msg.fromMe ? '#005c4b' : '#232d36',
-              color: '#e9edef',
-              borderRadius: msg.fromMe ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
-              padding: '0.7rem 1.1rem',
-              minWidth: 60,
-              maxWidth: '70%',
-              fontSize: 15,
-              position: 'relative',
-              filter: 'blur(3px) grayscale(0.3) brightness(0.7)',
-              userSelect: 'none',
-              cursor: 'not-allowed',
-              marginLeft: msg.fromMe ? 0 : 8,
-              marginRight: msg.fromMe ? 8 : 0
+        <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
+          {chats.map((c, i) => (
+            <div key={i} onClick={() => setSelected(i)} style={{
+              display: 'flex', alignItems: 'center', gap: 14, padding: '0.7rem 1.1rem', cursor: 'pointer',
+              background: selected === i ? '#232d36' : 'transparent',
+              borderLeft: selected === i ? '3px solid #25d366' : '3px solid transparent',
+              borderRadius: 8, marginBottom: 2, transition: 'background 0.2s'
             }}>
-              <span style={{ color: '#25d366', fontSize: 18, marginRight: 6 }}>💬</span>
-              {msg.text}
-              <span style={{ position: 'absolute', right: 10, bottom: 6, color: '#b0b0b0', fontSize: 12 }}>{msg.time}</span>
+              <div style={{ width: 38, height: 38, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 20 }}>{c.avatar}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 600, color: '#e9edef', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
+                <div style={{ color: '#b0b0b0', fontSize: '0.97rem', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.last}</div>
+              </div>
+              <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 10, flexShrink: 0 }}>{c.time}</div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      {/* Campo de digitação fake */}
+      {/* Área de chat */}
       <div style={{
-        width: '100%', maxWidth: 700, margin: '0 auto', marginTop: 18,
-        display: 'flex', alignItems: 'center', gap: 12, background: '#232d36', borderRadius: 10, padding: '0.7rem 1.2rem'
+        flex: 1,
+        background: 'transparent',
+        borderRadius: '0 16px 16px 0',
+        display: 'flex', flexDirection: 'column', alignItems: 'stretch',
+        minHeight: 520
       }}>
-        <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>😊</span>
-        <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📎</span>
-        <input disabled placeholder="Type a message..." style={{
-          flex: 1, background: 'transparent', border: 'none', color: '#b0b0b0', fontSize: 15, outline: 'none', fontFamily: 'Inter',
-        }} />
-        <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>🎤</button>
-        <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>Send</button>
+        {/* Barra superior do chat */}
+        <div style={{
+          width: '100%',
+          background: '#202c33',
+          borderRadius: '0 14px 0 0',
+          boxShadow: '0 2px 8px #0001',
+          padding: '1.2rem 2.2rem',
+          display: 'flex', alignItems: 'center', gap: 16
+        }}>
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>?</div>
+          <div>
+            <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>Unknown</div>
+            <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
+          </div>
+          <div style={{ marginLeft: 'auto', color: '#b0b0b0', fontSize: 15 }}>{number}</div>
+          <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>⋮</span>
+          </div>
+        </div>
+        {/* Mensagens (ocultas) */}
+        <div style={{
+          background: 'transparent',
+          borderRadius: 14,
+          boxShadow: 'none',
+          padding: '1.5rem 2.2rem',
+          maxWidth: 700,
+          width: '100%',
+          minHeight: 320,
+          maxHeight: 420,
+          overflowY: 'auto',
+          display: 'flex', flexDirection: 'column', gap: 0
+        }}>
+          {chat.messages.map((msg, i) => (
+            <div key={i} style={{
+              display: 'flex', flexDirection: msg.fromMe ? 'row-reverse' : 'row', alignItems: 'flex-end',
+              marginBottom: 10, width: '100%'
+            }}>
+              <div style={{
+                background: msg.fromMe ? '#005c4b' : '#232d36',
+                color: '#e9edef',
+                borderRadius: msg.fromMe ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
+                padding: '0.7rem 1.1rem',
+                minWidth: 60,
+                maxWidth: '70%',
+                fontSize: 15,
+                position: 'relative',
+                filter: 'blur(3px) grayscale(0.3) brightness(0.7)',
+                userSelect: 'none',
+                cursor: 'not-allowed',
+                marginLeft: msg.fromMe ? 0 : 8,
+                marginRight: msg.fromMe ? 8 : 0
+              }}>
+                <span style={{ color: '#25d366', fontSize: 18, marginRight: 6 }}>💬</span>
+                {msg.text}
+                <span style={{ position: 'absolute', right: 10, bottom: 6, color: '#b0b0b0', fontSize: 12 }}>{msg.time}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Campo de digitação fake */}
+        <div style={{
+          width: '100%', maxWidth: 700, margin: '0 auto', marginTop: 18,
+          display: 'flex', alignItems: 'center', gap: 12, background: '#232d36', borderRadius: 10, padding: '0.7rem 1.2rem'
+        }}>
+          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>😊</span>
+          <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📎</span>
+          <input disabled placeholder="Type a message..." style={{
+            flex: 1, background: 'transparent', border: 'none', color: '#b0b0b0', fontSize: 15, outline: 'none', fontFamily: 'Inter',
+          }} />
+          <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>🎤</button>
+          <button disabled style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'not-allowed' }}>Send</button>
+        </div>
+        {/* Mensagem de privacidade */}
+        <div style={{ color: '#b0b0b0', fontSize: 15, marginTop: 18, textAlign: 'center', maxWidth: 700 }}>
+          <span style={{ color: '#E60033', fontWeight: 600 }}>You do not have access to the content of this chat.</span>
+        </div>
+        <button onClick={onBack} style={{ margin: '32px auto 0 auto', background: '#232d36', color: '#25d366', border: 'none', borderRadius: 8, padding: '0.7rem 2.2rem', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'block' }}>Back</button>
       </div>
-      {/* Mensagem de privacidade */}
-      <div style={{ color: '#b0b0b0', fontSize: 15, marginTop: 18, textAlign: 'center', maxWidth: 700 }}>
-        <span style={{ color: '#E60033', fontWeight: 600 }}>You do not have access to the content of this chat.</span>
-      </div>
-      <button onClick={onBack} style={{ margin: '32px auto 0 auto', background: '#232d36', color: '#25d366', border: 'none', borderRadius: 8, padding: '0.7rem 2.2rem', fontWeight: 700, fontSize: 15, cursor: 'pointer', display: 'block' }}>Back</button>
     </div>
   );
 }
@@ -355,7 +397,7 @@ function WhatsAppSim() {
   }
 
   if (showChat) {
-    return <WhatsAppChatSim number={chatNumber} onBack={() => setShowChat(false)} />;
+    return <WhatsAppWebSim number={chatNumber} onBack={() => setShowChat(false)} />;
   }
 
   return (
@@ -420,7 +462,7 @@ function WhatsAppSim() {
         </form>
       )}
       {option === 'clone' && showMonitor && showChat && (
-        <WhatsAppChatSim number={chatNumber} onBack={() => setShowChat(false)} />
+        <WhatsAppWebSim number={chatNumber} onBack={() => setShowChat(false)} />
       )}
       {option === 'web' && (
         <div style={{ marginTop: 32, background: 'var(--cinza-card)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px #0005', fontSize: 16 }}>
