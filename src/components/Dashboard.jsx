@@ -529,6 +529,13 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 export default function Dashboard({ email }) {
   const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || 'Spy Location');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
+  const [selected, setSelected] = useState(0);
+  // Exemplo de dados de chats (ajuste conforme seu código real)
+  const chats = [
+    { avatar: 'A', name: 'Alice', last: 'Oi', time: '10:00' },
+    { avatar: 'B', name: 'Bob', last: 'Olá', time: '11:00' },
+    // ...
+  ];
 
   useEffect(() => {
     localStorage.setItem('dashboardActiveTab', active);
