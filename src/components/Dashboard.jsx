@@ -260,6 +260,9 @@ function WhatsAppSim() {
             <label>IMEI</label>
             <input type="text" value={imei} onChange={e => setImei(e.target.value)} required placeholder="e.g. 356938035643809" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-claro)', marginTop: 4, fontSize: 15, background: 'var(--cinza-escuro)', color: '#fff' }} />
           </div>
+          <div style={{ color: 'var(--vermelho)', fontWeight: 600, marginBottom: 12, fontSize: 15 }}>
+            You must enter the correct IMEI to access the conversations.
+          </div>
           <button type="submit" disabled={connecting} style={{
             background: 'var(--vermelho)',
             color: '#fff',
@@ -292,31 +295,53 @@ function WhatsAppSim() {
       )}
       {option === 'clone' && showMonitor && (
         <div className="card-glass" style={{ marginTop: 32, position: 'relative', overflow: 'hidden' }}>
-          <div className="whatsapp-blur" style={{ filter: 'blur(6px) grayscale(0.3) brightness(0.7)', pointerEvents: 'none', userSelect: 'none', position: 'relative' }}>
-            <h3 style={{ color: 'var(--vermelho)' }}>Monitor WhatsApp</h3>
-            <div style={{ fontWeight: 600, marginBottom: 12 }}>Real-time monitoring with advanced technology</div>
-            <div style={{ marginBottom: 18, color: 'var(--sucesso)' }}>System Active</div>
-            <div style={{ marginBottom: 12 }}><b>Add Number for Monitoring</b></div>
-            <div style={{ color: 'var(--vermelho)', fontWeight: 600, marginBottom: 8 }}>LIMIT REACHED: Maximum of 1 number per session. Remove the current number to add a new one.</div>
-            <div style={{ marginBottom: 10 }}>Select Country</div>
-            <div style={{ marginBottom: 10 }}>🇺🇸 United States (+1)</div>
-            <div style={{ marginBottom: 10 }}>Phone Number * (Enter only numbers)</div>
-            <div style={{ marginBottom: 10 }}>Contact Name *</div>
-            <div style={{ marginBottom: 10, color: 'var(--aviso)' }}>⚠️ IMPORTANT SECURITY WARNING</div>
-            <div style={{ marginBottom: 10, color: 'var(--vermelho)' }}>🔒 Automated and irreversible process: ...</div>
-            <div style={{ marginBottom: 10 }}>LIMIT REACHED - 1/1 Numbers Used</div>
-            <div style={{ marginBottom: 10 }}>Monitored Contacts (1) - davi - +5531971391218 - Verified</div>
-            <div style={{ marginBottom: 10 }}>Intercepted Conversations, Penetration System Active, Monitoring 1 contacts</div>
-            <div style={{ marginBottom: 10 }}>⚠️ IMPORTANT NOTE: Intercepted messages may have been sent in recent hours.</div>
-            <div style={{ marginBottom: 10 }}>... (messages, analysis, etc, all blurred) ...</div>
-          </div>
+          {/* Bloco de análise no topo */}
           <div style={{
-            position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#fff', fontWeight: 700, fontSize: 22, zIndex: 10,
-            background: 'rgba(18,18,22,0.85)', borderRadius: 16
+            background: '#fff',
+            borderRadius: 14,
+            boxShadow: '0 2px 8px #0001',
+            padding: '1.5rem 1.2rem',
+            marginBottom: 32,
+            maxWidth: 700,
+            marginLeft: 'auto',
+            marginRight: 'auto',
           }}>
-            <span style={{ color: 'var(--vermelho)' }}>Content hidden for privacy</span>
+            <div style={{ fontWeight: 700, fontSize: 18, color: '#232323', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span role="img" aria-label="chart">📊</span>
+              Complete Analysis (last 3 days, except today)
+            </div>
+            <div style={{ display: 'flex', gap: 18, marginBottom: 18, flexWrap: 'wrap' }}>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
+                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>108</div>
+                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>TOTAL INTERACTIONS</div>
+              </div>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
+                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>71</div>
+                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>TEXT MESSAGES</div>
+              </div>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
+                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>37</div>
+                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>VARIOUS ACTIVITIES</div>
+              </div>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
+                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>6</div>
+                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>CALLS</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 18, marginBottom: 8, flexWrap: 'wrap' }}>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span role="img" aria-label="photo">📷</span> 9 photos shared
+              </div>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span role="img" aria-label="audio">🎵</span> 8 audio messages
+              </div>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span role="img" aria-label="clock">⏰</span> Most active at 21h
+              </div>
+              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span role="img" aria-label="smile">😊</span> 95% positive mood
+              </div>
+            </div>
           </div>
           {/* Bloco separado para histórico de conversas */}
           <div style={{
