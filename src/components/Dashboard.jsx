@@ -86,23 +86,36 @@ function MicrophonePlaceholder() {
     }
     const ws = new window.WebSocket(WS_URL);
     wsRef.current = ws;
+
+    let audioQueue = [];
+    let processor = null;
+
     ws.onopen = () => {
       ws.send(JSON.stringify({ listen: id }));
+      processor = audioContext.createScriptProcessor(4096, 1, 1);
+      processor.onaudioprocess = function (e) {
+        const output = e.outputBuffer.getChannelData(0);
+        if (audioQueue.length > 0) {
+          const buffer = audioQueue.shift();
+          output.set(buffer);
+        } else {
+          output.fill(0);
+        }
+      };
+      processor.connect(audioContext.destination);
     };
+
     ws.onmessage = e => {
       const msg = JSON.parse(e.data);
       if (msg.id === id && msg.audio) {
         const floatArray = new Float32Array(msg.audio);
-        const buffer = audioContext.createBuffer(1, floatArray.length, 44100);
-        buffer.copyToChannel(floatArray, 0);
-        const source = audioContext.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioContext.destination);
-        source.start();
+        audioQueue.push(floatArray);
       }
     };
+
     ws.onclose = () => {
       setListeningId(null);
+      if (processor) processor.disconnect();
     };
   }
 
