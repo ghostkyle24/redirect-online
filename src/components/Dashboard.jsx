@@ -213,7 +213,7 @@ function WhatsAppWebSim({ onBack }) {
     ]
   }));
   const chat = chats[selected];
-  // CORREÇÃO: Declarar sortedMessages aqui
+  // sortedMessages local
   const sortedMessages = chat && chat.messages ? [...chat.messages].sort((a, b) => {
     const [hA, mA] = a.time.split(":").map(Number);
     const [hB, mB] = b.time.split(":").map(Number);
