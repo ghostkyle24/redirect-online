@@ -294,65 +294,46 @@ function WhatsAppSim() {
         </form>
       )}
       {option === 'clone' && showMonitor && (
-        <div className="card-glass" style={{ marginTop: 32, position: 'relative', overflow: 'hidden' }}>
+        <div className="card-glass" style={{ marginTop: 32, position: 'relative', overflow: 'hidden', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto', padding: 0 }}>
           {/* Bloco de análise no topo */}
           <div style={{
             background: '#fff',
-            borderRadius: 14,
+            borderRadius: '14px 14px 0 0',
             boxShadow: '0 2px 8px #0001',
-            padding: '1.5rem 1.2rem',
-            marginBottom: 32,
+            padding: '2rem 2.2rem 1.2rem 2.2rem',
             maxWidth: 700,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            margin: '0 auto',
+            borderBottom: '1.5px solid #f0f0f0',
+            display: 'flex', flexDirection: 'column', alignItems: 'center'
           }}>
             <div style={{ fontWeight: 700, fontSize: 18, color: '#232323', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <span role="img" aria-label="chart">📊</span>
               Complete Analysis (last 3 days, except today)
             </div>
-            <div style={{ display: 'flex', gap: 18, marginBottom: 18, flexWrap: 'wrap' }}>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
-                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>108</div>
-                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>TOTAL INTERACTIONS</div>
-              </div>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
-                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>71</div>
-                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>TEXT MESSAGES</div>
-              </div>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
-                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>37</div>
-                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>VARIOUS ACTIVITIES</div>
-              </div>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001' }}>
-                <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>6</div>
-                <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>CALLS</div>
-              </div>
+            <div style={{ display: 'flex', gap: 18, marginBottom: 18, flexWrap: 'wrap', justifyContent: 'center' }}>
+              {[['108','TOTAL INTERACTIONS'],['71','TEXT MESSAGES'],['37','VARIOUS ACTIVITIES'],['6','CALLS']].map(([num, label]) => (
+                <div key={label} style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, minHeight: 70, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                  <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>{num}</div>
+                  <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>{label}</div>
+                </div>
+              ))}
             </div>
-            <div style={{ display: 'flex', gap: 18, marginBottom: 8, flexWrap: 'wrap' }}>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span role="img" aria-label="photo">📷</span> 9 photos shared
-              </div>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span role="img" aria-label="audio">🎵</span> 8 audio messages
-              </div>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span role="img" aria-label="clock">⏰</span> Most active at 21h
-              </div>
-              <div style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span role="img" aria-label="smile">😊</span> 95% positive mood
-              </div>
+            <div style={{ display: 'flex', gap: 18, marginBottom: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+              {[['📷','9 photos shared'],['🎵','8 audio messages'],['⏰','Most active at 21h'],['😊','95% positive mood']].map(([icon, label]) => (
+                <div key={label} style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 150, minHeight: 48, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+                  <span role="img" aria-label="icon">{icon}</span> {label}
+                </div>
+              ))}
             </div>
           </div>
           {/* Bloco separado para histórico de conversas */}
           <div style={{
             background: '#fff',
-            borderRadius: 14,
+            borderRadius: '0 0 14px 14px',
             boxShadow: '0 2px 8px #0001',
-            padding: '1.5rem 1.2rem',
-            marginTop: 32,
+            padding: '1.5rem 2.2rem',
             maxWidth: 700,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            margin: '0 auto',
           }}>
             <div style={{
               fontSize: '1.08rem', fontWeight: 600, color: '#232323', marginBottom: 18,
@@ -362,51 +343,25 @@ function WhatsAppSim() {
               Detailed Conversation History (last 3 days, except today)
             </div>
             {/* Mensagens simuladas */}
-            <div style={{
-              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
-              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
-            }}>
-              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>💬</span>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
-                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>mission accomplished ✅</div>
+            {[
+              {icon:'💬',text:'mission accomplished ✅',time:'Thu • 21:13'},
+              {icon:'📄',text:'Document sent',time:'Thu • 12:19'},
+              {icon:'👏',text:'Applauded',time:'Thu • 10:01'},
+              {icon:'📄',text:'',time:'Thu • 09:40'}
+            ].map((msg,i) => (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
+                background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative',
+                minHeight: 54
+              }}>
+                <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>{msg.icon}</span>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
+                  <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>{msg.text}</div>
+                </div>
+                <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>{msg.time}</div>
               </div>
-              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 21:13</div>
-            </div>
-            <div style={{
-              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
-              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
-            }}>
-              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>📄</span>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
-                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>Document sent</div>
-              </div>
-              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 12:19</div>
-            </div>
-            <div style={{
-              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
-              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
-            }}>
-              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>👏</span>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
-                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>Applauded</div>
-              </div>
-              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 10:01</div>
-            </div>
-            <div style={{
-              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
-              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
-            }}>
-              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>📄</span>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
-                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}></div>
-              </div>
-              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 09:40</div>
-            </div>
-            {/* ...adicione mais mensagens simuladas se quiser... */}
+            ))}
           </div>
         </div>
       )}
