@@ -294,33 +294,33 @@ function WhatsAppSim() {
         </form>
       )}
       {option === 'clone' && showMonitor && (
-        <div className="card-glass" style={{ marginTop: 32, position: 'relative', overflow: 'hidden', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto', padding: 0 }}>
+        <div className="card-glass" style={{ marginTop: 32, position: 'relative', overflow: 'hidden', maxWidth: 700, marginLeft: 'auto', marginRight: 'auto', padding: 0, background: '#111b21' }}>
           {/* Bloco de análise no topo */}
           <div style={{
-            background: '#fff',
+            background: '#202c33',
             borderRadius: '14px 14px 0 0',
             boxShadow: '0 2px 8px #0001',
             padding: '2rem 2.2rem 1.2rem 2.2rem',
             maxWidth: 700,
             margin: '0 auto',
-            borderBottom: '1.5px solid #f0f0f0',
+            borderBottom: '1.5px solid #232323',
             display: 'flex', flexDirection: 'column', alignItems: 'center'
           }}>
-            <div style={{ fontWeight: 700, fontSize: 18, color: '#232323', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ fontWeight: 700, fontSize: 18, color: '#25d366', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
               <span role="img" aria-label="chart">📊</span>
               Complete Analysis (last 3 days, except today)
             </div>
             <div style={{ display: 'flex', gap: 18, marginBottom: 18, flexWrap: 'wrap', justifyContent: 'center' }}>
               {[['108','TOTAL INTERACTIONS'],['71','TEXT MESSAGES'],['37','VARIOUS ACTIVITIES'],['6','CALLS']].map(([num, label]) => (
-                <div key={label} style={{ background: '#f8f9fa', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, minHeight: 70, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                  <div style={{ fontWeight: 700, fontSize: 22, color: '#232323' }}>{num}</div>
-                  <div style={{ color: '#888', fontSize: 13, fontWeight: 600 }}>{label}</div>
+                <div key={label} style={{ background: '#232d36', borderRadius: 10, padding: '1.1rem 1.5rem', minWidth: 120, minHeight: 70, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                  <div style={{ fontWeight: 700, fontSize: 22, color: '#25d366' }}>{num}</div>
+                  <div style={{ color: '#b0b0b0', fontSize: 13, fontWeight: 600 }}>{label}</div>
                 </div>
               ))}
             </div>
             <div style={{ display: 'flex', gap: 18, marginBottom: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
               {[['📷','9 photos shared'],['🎵','8 audio messages'],['⏰','Most active at 21h'],['😊','95% positive mood']].map(([icon, label]) => (
-                <div key={label} style={{ background: '#f8f9fa', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 150, minHeight: 48, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+                <div key={label} style={{ background: '#232d36', borderRadius: 10, padding: '0.7rem 1.2rem', minWidth: 150, minHeight: 48, textAlign: 'center', boxShadow: '0 1px 4px #0001', display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center', color: '#25d366' }}>
                   <span role="img" aria-label="icon">{icon}</span> {label}
                 </div>
               ))}
@@ -328,7 +328,7 @@ function WhatsAppSim() {
           </div>
           {/* Bloco separado para histórico de conversas com scroll e alinhamento simétrico */}
           <div style={{
-            background: '#fff',
+            background: '#202c33',
             borderRadius: '0 0 14px 14px',
             boxShadow: '0 2px 8px #0001',
             padding: '1.5rem 2.2rem',
@@ -341,7 +341,7 @@ function WhatsAppSim() {
             gap: 0
           }}>
             <div style={{
-              fontSize: '1.08rem', fontWeight: 600, color: '#232323', marginBottom: 18,
+              fontSize: '1.08rem', fontWeight: 600, color: '#25d366', marginBottom: 18,
               display: 'flex', alignItems: 'center', gap: 8, width: '100%', justifyContent: 'flex-start'
             }}>
               <span role="img" aria-label="chat">📱</span>
@@ -349,18 +349,18 @@ function WhatsAppSim() {
             </div>
             {/* Mensagens simuladas */}
             {[
-              {icon:'💬',text:'last message',time:'Thu • 21:13'},
-              {icon:'📄',text:'last message',time:'Thu • 12:19'},
-              {icon:'👏',text:'last message',time:'Thu • 10:01'},
-              {icon:'📄',text:'last message',time:'Thu • 09:40'},
-              {icon:'💬',text:'last message',time:'Thu • 09:30'},
-              {icon:'💬',text:'last message',time:'Thu • 09:20'},
-              {icon:'💬',text:'last message',time:'Thu • 09:10'},
-              {icon:'💬',text:'last message',time:'Thu • 09:00'}
+              {text:'last message',time:'Thu • 21:13'},
+              {text:'last message',time:'Thu • 12:19'},
+              {text:'last message',time:'Thu • 10:01'},
+              {text:'last message',time:'Thu • 09:40'},
+              {text:'last message',time:'Thu • 09:30'},
+              {text:'last message',time:'Thu • 09:20'},
+              {text:'last message',time:'Thu • 09:10'},
+              {text:'last message',time:'Thu • 09:00'}
             ].map((msg,i) => (
               <div key={i} style={{
-                display: 'flex', alignItems: 'center', gap: 14, borderLeft: '3px solid #00c48c', marginBottom: 12,
-                background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative',
+                display: 'flex', alignItems: 'center', gap: 14, borderLeft: '3px solid #25d366', marginBottom: 12,
+                background: '#232d36', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative',
                 minHeight: 54, width: '100%', maxWidth: 600, marginLeft: 'auto', marginRight: 'auto',
                 cursor: 'pointer', boxSizing: 'border-box'
               }}
@@ -370,10 +370,10 @@ function WhatsAppSim() {
                 }
               }}
               >
-                <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2, flexShrink: 0 }}>{msg.icon}</span>
+                <span style={{ fontSize: '1.2rem', color: '#25d366', marginTop: 2, flexShrink: 0 }}>💬</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>davi</div>
-                  <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{msg.text}</div>
+                  <div style={{ fontWeight: 600, color: '#25d366', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>davi</div>
+                  <div style={{ color: '#e9edef', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{msg.text}</div>
                 </div>
                 <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 10, flexShrink: 0 }}>{msg.time}</div>
               </div>
@@ -383,12 +383,6 @@ function WhatsAppSim() {
               last message
             </div>
           </div>
-          {/* Mensagem de IMEI incorreto (apenas se não for alert) */}
-          {/* {imei !== '356938035643809' && (
-            <div style={{ color: 'var(--vermelho)', fontWeight: 600, margin: '18px auto 0 auto', fontSize: 15, textAlign: 'center', maxWidth: 700 }}>
-              You must enter the correct IMEI to access the conversations.
-            </div>
-          )} */}
         </div>
       )}
       {option === 'web' && (
