@@ -13,6 +13,15 @@
   --erro: #FF0033;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: 'Inter', Arial, sans-serif;
   background: var(--preto);

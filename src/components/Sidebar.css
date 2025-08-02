@@ -17,11 +17,11 @@
   justify-content: center;
   gap: 1.1rem;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: #E60033;
-  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
-  letter-spacing: 1.5px;
+  padding: 2rem 1.2rem 1.2rem 1.2rem;
+  letter-spacing: 1.2px;
   background: none;
   border-bottom: none;
 }
@@ -45,14 +45,18 @@
   padding: 0;
   margin: 0;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: stretch;
 }
 
 .sidebar__item {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
   padding: 1rem 1.3rem;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   cursor: pointer;
   color: #fff;
   border-left: 4px solid transparent;
@@ -60,6 +64,7 @@
   border-radius: 0 14px 14px 0;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-weight: 600;
+  justify-content: flex-start;
 }
 
 .sidebar__item.active, .sidebar__item:hover {
@@ -71,7 +76,7 @@
 
 .sidebar__icon {
   font-size: 1.25rem;
-  min-width: 24px;
+  min-width: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,6 +85,8 @@
 .sidebar__text {
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.01em;
 }
 
 .sidebar__toggle {
@@ -108,19 +115,22 @@
     transform: translateX(-100%);
     width: 80vw;
     max-width: 320px;
+    z-index: 201;
+    padding-top: 60px;
   }
   .sidebar.open {
     transform: translateX(0);
   }
   .sidebar__toggle {
     display: flex;
+    z-index: 202;
   }
   .sidebar-backdrop {
     display: block;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.25);
-    z-index: 99;
+    z-index: 200;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s;
@@ -137,19 +147,27 @@
     max-width: 99vw;
   }
   .sidebar__logo {
-    font-size: 1.1rem;
-    padding: 1.2rem 1rem 1rem 1rem;
-    gap: 0.6rem;
+    font-size: 1.08rem;
+    padding: 1.1rem 0.7rem 0.7rem 0.7rem;
+    gap: 0.5rem;
   }
   .sidebar__logo-img-bg {
-    padding: 6px;
+    padding: 5px;
   }
   .sidebar__logo img {
-    height: 26px;
-    width: 26px;
+    height: 22px;
+    width: 22px;
   }
   .sidebar__item {
-    font-size: 0.98rem;
-    padding: 0.8rem 1rem;
+    font-size: 0.99rem;
+    padding: 0.7rem 0.8rem;
+    gap: 0.6rem;
+  }
+  .sidebar__icon {
+    font-size: 1.1rem;
+    min-width: 22px;
+  }
+  .sidebar__text {
+    font-size: 0.99rem;
   }
 }

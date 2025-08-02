@@ -3,7 +3,6 @@ import { FaMapMarkerAlt, FaBook, FaWhatsapp, FaInstagram, FaFacebookF, FaMicroph
 import './Sidebar.css';
 
 const items = [
-  { label: 'Lessons', icon: <FaBook />, path: '#' },
   { label: 'Spy Location', icon: <FaMapMarkerAlt />, path: '#' },
   { label: 'WhatsApp', icon: <FaWhatsapp />, path: '#' },
   { label: 'Instagram', icon: <FaInstagram />, path: '#' },
