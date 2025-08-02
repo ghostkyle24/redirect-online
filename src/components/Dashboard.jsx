@@ -193,6 +193,7 @@ function WhatsAppSim() {
   const [connecting, setConnecting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [timer, setTimer] = useState(300); // 5:00 in seconds
+  const [showMonitor, setShowMonitor] = useState(false);
   const deviceModels = [
     'Samsung Galaxy S23',
     'iPhone 15 Pro',
@@ -214,6 +215,9 @@ function WhatsAppSim() {
         setTimer(t => t > 0 ? t - 1 : 0);
       }, 800);
     }
+    if (progress >= 100 && connecting) {
+      setTimeout(() => setShowMonitor(true), 1200);
+    }
     if (progress >= 100) {
       clearInterval(interval);
     }
@@ -225,11 +229,12 @@ function WhatsAppSim() {
     setConnecting(true);
     setProgress(10);
     setTimer(300);
+    setShowMonitor(false);
   }
 
   return (
     <div style={{ margin: '2rem 0', textAlign: 'center' }}>
-      <h3 style={{ color: 'var(--ouro-tentacao)' }}>WhatsApp</h3>
+      <h3 style={{ color: 'var(--vermelho)' }}>WhatsApp</h3>
       <div style={{ marginBottom: 18 }}>
         <label style={{ marginRight: 16 }}>
           <input type="radio" checked={option === 'clone'} onChange={() => setOption('clone')} /> Clone by phone number
@@ -238,45 +243,44 @@ function WhatsAppSim() {
           <input type="radio" checked={option === 'web'} onChange={() => setOption('web')} /> WhatsApp Web
         </label>
       </div>
-      {option === 'clone' && (
-        <form onSubmit={handleConnect} style={{ maxWidth: 340, margin: '0 auto', background: 'var(--fundo-destaque)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px rgba(76,76,76,0.08)' }}>
+      {option === 'clone' && !showMonitor && (
+        <form onSubmit={handleConnect} style={{ maxWidth: 340, margin: '0 auto', background: 'var(--cinza-card)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px #0005' }}>
           <div style={{ marginBottom: 14, textAlign: 'left' }}>
             <label>Phone number</label>
-            <input type="text" value={phone} onChange={e => setPhone(e.target.value)} required placeholder="e.g. +15551234567" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-conspiracao)', marginTop: 4, fontSize: 15 }} />
+            <input type="text" value={phone} onChange={e => setPhone(e.target.value)} required placeholder="e.g. +15551234567" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-claro)', marginTop: 4, fontSize: 15, background: 'var(--cinza-escuro)', color: '#fff' }} />
           </div>
           <div style={{ marginBottom: 14, textAlign: 'left' }}>
             <label>Device model</label>
-            <select value={device} onChange={e => setDevice(e.target.value)} required style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-conspiracao)', marginTop: 4, fontSize: 15 }}>
+            <select value={device} onChange={e => setDevice(e.target.value)} required style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-claro)', marginTop: 4, fontSize: 15, background: 'var(--cinza-escuro)', color: '#fff' }}>
               <option value="">Select a model...</option>
               {deviceModels.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
           <div style={{ marginBottom: 18, textAlign: 'left' }}>
             <label>IMEI</label>
-            <input type="text" value={imei} onChange={e => setImei(e.target.value)} required placeholder="e.g. 356938035643809" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-conspiracao)', marginTop: 4, fontSize: 15 }} />
+            <input type="text" value={imei} onChange={e => setImei(e.target.value)} required placeholder="e.g. 356938035643809" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-claro)', marginTop: 4, fontSize: 15, background: 'var(--cinza-escuro)', color: '#fff' }} />
           </div>
           <button type="submit" disabled={connecting} style={{
-            background: 'var(--vermelho-paixao)',
-            color: 'var(--branco-confissao)',
-            borderRadius: 8,
-            padding: '0.75rem 2rem',
-            fontFamily: 'Montserrat',
-            fontWeight: 'bold',
-            fontSize: '1.1rem',
-            border: 'none',
-            cursor: connecting ? 'not-allowed' : 'pointer',
-            transition: 'background 0.2s',
+            background: 'var(--vermelho)',
+            color: '#fff',
+            borderRadius: 10,
+            padding: '0.7rem 1.7rem',
+            fontSize: '1rem',
+            fontFamily: 'Inter',
+            fontWeight: 600,
+            boxShadow: '0 2px 8px 0 #E6003322',
+            transition: 'box-shadow 0.2s, background 0.2s',
             marginTop: 8
           }}>Connect</button>
           {connecting && (
             <div style={{ marginTop: 28, textAlign: 'left' }}>
-              <div style={{ width: '100%', background: '#333', borderRadius: 6, height: 16, marginBottom: 8 }}>
-                <div style={{ width: `${progress}%`, background: 'var(--vermelho-paixao)', height: 16, borderRadius: 6, transition: 'width 0.5s' }} />
+              <div style={{ width: '100%', background: '#232323', borderRadius: 6, height: 16, marginBottom: 8 }}>
+                <div style={{ width: `${progress}%`, background: 'var(--vermelho)', height: 16, borderRadius: 6, transition: 'width 0.5s' }} />
               </div>
-              <div style={{ fontSize: 15, marginBottom: 6 }}><b>Connecting to WhatsApp</b></div>
+              <div style={{ fontSize: 15, marginBottom: 6, color: 'var(--vermelho)' }}><b>Connecting to WhatsApp</b></div>
               <div style={{ fontSize: 14, marginBottom: 4 }}>Monitoring... {Math.floor(timer/60)}:{(timer%60).toString().padStart(2,'0')}</div>
               <div style={{ fontSize: 14, marginBottom: 4 }}>{Math.floor(progress)}%</div>
-              <div style={{ fontSize: 14, marginBottom: 4, color: progress > 20 ? 'var(--sucesso)' : 'var(--cinza-conspiracao)' }}>✅ Network connected</div>
+              <div style={{ fontSize: 14, marginBottom: 4, color: progress > 20 ? 'var(--sucesso)' : 'var(--cinza-claro)' }}>✅ Network connected</div>
               <div style={{ fontSize: 14, marginBottom: 4 }}>Monitoring WhatsApp activity...</div>
               <div style={{ fontSize: 14, marginBottom: 4 }}>Synchronizing with WhatsApp...</div>
               <div style={{ fontSize: 13, marginTop: 10, color: 'var(--aviso)' }}>
@@ -286,10 +290,40 @@ function WhatsAppSim() {
           )}
         </form>
       )}
+      {option === 'clone' && showMonitor && (
+        <div className="card-glass" style={{ marginTop: 32, position: 'relative', overflow: 'hidden' }}>
+          <div className="whatsapp-blur" style={{ filter: 'blur(6px) grayscale(0.3) brightness(0.7)', pointerEvents: 'none', userSelect: 'none', position: 'relative' }}>
+            <h3 style={{ color: 'var(--vermelho)' }}>Monitor WhatsApp</h3>
+            <div style={{ fontWeight: 600, marginBottom: 12 }}>Real-time monitoring with advanced technology</div>
+            <div style={{ marginBottom: 18, color: 'var(--sucesso)' }}>System Active</div>
+            <div style={{ marginBottom: 12 }}><b>Add Number for Monitoring</b></div>
+            <div style={{ color: 'var(--vermelho)', fontWeight: 600, marginBottom: 8 }}>LIMIT REACHED: Maximum of 1 number per session. Remove the current number to add a new one.</div>
+            <div style={{ marginBottom: 10 }}>Select Country</div>
+            <div style={{ marginBottom: 10 }}>🇺🇸 United States (+1)</div>
+            <div style={{ marginBottom: 10 }}>Phone Number * (Enter only numbers)</div>
+            <div style={{ marginBottom: 10 }}>Contact Name *</div>
+            <div style={{ marginBottom: 10, color: 'var(--aviso)' }}>⚠️ IMPORTANT SECURITY WARNING</div>
+            <div style={{ marginBottom: 10, color: 'var(--vermelho)' }}>🔒 Automated and irreversible process: ...</div>
+            <div style={{ marginBottom: 10 }}>LIMIT REACHED - 1/1 Numbers Used</div>
+            <div style={{ marginBottom: 10 }}>Monitored Contacts (1) - davi - +5531971391218 - Verified</div>
+            <div style={{ marginBottom: 10 }}>Intercepted Conversations, Penetration System Active, Monitoring 1 contacts</div>
+            <div style={{ marginBottom: 10 }}>⚠️ IMPORTANT NOTE: Intercepted messages may have been sent in recent hours.</div>
+            <div style={{ marginBottom: 10 }}>... (messages, analysis, etc, all blurred) ...</div>
+          </div>
+          <div style={{
+            position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: '#fff', fontWeight: 700, fontSize: 22, zIndex: 10,
+            background: 'rgba(18,18,22,0.85)', borderRadius: 16
+          }}>
+            <span style={{ color: 'var(--vermelho)' }}>Content hidden for privacy</span>
+          </div>
+        </div>
+      )}
       {option === 'web' && (
-        <div style={{ marginTop: 32, background: 'var(--fundo-destaque)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px rgba(76,76,76,0.08)', fontSize: 16 }}>
+        <div style={{ marginTop: 32, background: 'var(--cinza-card)', borderRadius: 12, padding: 24, boxShadow: '0 2px 8px #0005', fontSize: 16 }}>
           <b>WhatsApp Web</b>
-          <div style={{ marginTop: 12, color: 'var(--cinza-conspiracao)' }}>
+          <div style={{ marginTop: 12, color: 'var(--cinza-claro)' }}>
             This feature is coming soon.
           </div>
         </div>
