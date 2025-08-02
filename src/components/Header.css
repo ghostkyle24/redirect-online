@@ -2,15 +2,17 @@
   background: var(--preto-espionagem);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0.5rem 2rem;
   border-bottom: 1px solid var(--cinza-conspiracao);
+  position: relative;
 }
 
 .header__logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-content: center;
 }
 
 .header__brand {
@@ -34,4 +36,13 @@
 
 .header__link:hover {
   color: var(--ouro-tentacao);
+}
+
+@media (max-width: 700px) {
+  .header {
+    padding: 0.5rem 0.7rem;
+  }
+  .header__logo {
+    gap: 0.3rem;
+  }
 }

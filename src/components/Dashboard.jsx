@@ -293,20 +293,24 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         background: 'transparent',
         borderRadius: '0 16px 16px 0',
         display: 'flex', flexDirection: 'column', alignItems: 'stretch',
-        minHeight: 520
+        minHeight: 520,
+        width: '100%',
+        maxWidth: '100vw',
+        boxSizing: 'border-box',
       }}>
         {showLoadMoreMsg ? (
           <div style={{
             background: 'transparent',
             borderRadius: 14,
             boxShadow: 'none',
-            padding: '2.5rem 2.2rem',
-            maxWidth: 700,
+            padding: window.innerWidth <= 700 ? '1rem 0.2rem' : '2.5rem 2.2rem',
+            maxWidth: window.innerWidth <= 700 ? '100vw' : 700,
             width: '100%',
-            margin: '32px auto 0 auto',
+            margin: window.innerWidth <= 700 ? '16px 0 0 0' : '32px auto 0 auto',
             minHeight: 320,
             maxHeight: 420,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxSizing: 'border-box',
           }}>
             <span style={{ color: '#E60033', fontWeight: 600, fontSize: 18, textAlign: 'center' }}>
               You do not have access to the content of this chat. The IMEI must be filled in correctly to access the conversations.
@@ -318,10 +322,11 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
             <div style={{
               width: '100%',
               background: '#202c33',
-              borderRadius: '0 14px 0 0',
+              borderRadius: window.innerWidth <= 700 ? '0' : '0 14px 0 0',
               boxShadow: '0 2px 8px #0001',
-              padding: '1.2rem 2.2rem',
-              display: 'flex', alignItems: 'center', gap: 16
+              padding: window.innerWidth <= 700 ? '0.7rem 0.5rem' : '1.2rem 2.2rem',
+              display: 'flex', alignItems: 'center', gap: 16,
+              boxSizing: 'border-box',
             }}>
               <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>?</div>
               <div>
@@ -339,13 +344,14 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               background: 'transparent',
               borderRadius: 14,
               boxShadow: 'none',
-              padding: '1.5rem 2.2rem',
-              maxWidth: 700,
+              padding: window.innerWidth <= 700 ? '0.7rem 0.2rem' : '1.5rem 2.2rem',
+              maxWidth: window.innerWidth <= 700 ? '100vw' : 700,
               width: '100%',
               minHeight: 320,
               maxHeight: 420,
               overflowY: 'auto',
-              display: 'flex', flexDirection: 'column', gap: 0
+              display: 'flex', flexDirection: 'column', gap: 0,
+              boxSizing: 'border-box',
             }}>
               {sortedMessages.map((msg, i) => (
                 <div key={i} style={{
@@ -365,7 +371,8 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
                     userSelect: 'none',
                     cursor: 'not-allowed',
                     marginLeft: msg.fromMe ? 0 : 8,
-                    marginRight: msg.fromMe ? 8 : 0
+                    marginRight: msg.fromMe ? 8 : 0,
+                    boxSizing: 'border-box',
                   }}>
                     <span style={{ color: '#25d366', fontSize: 18, marginRight: 6 }}>💬</span>
                     {msg.text}
