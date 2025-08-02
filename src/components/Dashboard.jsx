@@ -267,9 +267,24 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 10, flexShrink: 0 }}>{c.time}</div>
             </div>
           ))}
-          <button onClick={() => setShowLoadMoreMsg(true)} style={{
-            width: '90%', margin: '16px auto 8px auto', display: 'block', background: '#232d36', color: '#25d366', border: 'none', borderRadius: 8, padding: '0.7rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'pointer'
-          }}>Carregar mais chats</button>
+          <button
+            onClick={() => setShowLoadMoreMsg(true)}
+            style={{
+              width: '90%',
+              margin: '16px auto 8px auto',
+              display: 'block',
+              background: '#232d36',
+              color: '#25d366',
+              border: 'none',
+              borderRadius: 8,
+              padding: '0.7rem 1.2rem',
+              fontWeight: 700,
+              fontSize: 15,
+              cursor: 'pointer'
+            }}
+          >
+            Carregar mais chats
+          </button>
         </div>
       </div>
       {/* Área de chat */}
