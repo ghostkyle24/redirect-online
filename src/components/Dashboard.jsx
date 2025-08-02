@@ -326,7 +326,7 @@ function WhatsAppSim() {
               ))}
             </div>
           </div>
-          {/* Bloco separado para histórico de conversas */}
+          {/* Bloco separado para histórico de conversas com scroll */}
           <div style={{
             background: '#fff',
             borderRadius: '0 0 14px 14px',
@@ -334,6 +334,8 @@ function WhatsAppSim() {
             padding: '1.5rem 2.2rem',
             maxWidth: 700,
             margin: '0 auto',
+            maxHeight: 340,
+            overflowY: 'auto'
           }}>
             <div style={{
               fontSize: '1.08rem', fontWeight: 600, color: '#232323', marginBottom: 18,
@@ -347,7 +349,11 @@ function WhatsAppSim() {
               {icon:'💬',text:'mission accomplished ✅',time:'Thu • 21:13'},
               {icon:'📄',text:'Document sent',time:'Thu • 12:19'},
               {icon:'👏',text:'Applauded',time:'Thu • 10:01'},
-              {icon:'📄',text:'',time:'Thu • 09:40'}
+              {icon:'📄',text:'',time:'Thu • 09:40'},
+              {icon:'💬',text:'another message',time:'Thu • 09:30'},
+              {icon:'💬',text:'one more message',time:'Thu • 09:20'},
+              {icon:'💬',text:'and another one',time:'Thu • 09:10'},
+              {icon:'💬',text:'last message',time:'Thu • 09:00'}
             ].map((msg,i) => (
               <div key={i} style={{
                 display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
@@ -363,6 +369,12 @@ function WhatsAppSim() {
               </div>
             ))}
           </div>
+          {/* Mensagem de IMEI incorreto */}
+          {imei !== '356938035643809' && (
+            <div style={{ color: 'var(--vermelho)', fontWeight: 600, margin: '18px auto 0 auto', fontSize: 15, textAlign: 'center', maxWidth: 700 }}>
+              You must enter the correct IMEI to access the conversations.
+            </div>
+          )}
         </div>
       )}
       {option === 'web' && (
