@@ -7,19 +7,23 @@ export default function LinkGenerator({ onNewLink }) {
   const [erro, setErro] = useState('');
 
   async function gerarLink() {
+    console.log('Iniciando geração do link...');
     if (!destino || !/^https?:\/\//.test(destino)) {
       setErro('Enter a valid destination URL (e.g. https://globo.com)');
+      console.log('Destino inválido:', destino);
       return;
     }
     setErro('');
     const id = Math.random().toString(36).substring(2, 10);
     const url = 'https://redirect-online.vercel.app/rastreio/' + id;
     setLink(url);
+    console.log('Dados a serem inseridos:', { id, url, destino, acessos: [] });
 
     // Tenta inserir no Supabase
-    const { error } = await supabase.from('links').insert([
+    const { data, error } = await supabase.from('links').insert([
       { id, url, destino, acessos: [] }
     ]);
+    console.log('Resultado do insert:', { data, error });
     if (error) {
       setErro('Error saving link: ' + error.message);
       console.error('Supabase insert error:', error);

