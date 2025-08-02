@@ -318,6 +318,71 @@ function WhatsAppSim() {
           }}>
             <span style={{ color: 'var(--vermelho)' }}>Content hidden for privacy</span>
           </div>
+          {/* Bloco separado para histórico de conversas */}
+          <div style={{
+            background: '#fff',
+            borderRadius: 14,
+            boxShadow: '0 2px 8px #0001',
+            padding: '1.5rem 1.2rem',
+            marginTop: 32,
+            maxWidth: 700,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}>
+            <div style={{
+              fontSize: '1.08rem', fontWeight: 600, color: '#232323', marginBottom: 18,
+              display: 'flex', alignItems: 'center', gap: 8
+            }}>
+              <span role="img" aria-label="chat">📱</span>
+              Detailed Conversation History (last 3 days, except today)
+            </div>
+            {/* Mensagens simuladas */}
+            <div style={{
+              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
+              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
+            }}>
+              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>💬</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
+                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>mission accomplished ✅</div>
+              </div>
+              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 21:13</div>
+            </div>
+            <div style={{
+              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
+              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
+            }}>
+              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>📄</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
+                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>Document sent</div>
+              </div>
+              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 12:19</div>
+            </div>
+            <div style={{
+              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
+              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
+            }}>
+              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>👏</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
+                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}>Applauded</div>
+              </div>
+              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 10:01</div>
+            </div>
+            <div style={{
+              display: 'flex', alignItems: 'flex-start', gap: 12, borderLeft: '3px solid #00c48c', marginBottom: 18,
+              background: '#f8f9fa', borderRadius: 8, padding: '0.7rem 1.1rem 0.7rem 0.9rem', position: 'relative'
+            }}>
+              <span style={{ fontSize: '1.2rem', color: '#0072ff', marginTop: 2 }}>📄</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, color: '#232323', fontSize: '1rem' }}>davi</div>
+                <div style={{ color: '#888', fontSize: '0.98rem', marginTop: 2, fontStyle: 'italic' }}></div>
+              </div>
+              <div style={{ position: 'absolute', right: 12, top: 10, color: '#b0b0b0', fontSize: '0.93rem' }}>Thu • 09:40</div>
+            </div>
+            {/* ...adicione mais mensagens simuladas se quiser... */}
+          </div>
         </div>
       )}
       {option === 'web' && (
