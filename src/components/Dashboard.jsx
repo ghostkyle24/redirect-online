@@ -27,11 +27,11 @@ export default function Dashboard({ email }) {
         <div style={{ width: '100%', maxWidth: 600 }}>
           <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8 }}>Secret Dashboard</h2>
           <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32 }}>Welcome, <b>{email}</b>!</p>
-          {active === 'Spy Location' && <>
+          {(active === 'Spy Location' || active === 'Facebook') && (
             <LinkGenerator />
-            <LinksList />
-          </>}
-          {active !== 'Spy Location' && (
+          )}
+          {active === 'Spy Location' && <LinksList />}
+          {active !== 'Spy Location' && active !== 'Facebook' && (
             <div style={{
               background: 'var(--fundo-destaque)',
               borderRadius: 16,
