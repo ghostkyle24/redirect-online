@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaBook, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaBars, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
-const pathMap = {
-  'Home': '/',
-  'Lessons': '/',
-  'Spy Location': '/spy-location',
-  'WhatsApp': '/whatsapp',
-  'Instagram': '/instagram',
-  'Facebook': '/facebook',
-  'Microphone': '/microphone',
-  'FAQ': '/faq',
-  'Support and refund': '/support',
-};
-
-export default function Sidebar({ active = 'Home', items }) {
+export default function Sidebar({ active = 'Home', setActive, items }) {
   const [open, setOpen] = useState(false);
-  const location = useLocation();
+
+  function handleSelect(label) {
+    if (setActive) setActive(label);
+    setOpen(false);
+  }
 
   return (
     <>
@@ -31,13 +22,11 @@ export default function Sidebar({ active = 'Home', items }) {
           {items.map(item => (
             <li
               key={item.label}
-              className={`sidebar__item${location.pathname === pathMap[item.label] ? ' active' : ''}`}
-              onClick={() => setOpen(false)}
+              className={`sidebar__item${active === item.label ? ' active' : ''}`}
+              onClick={() => handleSelect(item.label)}
             >
-              <Link to={pathMap[item.label]} style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'inherit', textDecoration: 'none', width: '100%' }}>
-                <span className="sidebar__icon">{item.icon}</span>
-                <span className="sidebar__text">{item.label}</span>
-              </Link>
+              <span className="sidebar__icon">{item.icon}</span>
+              <span className="sidebar__text">{item.label}</span>
             </li>
           ))}
         </ul>
