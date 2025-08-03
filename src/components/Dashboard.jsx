@@ -984,21 +984,43 @@ export default function Dashboard({ email }) {
               </div>
               <h2 style={{ color: '#E60033', marginBottom: 18 }}>Support</h2>
               <p style={{ fontSize: 18, marginBottom: 24 }}>If you need help, please open a support ticket below. Our team will get back to you as soon as possible.</p>
-              <form style={{ maxWidth: 400, margin: '0 auto', textAlign: 'left' }}>
-                <label style={{ color: '#fff', fontWeight: 600 }}>Name</label>
-                <input type="text" required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
-                <label style={{ color: '#fff', fontWeight: 600 }}>Email</label>
-                <input type="email" required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
-                <label style={{ color: '#fff', fontWeight: 600 }}>Subject</label>
-                <input type="text" required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
-                <label style={{ color: '#fff', fontWeight: 600 }}>Message</label>
-                <textarea required rows={5} style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 18, fontSize: 16, background: '#181A1B', color: '#fff', resize: 'vertical' }} />
-                <button type="submit" style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7rem 1.7rem', fontSize: '1rem', fontWeight: 700, cursor: 'pointer', width: '100%', marginBottom: 10 }}>Submit Ticket</button>
-              </form>
-              </div>
-            )}
+              <SupportForm />
+            </div>
+          )}
         </div>
       </div>
     </>
+  );
+}
+
+function SupportForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [sent, setSent] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSent(true);
+  }
+
+  return (
+    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '0 auto', textAlign: 'left' }}>
+      <label style={{ color: '#fff', fontWeight: 600 }}>Name</label>
+      <input type="text" value={name} onChange={e => setName(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
+      <label style={{ color: '#fff', fontWeight: 600 }}>Email</label>
+      <input type="email" value={email} onChange={e => setEmail(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
+      <label style={{ color: '#fff', fontWeight: 600 }}>Subject</label>
+      <input type="text" value={subject} onChange={e => setSubject(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
+      <label style={{ color: '#fff', fontWeight: 600 }}>Message</label>
+      <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={5} style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 18, fontSize: 16, background: '#181A1B', color: '#fff', resize: 'vertical' }} />
+      <button type="submit" style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7rem 1.7rem', fontSize: '1rem', fontWeight: 700, cursor: 'pointer', width: '100%', marginBottom: 10 }}>Submit Ticket</button>
+      {sent && (
+        <div style={{ color: '#25d366', marginTop: 18, fontWeight: 600, fontSize: 17, textAlign: 'center' }}>
+          Your ticket has been opened.
+        </div>
+      )}
+    </form>
   );
 }
