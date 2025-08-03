@@ -4,7 +4,7 @@ import LinkGenerator from './LinkGenerator';
 import LinksList from './LinksList';
 import Sidebar from './Sidebar';
 import { supabase } from '../supabase';
-import { FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaMapMarkerAlt, FaBook } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaMapMarkerAlt, FaBook, FaHome } from 'react-icons/fa';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
@@ -703,7 +703,7 @@ export default function Dashboard({ email }) {
 
   // Itens da sidebar (inclui Home)
   const sidebarItems = [
-    { label: 'Home', icon: <FaBook /> },
+    { label: 'Home', icon: <FaHome size={24} /> },
     ...tools.map(t => ({ label: t.label, icon: t.icon })),
   ];
 
