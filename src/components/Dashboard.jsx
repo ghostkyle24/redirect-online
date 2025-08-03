@@ -805,17 +805,23 @@ export default function Dashboard({ email }) {
                 showLoadMoreMsg={showLoadMoreMsg}
                 setShowLoadMoreMsg={setShowLoadMoreMsg}
               />
-              <a
-                href="#"
+              <span
                 onClick={e => {
                   e.preventDefault();
                   setShowIMEISupport(true);
                   console.log('[IMEI] Link clicked, showIMEISupport:', true);
                 }}
-                style={{ display: 'block', marginTop: 6, color: '#25d366', fontSize: 14, textDecoration: 'underline', cursor: 'pointer' }}
+                style={{
+                  display: 'block',
+                  marginTop: 6,
+                  color: '#25d366',
+                  fontSize: 14,
+                  textDecoration: 'underline',
+                  cursor: 'pointer'
+                }}
               >
                 How to get your IMEI?
-              </a>
+              </span>
             </div>
           )}
           {showIMEISupport && (
