@@ -870,7 +870,28 @@ export default function Dashboard({ email }) {
             <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center', width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <FaInstagram size={36} color="#E1306C" />
               <h2 style={{ color: '#E1306C', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Instagram</h2>
-              <b style={{ marginTop: 16 }}>Instagram coming soon...</b>
+              <div style={{ marginTop: 16, color: '#b0b0b0', fontSize: 17, maxWidth: 400 }}>
+                <b>Instagram is currently under maintenance.</b><br />
+                Our team is working to restore this feature as soon as possible.<br />
+                Please check back later.
+              </div>
+              <div style={{ marginTop: 32 }}>
+                <span className="spinner" style={{
+                  display: 'inline-block',
+                  width: 40,
+                  height: 40,
+                  border: '4px solid #E1306C',
+                  borderTop: '4px solid transparent',
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite'
+                }} />
+                <style>{`
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+                `}</style>
+              </div>
             </div>
           )}
           {active === 'Lessons' && (
