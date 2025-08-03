@@ -734,7 +734,7 @@ export default function Dashboard({ email }) {
           items={sidebarItems}
         />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0', maxWidth: '100vw', boxSizing: 'border-box' }}>
-          {active === 'Home' && (
+          {location.pathname === '/' && (
             <>
               <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem auto 0.5rem auto', letterSpacing: 1, textAlign: 'center', maxWidth: 700, width: '100%' }}>Welcome to SignalCheck</h1>
               <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520, width: '100%', padding: '0 0.5rem' }}>
@@ -792,69 +792,7 @@ export default function Dashboard({ email }) {
               </div>
             </>
           )}
-          {active === 'Lessons' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaBook size={36} color="#E60033" />
-                <h2 style={{ color: '#E60033', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Lessons</h2>
-              </div>
-              <LinkGenerator />
-            </div>
-          )}
-          {active === 'Spy Location' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaMapMarkerAlt size={36} color="#25d366" />
-                <h2 style={{ color: '#25d366', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Spy Location</h2>
-              </div>
-              <div>
-                <LinkGenerator />
-                <LinksList />
-              </div>
-            </div>
-          )}
-          {active === 'Facebook' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaFacebookF size={36} color="#1877f3" />
-                <h2 style={{ color: '#1877f3', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Facebook</h2>
-              </div>
-              <div>
-                <LinkGenerator onlyFacebook />
-                <FacebookCaptures />
-              </div>
-            </div>
-          )}
-          {active === 'Microphone' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaMicrophone size={36} color="#fff" />
-                <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Microphone</h2>
-              </div>
-              <MicrophonePlaceholder />
-            </div>
-          )}
-          {active === 'WhatsApp' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaWhatsapp size={36} color="#25d366" />
-                <h2 style={{ color: '#25d366', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>WhatsApp</h2>
-              </div>
-              <WhatsAppSim
-                onBack={() => setActive(null)}
-                showLoadMoreMsg={showLoadMoreMsg}
-                setShowLoadMoreMsg={setShowLoadMoreMsg}
-              />
-              </div>
-            )}
-          {active === 'Instagram' && (
-            <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center', width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <FaInstagram size={36} color="#E1306C" />
-              <h2 style={{ color: '#E1306C', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Instagram</h2>
-              <b style={{ marginTop: 16 }}>Instagram coming soon...</b>
-          </div>
-          )}
-          {active === 'FAQ' && (
+          {location.pathname === '/faq' && (
             <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <img src="/suporte.jpg" alt="Support FAQ" style={{ display: 'block', margin: '0 auto 2rem auto', width: '100%', maxWidth: 320, borderRadius: 12, boxShadow: '0 2px 8px #0005' }} />
               <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center' }}>Frequently Asked Questions (FAQ)</h2>
@@ -918,7 +856,7 @@ export default function Dashboard({ email }) {
               </div>
             </div>
           )}
-          {active === 'Support and refund' && (
+          {location.pathname === '/support' && (
             <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{
                 margin: '0 auto 2rem auto',
