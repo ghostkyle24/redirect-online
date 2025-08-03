@@ -726,19 +726,7 @@ export default function Dashboard({ email }) {
     }, 100);
   }, [location.pathname]);
 
-  useEffect(() => {
-    console.log('active mudou:', active, '| pathname:', location.pathname);
-    if (active === 'FAQ' && location.pathname !== '/faq') navigate('/faq');
-    else if (active === 'Support and refund' && location.pathname !== '/support') navigate('/support');
-    else if (active === 'WhatsApp' && location.pathname !== '/whatsapp') navigate('/whatsapp');
-    else if (active === 'Spy Location' && location.pathname !== '/spy-location') navigate('/spy-location');
-    else if (active === 'Facebook' && location.pathname !== '/facebook') navigate('/facebook');
-    else if (active === 'Microphone' && location.pathname !== '/microphone') navigate('/microphone');
-    else if (active === 'Instagram' && location.pathname !== '/instagram') navigate('/instagram');
-    else if (active === 'Lessons' && location.pathname !== '/lessons') navigate('/lessons');
-    else if (active === 'Home' && location.pathname !== '/') navigate('/');
-    // Não navegue para Home em outras rotas!
-  }, [active, navigate, location.pathname]);
+  // Remover o useEffect que navega com base em active!
 
   return (
     <>
