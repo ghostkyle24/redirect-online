@@ -117,6 +117,49 @@ function WhatsAppChat() {
   );
 }
 
+function FAQ() {
+  return <div style={{ maxWidth: 600, margin: '3rem auto', padding: '2rem', background: 'var(--cinza-card)', borderRadius: 16, color: '#fff', textAlign: 'center' }}>
+    <h2 style={{ color: '#25d366', marginBottom: 18 }}>Frequently Asked Questions (FAQ)</h2>
+    <p style={{ fontSize: 18 }}>This page will soon contain answers to the most common questions about SignalCheck.</p>
+  </div>;
+}
+function Support() {
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [subject, setSubject] = React.useState('');
+  const [message, setMessage] = React.useState('');
+  const [sent, setSent] = React.useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSent(true);
+    // Aqui você pode adicionar lógica para enviar para backend ou email
+  }
+
+  return (
+    <div style={{ maxWidth: 600, margin: '3rem auto', padding: '2rem', background: 'var(--cinza-card)', borderRadius: 16, color: '#fff', textAlign: 'center' }}>
+      <h2 style={{ color: '#E60033', marginBottom: 18 }}>Support</h2>
+      <p style={{ fontSize: 18, marginBottom: 24 }}>If you need help, please open a support ticket below. Our team will get back to you as soon as possible.</p>
+      <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '0 auto', textAlign: 'left' }}>
+        <label style={{ color: '#fff', fontWeight: 600 }}>Name</label>
+        <input type="text" value={name} onChange={e => setName(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
+        <label style={{ color: '#fff', fontWeight: 600 }}>Email</label>
+        <input type="email" value={email} onChange={e => setEmail(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
+        <label style={{ color: '#fff', fontWeight: 600 }}>Subject</label>
+        <input type="text" value={subject} onChange={e => setSubject(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
+        <label style={{ color: '#fff', fontWeight: 600 }}>Message</label>
+        <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={5} style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 18, fontSize: 16, background: '#181A1B', color: '#fff', resize: 'vertical' }} />
+        <button type="submit" style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7rem 1.7rem', fontSize: '1rem', fontWeight: 700, cursor: 'pointer', width: '100%', marginBottom: 10 }}>Submit Ticket</button>
+      </form>
+      {sent && (
+        <div style={{ color: '#25d366', marginTop: 18, fontWeight: 600, fontSize: 17 }}>
+          Support ticket sent! Our team will contact you soon.
+        </div>
+      )}
+    </div>
+  );
+}
+
 function App() {
   const [usuario, setUsuario] = useState(localStorage.getItem('usuario') || null);
 
@@ -141,6 +184,8 @@ function App() {
         <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
         <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
         <Route path="/imei-support-request" element={<IMEISupportRequest />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/support" element={<Support />} />
       </Routes>
     </BrowserRouter>
   );

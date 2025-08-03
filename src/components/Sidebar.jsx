@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaMapMarkerAlt, FaBook, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaBars, FaHome } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaBook, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaBars, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
 import './Sidebar.css';
 
 const items = [
@@ -37,6 +37,14 @@ export default function Sidebar({ active = 'Home', onSelect, items }) {
               <span className="sidebar__text">{item.label}</span>
             </li>
           ))}
+          <li className="sidebar__item" onClick={() => window.location.href = '/faq'}>
+            <span className="sidebar__icon"><FaQuestionCircle size={22} /></span>
+            <span className="sidebar__text">FAQ</span>
+          </li>
+          <li className="sidebar__item" onClick={() => window.location.href = '/support'}>
+            <span className="sidebar__icon"><FaLifeRing size={22} /></span>
+            <span className="sidebar__text">Support</span>
+          </li>
         </ul>
       </nav>
       <button className="sidebar__toggle" onClick={() => setOpen(!open)} style={{ background: '#232d36', color: '#E60033', border: 'none', boxShadow: '0 2px 8px #E6003340', width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', transition: 'box-shadow 0.2s, background 0.2s', fontSize: 28, cursor: 'pointer' }}>
