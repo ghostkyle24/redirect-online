@@ -697,16 +697,8 @@ export default function Dashboard({ email }) {
     if (location.pathname === '/faq') setActive('FAQ');
     else if (location.pathname === '/support') setActive('Support and refund');
     else if (location.pathname === '/') setActive('Home');
-    // Não setar active para 'Home' em outras rotas!
+    // Não altere active para Home em outras rotas!
   }, [location.pathname]);
-
-  useEffect(() => {
-    setActive('Home');
-  }, [email]);
-
-  useEffect(() => {
-    if (active) localStorage.setItem('dashboardActiveTab', active);
-  }, [active]);
 
   useEffect(() => {
     if (active === 'FAQ' && location.pathname !== '/faq') navigate('/faq');
