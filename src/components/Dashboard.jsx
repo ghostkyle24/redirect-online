@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import { supabase } from '../supabase';
 import { FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaMapMarkerAlt, FaBook, FaHome } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
+import IMEISupportRequest from '../pages/IMEISupportRequest';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
@@ -692,6 +693,7 @@ export default function Dashboard({ email }) {
   const [active, setActive] = useState('Home');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
+  const [showIMEISupport, setShowIMEISupport] = useState(false);
   // Blocos de ferramentas
   const tools = [
     { label: 'Lessons', icon: <FaBook size={44} color="#E60033" />, desc: 'Tutorials and instructions' },
@@ -792,7 +794,7 @@ export default function Dashboard({ email }) {
               </div>
             </>
           )}
-          {active === 'WhatsApp' && (
+          {active === 'WhatsApp' && !showIMEISupport && (
             <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
                 <FaWhatsapp size={36} color="#25d366" />
@@ -803,7 +805,21 @@ export default function Dashboard({ email }) {
                 showLoadMoreMsg={showLoadMoreMsg}
                 setShowLoadMoreMsg={setShowLoadMoreMsg}
               />
+              <a
+                href="#"
+                onClick={e => {
+                  e.preventDefault();
+                  setShowIMEISupport(true);
+                  console.log('[IMEI] Link clicked, showIMEISupport:', true);
+                }}
+                style={{ display: 'block', marginTop: 6, color: '#25d366', fontSize: 14, textDecoration: 'underline', cursor: 'pointer' }}
+              >
+                How to get your IMEI?
+              </a>
             </div>
+          )}
+          {showIMEISupport && (
+            <IMEISupportRequest />
           )}
           {active === 'Spy Location' && (
             <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
