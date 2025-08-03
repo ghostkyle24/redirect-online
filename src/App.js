@@ -318,8 +318,8 @@ function App() {
       <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
       <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
       <Route path="/imei-support-request" element={<IMEISupportRequest />} />
-      <Route path="/faq" element={<FAQ sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
-      <Route path="/support" element={<Support sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
+      <Route path="/faq" element={<Dashboard email={usuario} />} />
+      <Route path="/support" element={<Dashboard email={usuario} />} />
     </Routes>
   );
 }
