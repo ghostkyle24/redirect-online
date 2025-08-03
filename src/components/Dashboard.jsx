@@ -416,7 +416,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               cursor: 'pointer'
             }}
           >
-            Carregar mais chats
+            Load more chats
           </button>
         </div>
       </div>

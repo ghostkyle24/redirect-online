@@ -38,6 +38,16 @@
   color: var(--ouro-tentacao);
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100vw;
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 @media (max-width: 700px) {
   .header {
     padding: 0.5rem 0.7rem;
