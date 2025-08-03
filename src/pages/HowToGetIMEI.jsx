@@ -30,7 +30,7 @@ export default function HowToGetIMEI() {
           transition: 'box-shadow 0.2s, background 0.2s',
           cursor: 'pointer',
         }}
-        onClick={() => window.scrollTo({ top: 200, behavior: 'smooth' })}
+        onClick={() => window.location.href = '/imei-support-request'}
       >
         Don't have access to the IMEI? Click here
       </button>
