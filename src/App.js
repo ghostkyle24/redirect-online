@@ -225,6 +225,28 @@ function Support({ sidebarItems, active, setActive }) {
               Refund requests are subject to analysis and approval by our technical and financial team. The refund will be processed only if the product or service does not meet the described specifications, or in case of proven technical issues that cannot be resolved by our support.<br /><br />
               <b>If you request a refund within 7 days of purchase, you will be refunded within 7 business days.</b><br /><br />
               The refund process may take up to 7 business days after approval. Please provide all necessary information to expedite your request.
+              <br />
+              <button
+                style={{
+                  marginTop: 24,
+                  background: '#1a73e8',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 8,
+                  padding: '0.7rem 1.7rem',
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  width: '100%',
+                  maxWidth: 300,
+                  display: 'block',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+                onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
+              >
+                Request a refund
+              </button>
             </div>
             <h2 style={{ color: '#E60033', marginBottom: 18 }}>Support</h2>
             <p style={{ fontSize: 18, marginBottom: 24 }}>If you need help, please open a support ticket below. Our team will get back to you as soon as possible.</p>
@@ -244,27 +266,6 @@ function Support({ sidebarItems, active, setActive }) {
                 Support ticket sent! Our team will contact you soon.
               </div>
             )}
-            <button
-              style={{
-                marginTop: 8,
-                background: '#1a73e8',
-                color: '#fff',
-                border: 'none',
-                borderRadius: 8,
-                padding: '0.7rem 1.7rem',
-                fontSize: '1rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                width: '100%',
-                maxWidth: 300,
-                display: 'block',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-              }}
-              onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
-            >
-              Request a refund
-            </button>
           </div>
         </div>
       </div>
