@@ -6,6 +6,7 @@
   padding: 0.5rem 2rem;
   border-bottom: 1px solid var(--cinza-conspiracao);
   position: relative;
+  min-height: 56px;
 }
 
 .header__logo {
@@ -13,6 +14,7 @@
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
+  height: 48px;
 }
 
 .header__brand {
@@ -21,6 +23,9 @@
   font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  height: 48px;
 }
 
 .header__nav {
@@ -51,8 +56,14 @@ html, body {
 @media (max-width: 700px) {
   .header {
     padding: 0.5rem 0.7rem;
+    min-height: 48px;
   }
   .header__logo {
     gap: 0.3rem;
+    height: 40px;
+  }
+  .header__brand {
+    font-size: 1.1rem;
+    height: 40px;
   }
 }

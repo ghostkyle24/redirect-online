@@ -65,6 +65,8 @@
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-weight: 600;
   justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sidebar__item.active, .sidebar__item:hover {
