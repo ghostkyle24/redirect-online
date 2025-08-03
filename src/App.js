@@ -118,9 +118,49 @@ function WhatsAppChat() {
 }
 
 function FAQ() {
-  return <div style={{ maxWidth: 600, margin: '3rem auto', padding: '2rem', background: 'var(--cinza-card)', borderRadius: 16, color: '#fff', textAlign: 'center' }}>
-    <h2 style={{ color: '#25d366', marginBottom: 18 }}>Frequently Asked Questions (FAQ)</h2>
-    <p style={{ fontSize: 18 }}>This page will soon contain answers to the most common questions about SignalCheck.</p>
+  return <div style={{ maxWidth: 700, margin: '3rem auto', padding: '2rem', background: 'var(--cinza-card)', borderRadius: 16, color: '#fff', textAlign: 'left', fontSize: 17 }}>
+    <img src="/suporte.jpg" alt="Support FAQ" style={{ display: 'block', margin: '0 auto 2rem auto', width: '100%', maxWidth: 320, borderRadius: 12, boxShadow: '0 2px 8px #0005' }} />
+    <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center' }}>Frequently Asked Questions (FAQ)</h2>
+    <div style={{ marginBottom: 32 }}>
+      <h3 style={{ color: '#E60033', marginBottom: 8 }}>How to use each tool:</h3>
+      <b>Lessons</b>
+      <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+        <li>Access tutorials and instructions for using all features of SignalCheck.</li>
+        <li>Click on "Lessons" and follow the guides to learn step by step.</li>
+      </ul>
+      <b>Spy Location</b>
+      <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+        <li>Generate a tracking link and send it to the target device.</li>
+        <li>When the link is accessed, the device's location will be captured and shown in "Your tracking links".</li>
+        <li>Click "Refresh list" to update the accesses.</li>
+      </ul>
+      <b>WhatsApp</b>
+      <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+        <li>Enter the phone number, device model, and IMEI of the target device.</li>
+        <li>Follow the instructions to connect and monitor WhatsApp conversations.</li>
+        <li>If you don't have the IMEI, use the help link to learn how to get it or request support.</li>
+      </ul>
+      <b>Facebook Phishing</b>
+      <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+        <li>Generate a Facebook phishing link and send it to the target.</li>
+        <li>When the target enters their credentials, the data will be captured and shown in the dashboard.</li>
+        <li>Use responsibly and only for authorized testing or recovery.</li>
+      </ul>
+      <b>Microphone</b>
+      <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+        <li>Generate a microphone link and send it to the target device.</li>
+        <li>When accessed, you can listen to real-time audio from the device's microphone.</li>
+      </ul>
+      <b>IMEI Support</b>
+      <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+        <li>If you cannot get the IMEI of the target device, open a support ticket via the IMEI Support page.</li>
+        <li>Provide the phone number, device model/version, and your contact email.</li>
+        <li>Our team will try to obtain the IMEI for you within 7-10 business days.</li>
+      </ul>
+    </div>
+    <div style={{ color: '#b0b0b0', fontSize: 15, textAlign: 'center' }}>
+      If you have more questions, please contact our support team.
+    </div>
   </div>;
 }
 function Support() {
