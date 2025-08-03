@@ -34,7 +34,11 @@ export default function LinksList() {
   return (
     <div style={{ margin: '2rem 0', textAlign: 'center', width: '100%' }}>
       <h3 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', margin: '1.5rem 0 1rem 0', width: '100%' }}>Your tracking links</h3>
-      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>No links created yet.</p>}
+      {links.length === 0 && (
+        <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>
+          No links created yet.
+        </p>
+      )}
       {links.map(link => (
         <div key={link.id} className="card-glass" style={{
           margin: '1rem 0',
@@ -86,21 +90,25 @@ export default function LinksList() {
           )}
         </div>
       ))}
-      <button onClick={fetchLinks} style={{
-        background: 'var(--cinza-conspiracao)',
-        color: 'var(--branco-confissao)',
-        borderRadius: 8,
-        padding: '0.5rem 1.5rem',
-        fontFamily: 'Montserrat',
-        fontWeight: 'bold',
-        fontSize: '1rem',
-        border: 'none',
-        cursor: 'pointer',
-        marginTop: 10,
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      }}>Refresh list</button>
+      <button
+        onClick={fetchLinks}
+        style={{
+          display: 'block',
+          margin: '0 auto 1.5rem auto',
+          background: 'var(--cinza-conspiracao)',
+          color: 'var(--branco-confissao)',
+          borderRadius: 8,
+          padding: '0.5rem 1.5rem',
+          fontFamily: 'Montserrat',
+          fontWeight: 'bold',
+          fontSize: '1rem',
+          border: 'none',
+          cursor: 'pointer',
+          marginTop: 10
+        }}
+      >
+        Refresh list
+      </button>
     </div>
   );
 }
