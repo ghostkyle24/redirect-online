@@ -211,7 +211,7 @@ function Support({ sidebarItems, active, setActive }) {
     <>
       <Header />
       <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
-        <Sidebar active={active || 'Support'} onSelect={setActive} items={sidebarItems} />
+        <Sidebar active={active || 'FAQ'} onSelect={setActive} items={sidebarItems} />
         <div style={{ flex: 1 }}>
           <div style={{ maxWidth: 600, margin: '3rem auto', padding: '2rem', background: 'var(--cinza-card)', borderRadius: 16, color: '#fff', textAlign: 'center' }}>
             <div style={{
@@ -289,12 +289,12 @@ function App() {
     { label: 'Home', icon: <FaHome size={24} /> },
     ...tools,
     { label: 'FAQ', icon: <FaQuestionCircle size={22} /> },
-    { label: 'Support', icon: <FaLifeRing size={22} /> },
+    { label: 'Support and refund', icon: <FaLifeRing size={22} /> },
   ];
 
   React.useEffect(() => {
     if (active === 'FAQ') navigate('/faq');
-    else if (active === 'Support') navigate('/support');
+    else if (active === 'Support and refund') navigate('/support');
     else if (active === 'Home') navigate('/');
   }, [active, navigate]);
 
