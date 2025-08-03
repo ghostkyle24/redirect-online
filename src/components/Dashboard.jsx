@@ -244,13 +244,15 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
     }}>
       {/* Sidebar de chats */}
       <div style={{
-        width: 320,
+        width: window.innerWidth <= 700 ? 220 : 320,
         background: '#202c33',
         borderRadius: '16px 0 0 16px',
         boxShadow: '0 2px 8px #0001',
         display: 'flex', flexDirection: 'column', alignItems: 'stretch',
         borderRight: '1.5px solid #232323',
-        minHeight: 520
+        minHeight: 520,
+        overflowY: 'auto',
+        boxSizing: 'border-box',
       }}>
         <div style={{ padding: '1.2rem 1.2rem 0.7rem 1.2rem', borderBottom: '1.5px solid #232323' }}>
           <input disabled placeholder="Search or start new chat" style={{
@@ -260,17 +262,20 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
           {chats.map((c, i) => (
             <div key={i} onClick={() => setSelected(i)} style={{
-              display: 'flex', alignItems: 'center', gap: 14, padding: '0.7rem 1.1rem', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 10, padding: '0.7rem 0.7rem', cursor: 'pointer',
               background: selected === i ? '#232d36' : 'transparent',
               borderLeft: selected === i ? '3px solid #25d366' : '3px solid transparent',
-              borderRadius: 8, marginBottom: 2, transition: 'background 0.2s'
+              borderRadius: 8, marginBottom: 2, transition: 'background 0.2s',
+              maxWidth: '100%',
+              minWidth: 0,
+              boxSizing: 'border-box',
             }}>
-              <div style={{ width: 38, height: 38, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 20 }}>{c.avatar}</div>
+              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 18 }}>{c.avatar}</div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: 600, color: '#e9edef', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
-                <div style={{ color: '#b0b0b0', fontSize: '0.97rem', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.last}</div>
+                <div style={{ fontWeight: 600, color: '#e9edef', fontSize: '0.98rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
+                <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 120 }}>{c.last}</div>
               </div>
-              <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 10, flexShrink: 0 }}>{c.time}</div>
+              <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 6, flexShrink: 0 }}>{c.time}</div>
             </div>
           ))}
           <button
