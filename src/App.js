@@ -229,6 +229,27 @@ function Support({ sidebarItems, active, setActive }) {
                 Support ticket sent! Our team will contact you soon.
               </div>
             )}
+            <button
+              style={{
+                marginTop: 32,
+                background: '#1a73e8',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '0.7rem 1.7rem',
+                fontSize: '1rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                width: '100%',
+                maxWidth: 300,
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
+              onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
+            >
+              Request a refund
+            </button>
           </div>
         </div>
       </div>
