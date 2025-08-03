@@ -710,7 +710,7 @@ export default function Dashboard({ email }) {
   ];
 
   useEffect(() => {
-    console.log('PATHNAME:', location.pathname, '| active antes:', active);
+    console.log('[DASHBOARD] PATHNAME:', location.pathname, '| active antes:', active);
     if (location.pathname === '/faq') setActive('FAQ');
     else if (location.pathname === '/support') setActive('Support and refund');
     else if (location.pathname === '/whatsapp') setActive('WhatsApp');
@@ -722,7 +722,7 @@ export default function Dashboard({ email }) {
     else if (location.pathname === '/') setActive('Home');
     // Não altere active para Home em outras rotas!
     setTimeout(() => {
-      console.log('PATHNAME após setActive:', location.pathname, '| active agora:', active);
+      console.log('[DASHBOARD] PATHNAME após setActive:', location.pathname, '| active agora:', active);
     }, 100);
   }, [location.pathname]);
 
