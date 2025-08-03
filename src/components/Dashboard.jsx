@@ -775,21 +775,45 @@ export default function Dashboard({ email }) {
               </div>
             </>
           )}
-          {active === 'Lessons' && <LinkGenerator />}
-          {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
-          {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
-          {active === 'Microphone' && <MicrophonePlaceholder />}
+          {active === 'Lessons' && (
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <LinkGenerator />
+            </div>
+          )}
+          {active === 'Spy Location' && (
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div>
+                <LinkGenerator />
+                <LinksList />
+              </div>
+            </div>
+          )}
+          {active === 'Facebook' && (
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div>
+                <LinkGenerator onlyFacebook />
+                <FacebookCaptures />
+              </div>
+            </div>
+          )}
+          {active === 'Microphone' && (
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <MicrophonePlaceholder />
+            </div>
+          )}
           {active === 'WhatsApp' && (
-            <WhatsAppSim
-              onBack={() => setActive(null)}
-              showLoadMoreMsg={showLoadMoreMsg}
-              setShowLoadMoreMsg={setShowLoadMoreMsg}
-            />
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <WhatsAppSim
+                onBack={() => setActive(null)}
+                showLoadMoreMsg={showLoadMoreMsg}
+                setShowLoadMoreMsg={setShowLoadMoreMsg}
+              />
+            </div>
           )}
           {active === 'Instagram' && (
-            <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center' }}>
+            <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center', width: '100%', minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <b>Instagram</b> coming soon...
-          </div>
+            </div>
           )}
         </div>
       </div>
