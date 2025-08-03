@@ -696,7 +696,7 @@ export default function Dashboard({ email }) {
     if (location.pathname === '/faq') setActive('FAQ');
     else if (location.pathname === '/support') setActive('Support and refund');
     else if (location.pathname === '/') setActive('Home');
-    // ...outros casos se necessário
+    // Não setar active para 'Home' em outras rotas!
   }, [location.pathname]);
 
   useEffect(() => {
@@ -740,12 +740,12 @@ export default function Dashboard({ email }) {
               <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520, width: '100%', padding: '0 0.5rem' }}>
                 Select a tool below to get started. All features are organized in blocks for easy access.
               </p>
-              <div style={{
+      <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
                 gap: '2rem',
                 width: '100%',
-                maxWidth: 900,
+        maxWidth: 900,
                 margin: '2rem auto',
                 padding: '0 0.5rem',
                 boxSizing: 'border-box',
@@ -760,9 +760,9 @@ export default function Dashboard({ email }) {
                       boxShadow: '0 4px 24px 0 #0007',
                       border: '1.5px solid #232323',
                       padding: '2.2rem 1.2rem',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
                       justifyContent: 'center',
                       cursor: 'pointer',
                       transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
@@ -967,8 +967,8 @@ export default function Dashboard({ email }) {
                 <textarea required rows={5} style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 18, fontSize: 16, background: '#181A1B', color: '#fff', resize: 'vertical' }} />
                 <button type="submit" style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7rem 1.7rem', fontSize: '1rem', fontWeight: 700, cursor: 'pointer', width: '100%', marginBottom: 10 }}>Submit Ticket</button>
               </form>
-            </div>
-          )}
+              </div>
+            )}
         </div>
       </div>
     </>
