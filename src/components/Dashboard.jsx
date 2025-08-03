@@ -724,18 +724,18 @@ export default function Dashboard({ email }) {
           items={sidebarItems}
         />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0', maxWidth: '100vw', boxSizing: 'border-box' }}>
-          {!active && (
+          {(!active || active === 'Home') && (
             <>
               <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem auto 0.5rem auto', letterSpacing: 1, textAlign: 'center', maxWidth: 700, width: '100%' }}>Welcome to SignalCheck</h1>
               <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520, width: '100%', padding: '0 0.5rem' }}>
                 Select a tool below to get started. All features are organized in blocks for easy access.
               </p>
-      <div style={{
+              <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
                 gap: '2rem',
                 width: '100%',
-        maxWidth: 900,
+                maxWidth: 900,
                 margin: '2rem auto',
                 padding: '0 0.5rem',
                 boxSizing: 'border-box',
@@ -750,9 +750,9 @@ export default function Dashboard({ email }) {
                       boxShadow: '0 4px 24px 0 #0007',
                       border: '1.5px solid #232323',
                       padding: '2.2rem 1.2rem',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
                       justifyContent: 'center',
                       cursor: 'pointer',
                       transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
@@ -760,7 +760,7 @@ export default function Dashboard({ email }) {
                       fontWeight: 600,
                       color: '#fff',
                       minHeight: 150,
-                textAlign: 'center',
+                      textAlign: 'center',
                       gap: 18,
                       position: 'relative',
                       outline: 'none',
