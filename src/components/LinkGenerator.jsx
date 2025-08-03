@@ -95,8 +95,81 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
         </div>
       )}
       <h3 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', margin: '1.5rem 0 1rem 0', width: '100%' }}>Your tracking links</h3>
-      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>No links created yet.</p>}
-      <button onClick={fetchLinks} style={{ display: 'block', margin: '0 auto 1.5rem auto' }}>Refresh list</button>
+      {links.length === 0 && (
+        <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>
+          No links created yet.
+        </p>
+      )}
+      {links.map(link => (
+        <div key={link.id} className="card-glass" style={{
+          margin: '1rem 0',
+          padding: '1rem',
+        }}>
+          <div style={{ marginBottom: 8 }}>
+            <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
+          </div>
+          <div style={{ fontSize: 14, color: 'var(--cinza-conspiracao)' }}>
+            {(!link.acessos || link.acessos.length === 0) ? 'No access yet.' : `${link.acessos.length} access(es):`}
+          </div>
+          {link.acessos && link.acessos.length > 0 && (
+            <ul style={{ margin: '0.5rem 0 0 0', padding: 0, listStyle: 'none' }}>
+              {link.acessos.map((a, i) => {
+                const gmaps = getGoogleMapsLink(a.loc);
+                return (
+                  <li key={i} style={{
+                    background: 'rgba(255,143,163,0.08)',
+                    borderRadius: 6,
+                    margin: '0.25rem 0',
+                    padding: '0.5rem',
+                    color: 'var(--branco-confissao)'
+                  }}>
+                    <div><b>Date:</b> {a.data}</div>
+                    <div><b>IP:</b> {a.ip}</div>
+                    <div><b>Location:</b> {a.loc || 'Unknown'}</div>
+                    {gmaps && (
+                      <a
+                        href={gmaps}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'inline-block',
+                          marginTop: 6,
+                          background: 'var(--vermelho-paixao)',
+                          color: 'var(--branco-confissao)',
+                          borderRadius: 6,
+                          padding: '0.3rem 1rem',
+                          fontWeight: 'bold',
+                          textDecoration: 'none',
+                          fontSize: 14
+                        }}
+                      >View on Google Maps</a>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      ))}
+      <button
+        onClick={fetchLinks}
+        style={{
+          display: 'block',
+          margin: '0 auto 1.5rem auto',
+          background: 'var(--cinza-conspiracao)',
+          color: 'var(--branco-confissao)',
+          borderRadius: 8,
+          padding: '0.5rem 1.5rem',
+          fontFamily: 'Montserrat',
+          fontWeight: 'bold',
+          fontSize: '1rem',
+          border: 'none',
+          cursor: 'pointer',
+          marginTop: 10
+        }}
+      >
+        Refresh list
+      </button>
     </div>
   );
 }
