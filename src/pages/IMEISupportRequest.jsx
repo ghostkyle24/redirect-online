@@ -125,6 +125,20 @@ export default function IMEISupportRequest() {
           Request sent. You will have access to the device's WhatsApp within 7 business days.
         </div>
       )}
+      <div style={{ marginTop: 32, textAlign: 'center' }}>
+        <img
+          src="/imei-box.jpg"
+          alt="IMEI on box example"
+          style={{ width: '90%', maxWidth: 340, margin: '1.5rem 0', borderRadius: 8, boxShadow: '0 2px 8px #0005', border: '2px solid #25d366' }}
+        />
+        <div style={{ color: '#b0b0b0', fontSize: 16, marginTop: 12, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto' }}>
+          <b>How to find your IMEI using the original phone box:</b><br />
+          1. Find the original box of your phone (the one it came in when you bought it).<br />
+          2. Look for a sticker or label on the outside of the box. It is usually on the bottom or one of the sides.<br />
+          3. Locate the IMEI number on the label. It is a 15-digit number, often printed near the barcode and may be labeled as IMEI, IMEI1 or IMEI2 (for dual SIM phones).<br />
+          4. Write down or take a photo of the IMEI for your records.
+        </div>
+      </div>
     </div>
   );
 }
