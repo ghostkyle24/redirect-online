@@ -39,8 +39,8 @@ export default function Sidebar({ active = 'Home', onSelect, items }) {
           ))}
         </ul>
       </nav>
-      <button className="sidebar__toggle" onClick={() => setOpen(!open)}>
-        <FaBook size={24} />
+      <button className="sidebar__toggle" onClick={() => setOpen(!open)} style={{ background: '#232d36', color: '#E60033', border: 'none', boxShadow: '0 2px 8px #E6003340', width: 48, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', transition: 'box-shadow 0.2s, background 0.2s', fontSize: 28, cursor: 'pointer' }}>
+        <FaBars size={28} color="#E60033" />
       </button>
     </>
   );
