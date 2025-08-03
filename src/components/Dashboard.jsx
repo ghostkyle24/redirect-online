@@ -690,6 +690,21 @@ export default function Dashboard({ email }) {
   const [active, setActive] = useState('Home');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
+  const { location } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === '/faq') setActive('FAQ');
+    else if (location.pathname === '/support') setActive('Support and refund');
+    else if (location.pathname === '/whatsapp') setActive('WhatsApp');
+    else if (location.pathname === '/spy-location') setActive('Spy Location');
+    else if (location.pathname === '/facebook') setActive('Facebook');
+    else if (location.pathname === '/microphone') setActive('Microphone');
+    else if (location.pathname === '/instagram') setActive('Instagram');
+    else if (location.pathname === '/lessons') setActive('Lessons');
+    else if (location.pathname === '/') setActive('Home');
+    // Não altere active para Home em outras rotas!
+  }, [location.pathname]);
 
   useEffect(() => {
     if (active === 'FAQ' && location.pathname !== '/faq') navigate('/faq');
