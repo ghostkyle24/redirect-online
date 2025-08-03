@@ -13,7 +13,27 @@ export default function HowToGetIMEI() {
       textAlign: 'center',
       fontFamily: 'Inter, Arial, sans-serif',
     }}>
-      <h2 style={{ color: '#25d366', marginBottom: 18, fontWeight: 800, fontSize: 28 }}>How to find your IMEI using the original phone box</h2>
+      <h2 style={{ color: '#25d366', marginBottom: 18, fontWeight: 800, fontSize: 28 }}>How to find your IMEI to hack WhatsApp of your partner</h2>
+      <button
+        style={{
+          display: 'block',
+          margin: '0 auto 2rem auto',
+          background: '#232d36',
+          color: '#25d366',
+          border: 'none',
+          borderRadius: 8,
+          padding: '0.7rem 1.7rem',
+          fontSize: '1rem',
+          fontFamily: 'Inter',
+          fontWeight: 600,
+          boxShadow: '0 2px 8px 0 #25d36633',
+          transition: 'box-shadow 0.2s, background 0.2s',
+          cursor: 'pointer',
+        }}
+        onClick={() => window.scrollTo({ top: 200, behavior: 'smooth' })}
+      >
+        Don't have access to the IMEI? Click here
+      </button>
       <div style={{
         background: 'rgba(230,0,51,0.08)',
         borderRadius: 10,
@@ -45,16 +65,6 @@ export default function HowToGetIMEI() {
         alt="IMEI on box example"
         style={{ width: '90%', maxWidth: 340, margin: '1.5rem 0', borderRadius: 8, boxShadow: '0 2px 8px #0005', border: '2px solid #25d366' }}
       />
-      <div style={{
-        background: 'rgba(36, 36, 36, 0.7)',
-        borderRadius: 8,
-        padding: '1rem',
-        marginTop: 18,
-        color: '#b0b0b0',
-        fontSize: 15,
-      }}>
-        <b>Tip:</b> If you don't have the box, you can also dial <b>*#06#</b> on your phone to display the IMEI on the screen.
-      </div>
     </div>
   );
 }

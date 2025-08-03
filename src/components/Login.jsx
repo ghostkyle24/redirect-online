@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [erro, setErro] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +15,7 @@ export default function Login({ onLogin }) {
     }
     setErro('');
     onLogin(email);
+    navigate('/');
   };
 
   return (
