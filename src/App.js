@@ -214,6 +214,18 @@ function Support({ sidebarItems, active, setActive }) {
         <Sidebar active={active || 'Support'} onSelect={setActive} items={sidebarItems} />
         <div style={{ flex: 1 }}>
           <div style={{ maxWidth: 600, margin: '3rem auto', padding: '2rem', background: 'var(--cinza-card)', borderRadius: 16, color: '#fff', textAlign: 'center' }}>
+            <div style={{
+              margin: '0 auto 2rem auto',
+              color: '#b0b0b0',
+              fontSize: 15,
+              textAlign: 'center',
+              maxWidth: 480
+            }}>
+              <b>Refund Policy:</b><br />
+              Refund requests are subject to analysis and approval by our technical and financial team. The refund will be processed only if the product or service does not meet the described specifications, or in case of proven technical issues that cannot be resolved by our support.<br /><br />
+              <b>If you request a refund within 7 days of purchase, you will be refunded within 7 business days.</b><br /><br />
+              The refund process may take up to 7 business days after approval. Please provide all necessary information to expedite your request.
+            </div>
             <h2 style={{ color: '#E60033', marginBottom: 18 }}>Support</h2>
             <p style={{ fontSize: 18, marginBottom: 24 }}>If you need help, please open a support ticket below. Our team will get back to you as soon as possible.</p>
             <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '0 auto', textAlign: 'left' }}>
@@ -232,18 +244,6 @@ function Support({ sidebarItems, active, setActive }) {
                 Support ticket sent! Our team will contact you soon.
               </div>
             )}
-            <div style={{
-              margin: '2.5rem auto 1.5rem auto',
-              color: '#b0b0b0',
-              fontSize: 15,
-              textAlign: 'center',
-              maxWidth: 480
-            }}>
-              <b>Refund Policy:</b><br />
-              Refund requests are subject to analysis and approval by our technical and financial team. The refund will be processed only if the product or service does not meet the described specifications, or in case of proven technical issues that cannot be resolved by our support.<br /><br />
-              <b>If you request a refund within 7 days of purchase, you will be refunded within 7 business days.</b><br /><br />
-              The refund process may take up to 7 business days after approval. Please provide all necessary information to expedite your request.
-            </div>
             <button
               style={{
                 marginTop: 8,
