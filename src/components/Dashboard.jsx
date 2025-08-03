@@ -710,6 +710,7 @@ export default function Dashboard({ email }) {
   ];
 
   useEffect(() => {
+    console.log('PATHNAME:', location.pathname, '| active antes:', active);
     if (location.pathname === '/faq') setActive('FAQ');
     else if (location.pathname === '/support') setActive('Support and refund');
     else if (location.pathname === '/whatsapp') setActive('WhatsApp');
@@ -720,9 +721,13 @@ export default function Dashboard({ email }) {
     else if (location.pathname === '/lessons') setActive('Lessons');
     else if (location.pathname === '/') setActive('Home');
     // Não altere active para Home em outras rotas!
+    setTimeout(() => {
+      console.log('PATHNAME após setActive:', location.pathname, '| active agora:', active);
+    }, 100);
   }, [location.pathname]);
 
   useEffect(() => {
+    console.log('active mudou:', active, '| pathname:', location.pathname);
     if (active === 'FAQ' && location.pathname !== '/faq') navigate('/faq');
     else if (active === 'Support and refund' && location.pathname !== '/support') navigate('/support');
     else if (active === 'WhatsApp' && location.pathname !== '/whatsapp') navigate('/whatsapp');
