@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
 
 function getGoogleMapsLink(destino) {
-  // Se destino for um link do tipo https://maps.google.com/?q=lat,lng ou similar
-  const match = destino && destino.match(/([-\d.]+),\s*([-\d.]+)/);
+  const match = destino && destino.match(/([\-\d.]+),\s*([\-\d.]+)/);
   if (match) {
     return `https://www.google.com/maps?q=${match[1]},${match[2]}`;
   }
@@ -13,15 +12,17 @@ function getGoogleMapsLink(destino) {
 export default function LinksList() {
   const [links, setLinks] = useState([]);
   const usuario = localStorage.getItem('usuario');
+
+  async function fetchLinks() {
+    const { data } = await supabase
+      .from('links')
+      .select('*')
+      .eq('email', usuario)
+      .order('created_at', { ascending: false });
+    setLinks(data || []);
+  }
+
   useEffect(() => {
-    async function fetchLinks() {
-      const { data } = await supabase
-        .from('links')
-        .select('*')
-        .eq('email', usuario)
-        .order('created_at', { ascending: false });
-      setLinks(data || []);
-    }
     fetchLinks();
   }, []);
 
