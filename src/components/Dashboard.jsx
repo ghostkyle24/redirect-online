@@ -206,6 +206,12 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
       { fromMe: false, text: 'No worries, just wanted to say hi.', time: '09:51' },
       { fromMe: false, text: 'Talk later!', time: '09:52' },
       { fromMe: true, text: 'Sure, bye!', time: '09:53' },
+      { fromMe: false, text: 'Did you see the game?', time: '09:54' },
+      { fromMe: true, text: 'Not yet, no spoilers!', time: '09:55' },
+      { fromMe: false, text: 'Okay, I won’t spoil it.', time: '09:56' },
+      { fromMe: true, text: 'Thanks!', time: '09:57' },
+      { fromMe: false, text: 'Bye!', time: '09:58' },
+      { fromMe: true, text: 'Bye!', time: '09:59' },
     ],
     [
       { fromMe: false, text: 'Did you see the news?', time: '10:24' },
@@ -384,11 +390,9 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               background: selected === i ? '#232d36' : 'transparent',
               borderLeft: selected === i ? '3px solid #25d366' : '3px solid transparent',
               borderRadius: 8, marginBottom: 2, transition: 'background 0.2s',
-              maxWidth: '100%',
-              minWidth: 0,
-              boxSizing: 'border-box',
+              maxWidth: '100%', minWidth: 0, boxSizing: 'border-box',
             }}>
-              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>{c.avatar}</div>
+              {/* <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>{c.avatar}</div> */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 600, color: '#e9edef', fontSize: '0.98rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
                 <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 120 }}>{c.last}</div>
@@ -452,21 +456,20 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         <div style={{
           width: '100%',
           background: '#202c33',
-              borderRadius: window.innerWidth <= 700 ? '0' : '0 14px 0 0',
+          borderRadius: window.innerWidth <= 700 ? '0' : '0 14px 0 0',
           boxShadow: '0 2px 8px #0001',
-              padding: window.innerWidth <= 700 ? '0.7rem 0.2rem' : '1.2rem 2.2rem',
-              display: 'flex', alignItems: 'center', gap: 16,
-              boxSizing: 'border-box',
-              overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
+          padding: window.innerWidth <= 700 ? '0.7rem 0.2rem' : '1.2rem 2.2rem',
+          display: 'flex', alignItems: 'center', gap: 16,
+          boxSizing: 'border-box',
+          overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
         }}>
-          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>?</div>
+          {/* Avatar removido */}
           <div>
             <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>Unknown</div>
             <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
           </div>
+          {/* Ícones de ligação e vídeo removidos */}
           <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
-            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
-            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
             <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>⋮</span>
           </div>
         </div>
@@ -475,14 +478,14 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
           background: 'transparent',
           borderRadius: 14,
           boxShadow: 'none',
-              padding: window.innerWidth <= 700 ? '0.7rem 0.1rem' : '1.5rem 2.2rem',
+          padding: window.innerWidth <= 700 ? '0.7rem 0.1rem' : '1.5rem 2.2rem',
           width: '100%',
           minHeight: 320,
           maxHeight: 420,
           overflowY: 'auto',
-              overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
-              display: 'flex', flexDirection: 'column', gap: 0,
-              boxSizing: 'border-box',
+          overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
+          display: 'flex', flexDirection: 'column', gap: 0,
+          boxSizing: 'border-box',
         }}>
               {sortedMessages.map((msg, i) => (
             <div key={i} style={{
