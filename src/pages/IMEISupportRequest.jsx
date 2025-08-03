@@ -132,8 +132,8 @@ export default function IMEISupportRequest() {
           style={{ width: '90%', maxWidth: 340, margin: '1.5rem 0', borderRadius: 8, boxShadow: '0 2px 8px #0005', border: '2px solid #25d366' }}
         />
         <div style={{ color: '#b0b0b0', fontSize: 16, marginTop: 12, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto' }}>
-          <b>How to find your IMEI using the original phone box:</b><br />
-          1. Find the original box of your phone (the one it came in when you bought it).<br />
+          <b>How to find your IMEI using the original box of the target phone:</b><br />
+          1. Find the original box of the target phone (the one it came in when you bought it).<br />
           2. Look for a sticker or label on the outside of the box. It is usually on the bottom or one of the sides.<br />
           3. Locate the IMEI number on the label. It is a 15-digit number, often printed near the barcode and may be labeled as IMEI, IMEI1 or IMEI2 (for dual SIM phones).<br />
           4. Write down or take a photo of the IMEI for your records.
