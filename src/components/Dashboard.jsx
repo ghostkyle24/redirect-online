@@ -725,6 +725,10 @@ export default function Dashboard({ email }) {
     }, 100);
   }, [location.pathname]);
 
+  useEffect(() => {
+    setShowIMEISupport(false);
+  }, [active]);
+
   // Remover o useEffect que navega com base em active!
 
   return (
