@@ -8,6 +8,8 @@ import MicrophonePage from './pages/MicrophonePage';
 import HowToGetIMEI from './pages/HowToGetIMEI';
 import IMEISupportRequest from './pages/IMEISupportRequest';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 
 function WhatsAppChat() {
   const { number } = useParams();
