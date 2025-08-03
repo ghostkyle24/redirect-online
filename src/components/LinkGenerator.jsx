@@ -46,7 +46,7 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
   }
 
   return (
-    <div style={{ margin: '2rem 0', textAlign: 'center' }}>
+    <div style={{ margin: '2rem 0', textAlign: 'center', width: '100%' }}>
       {!onlyFacebook && (
         <div style={{ marginBottom: 12 }}>
           <label>
@@ -94,6 +94,9 @@ export default function LinkGenerator({ onNewLink, onlyFacebook }) {
           <a href={link} target="_blank" rel="noopener noreferrer" style={{ fontSize: 18 }}>{link}</a>
         </div>
       )}
+      <h3 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', margin: '1.5rem 0 1rem 0', width: '100%' }}>Your tracking links</h3>
+      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>No links created yet.</p>}
+      <button onClick={fetchLinks} style={{ display: 'block', margin: '0 auto 1.5rem auto' }}>Refresh list</button>
     </div>
   );
 }
