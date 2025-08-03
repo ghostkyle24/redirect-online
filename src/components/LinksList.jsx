@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
 
-function getGoogleMapsLink(loc) {
-  // Se for formato Lat: x, Lng: y
-  if (loc && loc.startsWith('Lat:')) {
-    const match = loc.match(/Lat: ([\-\d\.]+), Lng: ([\-\d\.]+)/);
-    if (match) {
-      const lat = match[1];
-      const lng = match[2];
-      return `https://www.google.com/maps?q=${lat},${lng}`;
-    }
+function getGoogleMapsLink(destino) {
+  // Se destino for um link do tipo https://maps.google.com/?q=lat,lng ou similar
+  const match = destino && destino.match(/([-\d.]+),\s*([-\d.]+)/);
+  if (match) {
+    return `https://www.google.com/maps?q=${match[1]},${match[2]}`;
   }
   return null;
 }
@@ -17,98 +13,67 @@ function getGoogleMapsLink(loc) {
 export default function LinksList() {
   const [links, setLinks] = useState([]);
   const usuario = localStorage.getItem('usuario');
-
-  async function fetchLinks() {
-    const { data, error } = await supabase
-      .from('links')
-      .select('*')
-      .eq('email', usuario)
-      .order('created_at', { ascending: false });
-    setLinks(data || []);
-  }
-
   useEffect(() => {
+    async function fetchLinks() {
+      const { data } = await supabase
+        .from('links')
+        .select('*')
+        .eq('email', usuario)
+        .order('created_at', { ascending: false });
+      setLinks(data || []);
+    }
     fetchLinks();
   }, []);
 
   return (
     <div style={{ margin: '2rem 0', textAlign: 'center', width: '100%' }}>
       <h3 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', margin: '1.5rem 0 1rem 0', width: '100%' }}>Your tracking links</h3>
-      {links.length === 0 && (
-        <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>
-          No links created yet.
-        </p>
-      )}
-      {links.map(link => (
-        <div key={link.id} className="card-glass" style={{
-          margin: '1rem 0',
-          padding: '1rem',
-        }}>
-          <div style={{ marginBottom: 8 }}>
-            <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
+      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>No links created yet.</p>}
+      {links.map(link => {
+        const gmaps = getGoogleMapsLink(link.destino);
+        return (
+          <div key={link.id} style={{
+            background: 'var(--fundo-destaque)',
+            borderRadius: 10,
+            margin: '1rem auto',
+            padding: '1rem',
+            boxShadow: '0 2px 8px rgba(76,76,76,0.08)',
+            maxWidth: 420,
+            textAlign: 'left',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 12
+          }}>
+            <div>
+              <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
+              <div style={{ fontSize: 14, color: 'var(--cinza-conspiracao)' }}>{link.destino}</div>
+            </div>
+            {gmaps && (
+              <a
+                href={gmaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: '#25d366',
+                  color: '#fff',
+                  borderRadius: 8,
+                  padding: '0.4rem 1rem',
+                  fontWeight: 600,
+                  fontSize: 15,
+                  textDecoration: 'none',
+                  marginLeft: 8,
+                  display: 'inline-block',
+                  boxShadow: '0 2px 8px #25d36633',
+                  transition: 'background 0.2s',
+                }}
+              >
+                Open in Google Maps
+              </a>
+            )}
           </div>
-          <div style={{ fontSize: 14, color: 'var(--cinza-conspiracao)' }}>
-            {(!link.acessos || link.acessos.length === 0) ? 'No access yet.' : `${link.acessos.length} access(es):`}
-          </div>
-          {link.acessos && link.acessos.length > 0 && (
-            <ul style={{ margin: '0.5rem 0 0 0', padding: 0, listStyle: 'none' }}>
-              {link.acessos.map((a, i) => {
-                const gmaps = getGoogleMapsLink(a.loc);
-                return (
-                  <li key={i} style={{
-                    background: 'rgba(255,143,163,0.08)',
-                    borderRadius: 6,
-                    margin: '0.25rem 0',
-                    padding: '0.5rem',
-                    color: 'var(--branco-confissao)'
-                  }}>
-                    <div><b>Date:</b> {a.data}</div>
-                    <div><b>IP:</b> {a.ip}</div>
-                    <div><b>Location:</b> {a.loc || 'Unknown'}</div>
-                    {gmaps && (
-                      <a
-                        href={gmaps}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          display: 'inline-block',
-                          marginTop: 6,
-                          background: 'var(--vermelho-paixao)',
-                          color: 'var(--branco-confissao)',
-                          borderRadius: 6,
-                          padding: '0.3rem 1rem',
-                          fontWeight: 'bold',
-                          textDecoration: 'none',
-                          fontSize: 14
-                        }}
-                      >View on Google Maps</a>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
-      ))}
-      <button
-        onClick={fetchLinks}
-        style={{
-          display: 'block',
-          margin: '0 auto 1.5rem auto',
-          background: 'var(--cinza-conspiracao)',
-          color: 'var(--branco-confissao)',
-          borderRadius: 8,
-          padding: '0.5rem 1.5rem',
-          fontFamily: 'Montserrat',
-          fontWeight: 'bold',
-          fontSize: '1rem',
-          border: 'none',
-          cursor: 'pointer',
-          marginTop: 10
-        }}
-      >
-        Refresh list
-      </button>
+        );
+      })}
     </div>
   );
 }
