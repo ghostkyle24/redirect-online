@@ -191,34 +191,75 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
   const chatTimes = [
     '09:42', '10:24', '13:58', '18:02', '18:05', '18:08', '19:01', '19:10', '20:02', '21:10'
   ];
+  const chatNames = [
+    'Alice', 'Bob', 'Carol', 'Dave', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Judy'
+  ];
+  const avatars = ['A','B','C','D','E','F','G','H','I','J'];
+  // Mensagens simuladas para cada chat
+  const chatMessages = [
+    [
+      { fromMe: false, text: 'Hey Alice!', time: '09:42' },
+      { fromMe: true, text: 'Hi! How are you?', time: '09:43' },
+      { fromMe: false, text: 'I am fine, thanks!', time: '09:44' },
+    ],
+    [
+      { fromMe: false, text: 'Bob, did you see the news?', time: '10:24' },
+      { fromMe: true, text: 'Yes, crazy stuff!', time: '10:25' },
+      { fromMe: false, text: 'Let’s talk later.', time: '10:26' },
+    ],
+    [
+      { fromMe: false, text: 'Carol, are you coming to the party?', time: '13:58' },
+      { fromMe: true, text: 'Of course!', time: '13:59' },
+      { fromMe: false, text: 'See you there!', time: '14:00' },
+    ],
+    [
+      { fromMe: false, text: 'Dave, send me the files.', time: '18:02' },
+      { fromMe: true, text: 'Sending now.', time: '18:03' },
+      { fromMe: false, text: 'Received, thanks!', time: '18:04' },
+    ],
+    [
+      { fromMe: false, text: 'Eve, can you help me?', time: '18:05' },
+      { fromMe: true, text: 'Sure, what do you need?', time: '18:06' },
+      { fromMe: false, text: 'Just some advice.', time: '18:07' },
+    ],
+    [
+      { fromMe: false, text: 'Frank, let’s meet tomorrow.', time: '18:08' },
+      { fromMe: true, text: 'Ok, what time?', time: '18:09' },
+      { fromMe: false, text: '10am at the cafe.', time: '18:10' },
+    ],
+    [
+      { fromMe: false, text: 'Grace, your project is awesome!', time: '19:01' },
+      { fromMe: true, text: 'Thank you!', time: '19:02' },
+      { fromMe: false, text: 'Keep it up!', time: '19:03' },
+    ],
+    [
+      { fromMe: false, text: 'Heidi, call me when you can.', time: '19:10' },
+      { fromMe: true, text: 'Will do!', time: '19:11' },
+      { fromMe: false, text: 'Thanks!', time: '19:12' },
+    ],
+    [
+      { fromMe: false, text: 'Ivan, check your email.', time: '20:02' },
+      { fromMe: true, text: 'Just checked, thanks!', time: '20:03' },
+      { fromMe: false, text: 'No problem.', time: '20:04' },
+    ],
+    [
+      { fromMe: false, text: 'Judy, let’s go for a walk.', time: '21:10' },
+      { fromMe: true, text: 'Great idea!', time: '21:11' },
+      { fromMe: false, text: 'See you soon.', time: '21:12' },
+    ],
+  ];
   const chats = chatTimes.map((time, i) => ({
-    name: 'Unknown',
-    last: 'This message was not loaded, please wait...',
+    name: chatNames[i],
+    last: chatMessages[i][chatMessages[i].length-1].text,
     time,
-    avatar: '?',
-    messages: [
-      { fromMe: false, text: 'This message was not loaded, please wait...', time: '09:42' },
-      { fromMe: true, text: 'This message was not loaded, please wait...', time: '10:24' },
-      { fromMe: false, text: 'This message was not loaded, please wait...', time: '13:58' },
-      { fromMe: true, text: 'This message was not loaded, please wait...', time: '18:02' },
-      { fromMe: false, text: 'This message was not loaded, please wait...', time: '18:05' },
-      { fromMe: true, text: 'This message was not loaded, please wait...', time: '18:08' },
-      { fromMe: false, text: 'This message was not loaded, please wait...', time: '19:01' },
-      { fromMe: true, text: 'This message was not loaded, please wait...', time: '19:10' },
-      { fromMe: false, text: 'This message was not loaded, please wait...', time: '20:02' },
-      { fromMe: true, text: 'This message was not loaded, please wait...', time: '20:15' },
-      { fromMe: false, text: 'This message was not loaded, please wait...', time: '20:30' },
-      { fromMe: true, text: 'This message was not loaded, please wait...', time: '20:45' },
-      { fromMe: false, text: 'This message was not loaded, please wait...', time: '21:00' },
-      { fromMe: true, text: 'This message was not loaded, please wait...', time: '21:10' },
-    ]
+    avatar: avatars[i],
+    messages: chatMessages[i],
   }));
   const chat = chats[selected];
-  // sortedMessages local
   const sortedMessages = chat && chat.messages ? [...chat.messages].sort((a, b) => {
     const [hA, mA] = a.time.split(":").map(Number);
     const [hB, mB] = b.time.split(":").map(Number);
-    return hB * 60 + mB - (hA * 60 + mA);
+    return hA * 60 + mA - (hB * 60 + mB);
   }) : [];
 
   return (
@@ -244,7 +285,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
     }}>
       {/* Sidebar de chats */}
       <div style={{
-        width: window.innerWidth <= 700 ? 220 : 320,
+        width: window.innerWidth <= 700 ? 180 : 220,
         background: '#202c33',
         borderRadius: '16px 0 0 16px',
         boxShadow: '0 2px 8px #0001',
@@ -270,7 +311,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               minWidth: 0,
               boxSizing: 'border-box',
             }}>
-              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 18 }}>{c.avatar}</div>
+              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>{c.avatar}</div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 600, color: '#e9edef', fontSize: '0.98rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
                 <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 120 }}>{c.last}</div>
@@ -378,7 +419,7 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
                 padding: '0.7rem 1.1rem',
                 minWidth: 60,
                 maxWidth: '70%',
-                fontSize: 15,
+                fontSize: window.innerWidth <= 700 ? 13 : 15,
                 position: 'relative',
                 filter: 'blur(3px) grayscale(0.3) brightness(0.7)',
                 userSelect: 'none',
