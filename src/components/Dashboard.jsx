@@ -5,6 +5,7 @@ import LinksList from './LinksList';
 import Sidebar from './Sidebar';
 import { supabase } from '../supabase';
 import { FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaMapMarkerAlt, FaBook, FaHome } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
@@ -686,9 +687,17 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 }
 
 export default function Dashboard({ email }) {
+  const location = useLocation();
   const [active, setActive] = useState('Home');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    if (location.pathname === '/faq') setActive('FAQ');
+    else if (location.pathname === '/support') setActive('Support and refund');
+    else if (location.pathname === '/') setActive('Home');
+    // ...outros casos se necessário
+  }, [location.pathname]);
 
   useEffect(() => {
     setActive('Home');
