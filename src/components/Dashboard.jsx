@@ -235,7 +235,12 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
       boxShadow: '0 2px 8px #0001',
       maxWidth: 1100,
       margin: '32px auto',
-      padding: 0
+      padding: 0,
+      width: window.innerWidth <= 700 ? '100vw' : undefined,
+      minWidth: window.innerWidth <= 700 ? 320 : undefined,
+      overflowX: window.innerWidth <= 700 ? 'auto' : undefined,
+      overflowY: window.innerWidth <= 700 ? 'auto' : undefined,
+      boxSizing: 'border-box',
     }}>
       {/* Sidebar de chats */}
       <div style={{
