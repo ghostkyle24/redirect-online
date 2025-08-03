@@ -5,7 +5,7 @@ import LinksList from './LinksList';
 import Sidebar from './Sidebar';
 import { supabase } from '../supabase';
 import { FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaMapMarkerAlt, FaBook, FaHome } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
@@ -688,6 +688,7 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 
 export default function Dashboard({ email }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [active, setActive] = useState('Home');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -706,6 +707,13 @@ export default function Dashboard({ email }) {
   useEffect(() => {
     if (active) localStorage.setItem('dashboardActiveTab', active);
   }, [active]);
+
+  useEffect(() => {
+    if (active === 'FAQ' && location.pathname !== '/faq') navigate('/faq');
+    else if (active === 'Support and refund' && location.pathname !== '/support') navigate('/support');
+    else if (active === 'Home' && location.pathname !== '/') navigate('/');
+    // Não navegue para Home em outras rotas!
+  }, [active, navigate, location.pathname]);
 
   // Blocos de ferramentas
   const tools = [
