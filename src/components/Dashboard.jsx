@@ -686,9 +686,13 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 }
 
 export default function Dashboard({ email }) {
-  const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || 'Home');
+  const [active, setActive] = useState('Home');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
   const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    setActive('Home');
+  }, [email]);
 
   useEffect(() => {
     if (active) localStorage.setItem('dashboardActiveTab', active);
