@@ -7,7 +7,7 @@ import FacebookPhishing from './pages/FacebookPhishing';
 import MicrophonePage from './pages/MicrophonePage';
 import HowToGetIMEI from './pages/HowToGetIMEI';
 import IMEISupportRequest from './pages/IMEISupportRequest';
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import { FaBook, FaMapMarkerAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
@@ -276,6 +276,7 @@ function Support({ sidebarItems, active, setActive }) {
 function App() {
   const [usuario, setUsuario] = useState(localStorage.getItem('usuario') || null);
   const [active, setActive] = useState('Home');
+  const navigate = useNavigate();
   const tools = [
     { label: 'Lessons', icon: <FaBook size={24} /> },
     { label: 'Spy Location', icon: <FaMapMarkerAlt size={24} /> },
@@ -290,6 +291,12 @@ function App() {
     { label: 'FAQ', icon: <FaQuestionCircle size={22} /> },
     { label: 'Support', icon: <FaLifeRing size={22} /> },
   ];
+
+  React.useEffect(() => {
+    if (active === 'FAQ') navigate('/faq');
+    else if (active === 'Support') navigate('/support');
+    else if (active === 'Home') navigate('/');
+  }, [active, navigate]);
 
   function handleLogin(email) {
     setUsuario(email);

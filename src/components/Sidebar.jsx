@@ -37,11 +37,11 @@ export default function Sidebar({ active = 'Home', onSelect, items }) {
               <span className="sidebar__text">{item.label}</span>
             </li>
           ))}
-          <li className="sidebar__item" onClick={() => window.location.href = '/faq'}>
+          <li className="sidebar__item" onClick={() => handleSelect('FAQ')}>
             <span className="sidebar__icon"><FaQuestionCircle size={22} /></span>
             <span className="sidebar__text">FAQ</span>
           </li>
-          <li className="sidebar__item" onClick={() => window.location.href = '/support'}>
+          <li className="sidebar__item" onClick={() => handleSelect('Support')}>
             <span className="sidebar__icon"><FaLifeRing size={22} /></span>
             <span className="sidebar__text">Support</span>
           </li>
