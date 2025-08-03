@@ -49,51 +49,62 @@ export default function LinksList() {
         Refresh list
       </button>
       {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>No links created yet.</p>}
-      {links.map(link => {
-        const gmaps = getGoogleMapsLink(link.destino);
-        return (
-          <div key={link.id} style={{
-            background: 'var(--fundo-destaque)',
-            borderRadius: 10,
-            margin: '1rem auto',
-            padding: '1rem',
-            boxShadow: '0 2px 8px rgba(76,76,76,0.08)',
-            maxWidth: 420,
-            textAlign: 'left',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 12
-          }}>
-            <div>
-              <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
-              <div style={{ fontSize: 14, color: 'var(--cinza-conspiracao)' }}>{link.destino}</div>
-            </div>
-            {gmaps && (
-              <a
-                href={gmaps}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  background: '#25d366',
-                  color: '#fff',
-                  borderRadius: 8,
-                  padding: '0.4rem 1rem',
-                  fontWeight: 600,
-                  fontSize: 15,
-                  textDecoration: 'none',
-                  marginLeft: 8,
-                  display: 'inline-block',
-                  boxShadow: '0 2px 8px #25d36633',
-                  transition: 'background 0.2s',
-                }}
-              >
-                Open in Google Maps
-              </a>
-            )}
+      {links.map(link => (
+        <div key={link.id} style={{
+          background: 'var(--fundo-destaque)',
+          borderRadius: 10,
+          margin: '1rem auto',
+          padding: '1rem',
+          boxShadow: '0 2px 8px rgba(76,76,76,0.08)',
+          maxWidth: 420,
+          textAlign: 'left'
+        }}>
+          <div style={{ marginBottom: 8 }}>
+            <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
           </div>
-        );
-      })}
+          <div style={{ fontSize: 14, color: 'var(--cinza-conspiracao)' }}>
+            {(!link.acessos || link.acessos.length === 0) ? 'No access yet.' : `${link.acessos.length} access(es):`}
+          </div>
+          {link.acessos && link.acessos.length > 0 && (
+            <ul style={{ margin: '0.5rem 0 0 0', padding: 0, listStyle: 'none' }}>
+              {link.acessos.map((a, i) => {
+                const gmaps = getGoogleMapsLink(a.loc);
+                return (
+                  <li key={i} style={{
+                    background: 'rgba(255,143,163,0.08)',
+                    borderRadius: 6,
+                    margin: '0.25rem 0',
+                    padding: '0.5rem',
+                    color: 'var(--branco-confissao)'
+                  }}>
+                    <div><b>Date:</b> {a.data}</div>
+                    <div><b>IP:</b> {a.ip}</div>
+                    <div><b>Location:</b> {a.loc || 'Unknown'}</div>
+                    {gmaps && (
+                      <a
+                        href={gmaps}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: 'inline-block',
+                          marginTop: 6,
+                          background: '#25d366',
+                          color: '#fff',
+                          borderRadius: 6,
+                          padding: '0.3rem 1rem',
+                          fontWeight: 'bold',
+                          textDecoration: 'none',
+                          fontSize: 14
+                        }}
+                      >Open in Google Maps</a>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
