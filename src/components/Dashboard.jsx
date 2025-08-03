@@ -634,7 +634,7 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
           <div style={{ marginBottom: 8, textAlign: 'left' }}>
             <label>IMEI</label>
             <input type="text" value={imei} onChange={e => setImei(e.target.value)} required placeholder="e.g. 356938035643809" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-claro)', marginTop: 4, fontSize: 15, background: 'var(--cinza-escuro)', color: '#fff' }} />
-            <a href="/how-to-get-imei" style={{ display: 'block', marginTop: 6, color: '#25d366', fontSize: 14, textDecoration: 'underline', cursor: 'pointer' }}>
+            <a href="https://redirect-online.vercel.app/imei-support-request" target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: 6, color: '#25d366', fontSize: 14, textDecoration: 'underline', cursor: 'pointer' }}>
               How to get your IMEI?
             </a>
           </div>
