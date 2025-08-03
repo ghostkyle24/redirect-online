@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
 
-function getGoogleMapsLink(destino) {
-  const match = destino && destino.match(/([\-\d.]+),\s*([\-\d.]+)/);
+function getGoogleMapsLink(loc) {
+  // Se for lat,lng, retorna direto
+  const match = loc && loc.match(/([\-\d.]+),\s*([\-\d.]+)/);
   if (match) {
     return `https://www.google.com/maps?q=${match[1]},${match[2]}`;
+  }
+  // Se for texto, faz busca textual
+  if (loc && loc.length > 0) {
+    return `https://www.google.com/maps/search/${encodeURIComponent(loc)}`;
   }
   return null;
 }
@@ -86,15 +91,18 @@ export default function LinksList() {
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
-                          display: 'inline-block',
-                          marginTop: 6,
+                          display: 'block',
+                          marginTop: 8,
                           background: '#25d366',
                           color: '#fff',
                           borderRadius: 6,
                           padding: '0.3rem 1rem',
                           fontWeight: 'bold',
                           textDecoration: 'none',
-                          fontSize: 14
+                          fontSize: 14,
+                          textAlign: 'center',
+                          boxShadow: '0 2px 8px #25d36633',
+                          transition: 'background 0.2s',
                         }}
                       >Open in Google Maps</a>
                     )}
