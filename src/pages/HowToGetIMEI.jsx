@@ -41,7 +41,7 @@ export default function HowToGetIMEI() {
         </ol>
       </div>
       <img
-        src="https://i.imgur.com/4QfKuz1.png"
+        src="/imei-box.jpg"
         alt="IMEI on box example"
         style={{ width: '90%', maxWidth: 340, margin: '1.5rem 0', borderRadius: 8, boxShadow: '0 2px 8px #0005', border: '2px solid #25d366' }}
       />
