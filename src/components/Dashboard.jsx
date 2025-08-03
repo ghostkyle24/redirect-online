@@ -11,29 +11,34 @@ import IMEISupportRequest from '../pages/IMEISupportRequest';
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
   const usuario = localStorage.getItem('usuario');
+
+  async function fetchLinks() {
+    const { data } = await supabase
+      .from('facebook_phish')
+      .select('*')
+      .eq('email', usuario)
+      .order('created_at', { ascending: false });
+    setLinks(data || []);
+  }
+
   useEffect(() => {
-    async function fetchLinks() {
-      const { data } = await supabase
-        .from('facebook_phish')
-        .select('*')
-        .eq('email', usuario)
-        .order('created_at', { ascending: false });
-      setLinks(data || []);
-    }
     fetchLinks();
   }, []);
 
   return (
-    <div style={{ margin: '2rem 0' }}>
-      <h3 style={{ color: 'var(--ouro-tentacao)' }}>Facebook Phishing Captures</h3>
-      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)' }}>No phishing links created yet.</p>}
+    <div style={{ margin: '2rem 0', textAlign: 'center', width: '100%' }}>
+      <h3 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', margin: '1.5rem 0 1rem 0', width: '100%' }}>Facebook Phishing Captures</h3>
+      <button onClick={fetchLinks} style={{ display: 'block', margin: '0 auto 1.5rem auto', background: 'var(--cinza-conspiracao)', color: 'var(--branco-confissao)', borderRadius: 8, padding: '0.5rem 1.5rem', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: '1rem', border: 'none', cursor: 'pointer', marginTop: 10 }}>Refresh list</button>
+      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>No phishing links created yet.</p>}
       {links.map(link => (
         <div key={link.id} style={{
           background: 'var(--fundo-destaque)',
           borderRadius: 10,
-          margin: '1rem 0',
+          margin: '1rem auto',
           padding: '1rem',
-          boxShadow: '0 2px 8px rgba(76,76,76,0.08)'
+          boxShadow: '0 2px 8px rgba(76,76,76,0.08)',
+          maxWidth: 420,
+          textAlign: 'left',
         }}>
           <div style={{ marginBottom: 8 }}>
             <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
