@@ -232,9 +232,21 @@ function Support({ sidebarItems, active, setActive }) {
                 Support ticket sent! Our team will contact you soon.
               </div>
             )}
+            <div style={{
+              margin: '2.5rem auto 1.5rem auto',
+              color: '#b0b0b0',
+              fontSize: 15,
+              textAlign: 'center',
+              maxWidth: 480
+            }}>
+              <b>Refund Policy:</b><br />
+              Refund requests are subject to analysis and approval by our technical and financial team. The refund will be processed only if the product or service does not meet the described specifications, or in case of proven technical issues that cannot be resolved by our support.<br /><br />
+              <b>If you request a refund within 7 days of purchase, you will be refunded within 7 business days.</b><br /><br />
+              The refund process may take up to 7 business days after approval. Please provide all necessary information to expedite your request.
+            </div>
             <button
               style={{
-                marginTop: 32,
+                marginTop: 8,
                 background: '#1a73e8',
                 color: '#fff',
                 border: 'none',
