@@ -180,7 +180,7 @@ function FAQ({ sidebarItems, active, setActive }) {
                   cursor: 'pointer',
                   display: 'inline-block',
                 }}
-                onClick={() => alert('Refund request sent! Our team will contact you soon.')}
+                onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
               >
                 Request a refund
               </button>
