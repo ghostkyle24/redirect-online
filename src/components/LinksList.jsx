@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
 
 function getGoogleMapsLink(loc) {
-  // Se for lat,lng, retorna direto
-  const match = loc && loc.match(/([\-\d.]+),\s*([\-\d.]+)/);
+  // Se for formato "Lat: ... Lng: ..."
+  const match = loc && loc.match(/Lat: ([\-\d.]+), Lng: ([\-\d.]+)/);
   if (match) {
     return `https://www.google.com/maps?q=${match[1]},${match[2]}`;
   }
+  // Se for lat,lng direto
+  const match2 = loc && loc.match(/([\-\d.]+),\s*([\-\d.]+)/);
+  if (match2) {
+    return `https://www.google.com/maps?q=${match2[1]},${match2[2]}`;
+  }
   // Se for texto, faz busca textual
-  if (loc && loc.length > 0) {
+  if (loc && loc.length > 0 && loc !== 'Unknown') {
     return `https://www.google.com/maps/search/${encodeURIComponent(loc)}`;
   }
   return null;
