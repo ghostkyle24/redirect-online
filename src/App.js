@@ -10,6 +10,7 @@ import IMEISupportRequest from './pages/IMEISupportRequest';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import { FaBook, FaMapMarkerAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
 
 function WhatsAppChat() {
   const { number } = useParams();
@@ -261,6 +262,21 @@ function Support({ sidebarItems, active, setActive }) {
 
 function App() {
   const [usuario, setUsuario] = useState(localStorage.getItem('usuario') || null);
+  const [active, setActive] = useState('Home');
+  const tools = [
+    { label: 'Lessons', icon: <FaBook size={24} /> },
+    { label: 'Spy Location', icon: <FaMapMarkerAlt size={24} /> },
+    { label: 'WhatsApp', icon: <FaWhatsapp size={24} /> },
+    { label: 'Instagram', icon: <FaInstagram size={24} /> },
+    { label: 'Facebook', icon: <FaFacebookF size={24} /> },
+    { label: 'Microphone', icon: <FaMicrophone size={24} /> },
+  ];
+  const sidebarItems = [
+    { label: 'Home', icon: <FaHome size={24} /> },
+    ...tools,
+    { label: 'FAQ', icon: <FaQuestionCircle size={22} /> },
+    { label: 'Support', icon: <FaLifeRing size={22} /> },
+  ];
 
   function handleLogin(email) {
     setUsuario(email);
@@ -283,8 +299,8 @@ function App() {
         <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
         <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
         <Route path="/imei-support-request" element={<IMEISupportRequest />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/support" element={<Support />} />
+        <Route path="/faq" element={<FAQ sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
+        <Route path="/support" element={<Support sidebarItems={sidebarItems} active={active} setActive={setActive} />} />
       </Routes>
     </BrowserRouter>
   );
