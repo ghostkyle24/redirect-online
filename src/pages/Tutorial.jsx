@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 const videos = [
-  'https://www.youtube.com/embed/X30N6ybuju4',
-  'https://www.youtube.com/embed/vma9TIytHHo',
-  'https://www.youtube.com/embed/VJFKb2i-9j8',
+  {
+    url: 'https://iframe.vslplay.com/81d6ca52-2104-46d6-9f56-bb2ad83b7094',
+    title: 'How to clone WhatsApp',
+    type: 'vslplay',
+  },
+  {
+    url: 'https://iframe.vslplay.com/d82f9992-bd78-416b-a588-45ceb4d49d3e',
+    title: 'Spy Location',
+    type: 'vslplay',
+  },
+  {
+    url: 'https://iframe.vslplay.com/653c70ba-c294-44d8-852e-2640fa145786',
+    title: 'Spy Facebook',
+    type: 'vslplay',
+  },
 ];
 
 function getCurrentDate() {
@@ -126,7 +138,7 @@ export default function Tutorial() {
         <iframe
           width="100%"
           height="520"
-          src={videos[step]}
+          src={videos[step].url}
           title={`Tutorial step ${step + 1}`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

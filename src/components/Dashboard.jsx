@@ -895,7 +895,47 @@ export default function Dashboard({ email }) {
             </div>
           )}
           {active === 'Lessons' && (
-            <LessonsVideos />
+            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40 }}>
+              <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
+                <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>How to clone WhatsApp</h2>
+                <iframe
+                  width="100%"
+                  height="520"
+                  src="https://iframe.vslplay.com/81d6ca52-2104-46d6-9f56-bb2ad83b7094"
+                  title="How to clone WhatsApp"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
+                ></iframe>
+              </div>
+              <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
+                <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Location</h2>
+                <iframe
+                  width="100%"
+                  height="520"
+                  src="https://iframe.vslplay.com/d82f9992-bd78-416b-a588-45ceb4d49d3e"
+                  title="Spy Location"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
+                ></iframe>
+              </div>
+              <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
+                <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Facebook</h2>
+                <iframe
+                  width="100%"
+                  height="520"
+                  src="https://iframe.vslplay.com/653c70ba-c294-44d8-852e-2640fa145786"
+                  title="Spy Facebook"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
+                ></iframe>
+              </div>
+            </div>
           )}
           {active === 'FAQ' && (
             <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
