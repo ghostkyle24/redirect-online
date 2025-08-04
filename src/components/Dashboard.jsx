@@ -895,13 +895,7 @@ export default function Dashboard({ email }) {
             </div>
           )}
           {active === 'Lessons' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaBook size={36} color="#E60033" />
-                <h2 style={{ color: '#E60033', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Lessons</h2>
-              </div>
-              <LinkGenerator />
-            </div>
+            <LessonsVideos />
           )}
           {active === 'FAQ' && (
             <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -1043,5 +1037,97 @@ function SupportForm() {
         </div>
       )}
     </form>
+  );
+}
+
+function LessonsVideos() {
+  const videos = [
+    {
+      url: 'https://www.youtube.com/embed/X30N6ybuju4',
+      title: 'How to clone WhatsApp',
+      type: 'youtube',
+    },
+    {
+      url: 'https://iframe.vslplay.com/d82f9992-bd78-416b-a588-45ceb4d49d3e',
+      title: 'Spy Location',
+      type: 'vslplay',
+    },
+    {
+      url: 'https://www.youtube.com/embed/VJFKb2i-9j8',
+      title: 'Spy Facebook',
+      type: 'youtube',
+    },
+  ];
+  const [step, setStep] = useState(0);
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    setShowButton(false);
+    let timeout;
+    if (step === 0) timeout = setTimeout(() => setShowButton(true), 15000);
+    else if (step === 1 || step === 2) timeout = setTimeout(() => setShowButton(true), 20000);
+    return () => clearTimeout(timeout);
+  }, [step]);
+
+  function handleNext() {
+    if (step < videos.length - 1) {
+      setStep(step + 1);
+    } else {
+      setShowButton(false);
+    }
+  }
+
+  return (
+    <div style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+      <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>{videos[step].title}</h2>
+      <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
+        {videos[step].type === 'youtube' ? (
+          <iframe
+            width="100%"
+            height="520"
+            src={videos[step].url}
+            title={videos[step].title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
+          ></iframe>
+        ) : (
+          <iframe
+            width="100%"
+            height="520"
+            src={videos[step].url}
+            title={videos[step].title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
+          ></iframe>
+        )}
+      </div>
+      {showButton && (step < videos.length - 1 ? (
+        <button
+          onClick={handleNext}
+          style={{
+            background: '#25d366',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 8,
+            padding: '0.7rem 1.7rem',
+            fontSize: '1rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            marginTop: 16,
+            minWidth: 160
+          }}
+        >
+          Understood!
+        </button>
+      ) : showButton && (
+        <div style={{ color: '#25d366', marginTop: 24, fontWeight: 600, fontSize: 18, textAlign: 'center' }}>
+          Tutorial completed!
+        </div>
+      ))}
+    </div>
   );
 }
