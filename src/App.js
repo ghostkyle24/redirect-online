@@ -7,6 +7,7 @@ import FacebookPhishing from './pages/FacebookPhishing';
 import MicrophonePage from './pages/MicrophonePage';
 import HowToGetIMEI from './pages/HowToGetIMEI';
 import IMEISupportRequest from './pages/IMEISupportRequest';
+import Tutorial from './pages/Tutorial';
 import { Routes, Route, useParams } from 'react-router-dom';
 
 function WhatsAppChat() {
@@ -39,6 +40,7 @@ function App() {
       <Route path="/lessons" element={<Dashboard email={usuario} />} />
       <Route path="/faq" element={<Dashboard email={usuario} />} />
       <Route path="/support" element={<Dashboard email={usuario} />} />
+      <Route path="/tutorial" element={<Tutorial />} />
       {/* Rotas especiais: NÃO renderize Dashboard aqui! */}
       <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
       <Route path="/imei-support-request" element={<IMEISupportRequest />} />
