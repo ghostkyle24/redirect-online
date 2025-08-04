@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const videos = [
   'https://www.youtube.com/embed/X30N6ybuju4',
@@ -14,7 +14,16 @@ function getCurrentDate() {
 export default function Tutorial() {
   const [step, setStep] = useState(0);
   const [accepted, setAccepted] = useState(false);
+  const [showButton, setShowButton] = useState(false);
   const ip = window?.location?.hostname || '127.0.0.1';
+
+  useEffect(() => {
+    setShowButton(false);
+    let timeout;
+    if (step === 0) timeout = setTimeout(() => setShowButton(true), 15000);
+    else if (step === 1 || step === 2) timeout = setTimeout(() => setShowButton(true), 20000);
+    return () => clearTimeout(timeout);
+  }, [step]);
 
   function handleAccept() {
     setAccepted(true);
@@ -53,7 +62,7 @@ export default function Tutorial() {
           boxShadow: '0 2px 8px #E6003322'
         }}>
           <p>
-            I, <b>[FULL NAME]</b>, declare that:
+            After accepting the terms, I declare that:
             <ul style={{ margin: '1rem 0 1rem 1.2rem' }}>
               <li>I am aware that the application [App Name] must be used only on devices I own or with the express authorization of the owner;</li>
               <li>I take full responsibility for the use of the tool;</li>
@@ -110,36 +119,40 @@ export default function Tutorial() {
       fontFamily: 'Inter, Arial, sans-serif',
       padding: '2rem'
     }}>
-      <h2 style={{ color: '#25d366', marginBottom: 24 }}>Tutorial</h2>
-      <div style={{ width: '100%', maxWidth: 420, marginBottom: 32 }}>
+      <h2 style={{ color: '#25d366', marginBottom: 24, textAlign: 'center', fontSize: 22 }}>
+        Before accessing the tool, watch this quick video to learn how to use it.
+      </h2>
+      <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
         <iframe
           width="100%"
-          height="320"
+          height="520"
           src={videos[step]}
           title={`Tutorial step ${step + 1}`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005' }}
+          style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
         ></iframe>
       </div>
-      <button
-        onClick={handleNext}
-        style={{
-          background: '#25d366',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 8,
-          padding: '0.7rem 1.7rem',
-          fontSize: '1rem',
-          fontWeight: 700,
-          cursor: 'pointer',
-          marginTop: 16,
-          minWidth: 160
-        }}
-      >
-        Understood!
-      </button>
+      {showButton && (
+        <button
+          onClick={handleNext}
+          style={{
+            background: '#25d366',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 8,
+            padding: '0.7rem 1.7rem',
+            fontSize: '1rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            marginTop: 16,
+            minWidth: 160
+          }}
+        >
+          Understood!
+        </button>
+      )}
     </div>
   );
 }
