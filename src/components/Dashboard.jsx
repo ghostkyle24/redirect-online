@@ -686,11 +686,11 @@ export default function Dashboard({ email }) {
             {active === 'Support and refund' && (
               <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 {/* Bloco de suporte e reembolso detalhado */}
-                <div style={{
+              <div style={{
                   margin: '0 auto 2rem auto',
                   color: '#b0b0b0',
                   fontSize: 15,
-                  textAlign: 'center',
+                textAlign: 'center',
                   maxWidth: 480
                 }}>
                   <b>Refund Policy:</b><br />
@@ -823,20 +823,6 @@ export default function Dashboard({ email }) {
                 showLoadMoreMsg={showLoadMoreMsg}
                 setShowLoadMoreMsg={setShowLoadMoreMsg}
               />
-            )}
-            {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && active !== 'Lessons' && active !== 'Support and refund' && active !== 'FAQ' && active !== 'Instagram' && (
-              <div style={{
-                background: 'var(--fundo-destaque)',
-                borderRadius: 16,
-                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
-                padding: '2.5rem 1.5rem',
-                textAlign: 'center',
-                color: 'var(--cinza-conspiracao)',
-                fontSize: 20,
-                marginTop: 32
-              }}>
-                <b>{active}</b> coming soon...
-              </div>
             )}
           </div>
         </div>
