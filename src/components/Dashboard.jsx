@@ -572,9 +572,102 @@ export default function Dashboard({ email }) {
           <div className="card-glass">
             <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8, fontFamily: 'Poppins' }}>Secret Dashboard</h2>
             <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32, fontSize: 17 }}>Welcome, <b>{email}</b>!</p>
-            {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
-            {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
+            {active === 'Lessons' && (
+              <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40 }}>
+                {/* Vídeos embed do tutorial */}
+                <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
+                  <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>How to clone WhatsApp</h2>
+                  <iframe width="100%" height="520" src="https://iframe.vslplay.com/81d6ca52-2104-46d6-9f56-bb2ad83b7094" title="How to clone WhatsApp" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}></iframe>
+                </div>
+                <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
+                  <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Location</h2>
+                  <iframe width="100%" height="520" src="https://iframe.vslplay.com/d82f9992-bd78-416b-a588-45ceb4d49d3e" title="Spy Location" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}></iframe>
+                </div>
+                <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
+                  <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Facebook</h2>
+                  <iframe width="100%" height="520" src="https://iframe.vslplay.com/653c70ba-c294-44d8-852e-2640fa145786" title="Spy Facebook" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}></iframe>
+                </div>
+              </div>
+            )}
             {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
+            {active === 'Support and refund' && (
+              <div style={{
+                background: 'var(--fundo-destaque)',
+                borderRadius: 16,
+                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
+                padding: '2.5rem 1.5rem',
+                textAlign: 'center',
+                color: 'var(--cinza-conspiracao)',
+                fontSize: 20,
+                marginTop: 32
+              }}>
+                <b>Support and Refund</b>
+                <p style={{ marginTop: 10, fontSize: 16 }}>
+                  If you have any questions or issues, please contact our support team.
+                  We are here to help you with any problems you might encounter.
+                </p>
+                <p style={{ marginTop: 10, fontSize: 16 }}>
+                  Email: support@example.com
+                </p>
+                <p style={{ marginTop: 10, fontSize: 16 }}>
+                  Phone: +1 (555) 123-4567
+                </p>
+              </div>
+            )}
+            {active === 'FAQ' && (
+              <div style={{
+                background: 'var(--fundo-destaque)',
+                borderRadius: 16,
+                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
+                padding: '2.5rem 1.5rem',
+                textAlign: 'center',
+                color: 'var(--cinza-conspiracao)',
+                fontSize: 20,
+                marginTop: 32
+              }}>
+                <b>FAQ</b>
+                <p style={{ marginTop: 10, fontSize: 16 }}>
+                  Q: How does this work?
+                  A: This is a secret tool for monitoring conversations and locations.
+                </p>
+                <p style={{ marginTop: 10, fontSize: 16 }}>
+                  Q: Is it safe?
+                  A: Yes, it's completely safe and secure. We don't store any personal data.
+                </p>
+                <p style={{ marginTop: 10, fontSize: 16 }}>
+                  Q: Can I get a refund?
+                  A: Yes, you can request a refund within 7 days of purchase.
+                </p>
+              </div>
+            )}
+            {active === 'Instagram' && (
+              <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center', width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <FaInstagram size={36} color="#E1306C" />
+                <h2 style={{ color: '#E1306C', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Instagram</h2>
+                <div style={{ marginTop: 16, color: '#b0b0b0', fontSize: 17, maxWidth: 400 }}>
+                  <b>Instagram is currently under maintenance.</b><br />
+                  Our team is working to restore this feature as soon as possible.<br />
+                  Please check back later.
+                </div>
+                <div style={{ marginTop: 32 }}>
+                  <span className="spinner" style={{
+                    display: 'inline-block',
+                    width: 40,
+                    height: 40,
+                    border: '4px solid #E1306C',
+                    borderTop: '4px solid transparent',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite'
+                  }} />
+                  <style>{`
+                    @keyframes spin {
+                      0% { transform: rotate(0deg); }
+                      100% { transform: rotate(360deg); }
+                    }
+                  `}</style>
+                </div>
+              </div>
+            )}
             {active === 'WhatsApp' && (
               <WhatsAppSim
                 onBack={() => setShowLoadMoreMsg(false)}
@@ -582,7 +675,7 @@ export default function Dashboard({ email }) {
                 setShowLoadMoreMsg={setShowLoadMoreMsg}
               />
             )}
-            {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && (
+            {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && active !== 'Lessons' && active !== 'Support and refund' && active !== 'FAQ' && active !== 'Instagram' && (
               <div style={{
                 background: 'var(--fundo-destaque)',
                 borderRadius: 16,
