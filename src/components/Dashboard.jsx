@@ -4,7 +4,7 @@ import LinkGenerator from './LinkGenerator';
 import LinksList from './LinksList';
 import Sidebar from './Sidebar';
 import { supabase } from '../supabase';
-import { FaBook, FaMapMarkerAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
+import { FaBook, FaMapMarkerAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaHome, FaQuestionCircle, FaLifeRing, FaUserSecret } from 'react-icons/fa';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
@@ -581,6 +581,7 @@ export default function Dashboard({ email }) {
     ...tools.map(t => ({ label: t.label, icon: t.icon })),
     { label: 'FAQ', icon: <FaQuestionCircle size={22} /> },
     { label: 'Support and refund', icon: <FaLifeRing size={22} /> },
+    { label: 'Private Consultation', icon: <FaUserSecret size={22} />, external: true, url: 'https://bit.ly/free-support-consultation' },
   ];
 
   return (

@@ -23,7 +23,13 @@ export default function Sidebar({ active = 'Home', setActive, items }) {
             <li
               key={item.label}
               className={`sidebar__item${active === item.label ? ' active' : ''}`}
-              onClick={() => handleSelect(item.label)}
+              onClick={() => {
+                if (item.external && item.url) {
+                  window.open(item.url, '_blank');
+                } else {
+                  handleSelect(item.label);
+                }
+              }}
             >
               <span className="sidebar__icon">{item.icon}</span>
               <span className="sidebar__text">{item.label}</span>
