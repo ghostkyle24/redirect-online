@@ -677,6 +677,12 @@ export default function Dashboard({ email }) {
               </>
             )}
             {active === 'Microphone' && <MicrophonePlaceholder />}
+            {active === 'Facebook' && (
+              <>
+                <LinkGenerator onlyFacebook />
+                <FacebookCaptures />
+              </>
+            )}
             {active === 'Support and refund' && (
               <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 {/* Bloco de suporte e reembolso detalhado */}
