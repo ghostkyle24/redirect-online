@@ -4,6 +4,7 @@ import LinkGenerator from './LinkGenerator';
 import LinksList from './LinksList';
 import Sidebar from './Sidebar';
 import { supabase } from '../supabase';
+import { FaBook, FaMapMarkerAlt, FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaHome, FaQuestionCircle, FaLifeRing } from 'react-icons/fa';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
@@ -534,9 +535,25 @@ export default function Dashboard({ email }) {
     localStorage.setItem('dashboardActiveTab', active);
   }, [active]);
 
+  const tools = [
+    { label: 'Lessons', icon: <FaBook size={44} color="#E60033" />, desc: 'Tutorials and instructions' },
+    { label: 'Spy Location', icon: <FaMapMarkerAlt size={44} color="#25d366" />, desc: 'Real-time location' },
+    { label: 'WhatsApp', icon: <FaWhatsapp size={44} color="#25d366" />, desc: 'Conversation monitoring' },
+    { label: 'Instagram', icon: <FaInstagram size={44} color="#E1306C" />, desc: 'Coming soon...' },
+    { label: 'Facebook', icon: <FaFacebookF size={44} color="#1877f3" />, desc: 'Phishing captures' },
+    { label: 'Microphone', icon: <FaMicrophone size={44} color="#fff" />, desc: 'Real-time audio' },
+    { label: 'Support and refund', icon: <FaHome size={44} color="#E60033" />, desc: 'Help and refunds' },
+  ];
+  const sidebarItems = [
+    { label: 'Home', icon: <FaHome size={24} /> },
+    ...tools.map(t => ({ label: t.label, icon: t.icon })),
+    { label: 'FAQ', icon: <FaQuestionCircle size={22} /> },
+    { label: 'Support and refund', icon: <FaLifeRing size={22} /> },
+  ];
+
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
-      <Sidebar active={active} onSelect={setActive} />
+      <Sidebar active={active} setActive={setActive} items={sidebarItems} />
       <div className="dashboard-main" style={{
         flex: 1,
         marginLeft: 220,
