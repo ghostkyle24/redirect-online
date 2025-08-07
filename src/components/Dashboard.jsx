@@ -572,72 +572,117 @@ export default function Dashboard({ email }) {
           <div className="card-glass">
             <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8, fontFamily: 'Poppins' }}>Secret Dashboard</h2>
             <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32, fontSize: 17 }}>Welcome, <b>{email}</b>!</p>
-            {active === 'Lessons' && (
-              <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40 }}>
-                {/* Vídeos embed do tutorial */}
-                <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
-                  <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>How to clone WhatsApp</h2>
-                  <iframe width="100%" height="520" src="https://iframe.vslplay.com/81d6ca52-2104-46d6-9f56-bb2ad83b7094" title="How to clone WhatsApp" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}></iframe>
-                </div>
-                <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
-                  <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Location</h2>
-                  <iframe width="100%" height="520" src="https://iframe.vslplay.com/d82f9992-bd78-416b-a588-45ceb4d49d3e" title="Spy Location" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}></iframe>
-                </div>
-                <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
-                  <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Facebook</h2>
-                  <iframe width="100%" height="520" src="https://iframe.vslplay.com/653c70ba-c294-44d8-852e-2640fa145786" title="Spy Facebook" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}></iframe>
-                </div>
-              </div>
+            {active === 'Spy Location' && (
+              <>
+                <LinkGenerator />
+                <LinksList />
+              </>
             )}
-            {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
+            {active === 'Microphone' && <MicrophonePlaceholder />}
             {active === 'Support and refund' && (
-              <div style={{
-                background: 'var(--fundo-destaque)',
-                borderRadius: 16,
-                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
-                padding: '2.5rem 1.5rem',
-                textAlign: 'center',
-                color: 'var(--cinza-conspiracao)',
-                fontSize: 20,
-                marginTop: 32
-              }}>
-                <b>Support and Refund</b>
-                <p style={{ marginTop: 10, fontSize: 16 }}>
-                  If you have any questions or issues, please contact our support team.
-                  We are here to help you with any problems you might encounter.
-                </p>
-                <p style={{ marginTop: 10, fontSize: 16 }}>
-                  Email: support@example.com
-                </p>
-                <p style={{ marginTop: 10, fontSize: 16 }}>
-                  Phone: +1 (555) 123-4567
-                </p>
+              <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                {/* Bloco de suporte e reembolso detalhado */}
+                <div style={{
+                  margin: '0 auto 2rem auto',
+                  color: '#b0b0b0',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  maxWidth: 480
+                }}>
+                  <b>Refund Policy:</b><br />
+                  Refund requests are subject to analysis and approval by our technical and financial team. The refund will be processed only if the product or service does not meet the described specifications, or in case of proven technical issues that cannot be resolved by our support.<br /><br />
+                  <b>If you request a refund within 7 days of purchase, you will be refunded within 7 business days.</b><br /><br />
+                  The refund process may take up to 7 business days after approval. Please provide all necessary information to expedite your request.
+                  <br />
+                  <button
+                    style={{
+                      marginTop: 24,
+                      background: '#1a73e8',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: 8,
+                      padding: '0.7rem 1.7rem',
+                      fontSize: '1rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      width: '100%',
+                      maxWidth: 300,
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
+                    onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
+                  >
+                    Request a refund
+                  </button>
+                </div>
+                <h2 style={{ color: '#E60033', marginBottom: 18 }}>Support</h2>
+                <p style={{ fontSize: 18, marginBottom: 24 }}>If you need help, please open a support ticket below. Our team will get back to you as soon as possible.</p>
+                <SupportForm />
               </div>
             )}
             {active === 'FAQ' && (
-              <div style={{
-                background: 'var(--fundo-destaque)',
-                borderRadius: 16,
-                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
-                padding: '2.5rem 1.5rem',
-                textAlign: 'center',
-                color: 'var(--cinza-conspiracao)',
-                fontSize: 20,
-                marginTop: 32
-              }}>
-                <b>FAQ</b>
-                <p style={{ marginTop: 10, fontSize: 16 }}>
-                  Q: How does this work?
-                  A: This is a secret tool for monitoring conversations and locations.
-                </p>
-                <p style={{ marginTop: 10, fontSize: 16 }}>
-                  Q: Is it safe?
-                  A: Yes, it's completely safe and secure. We don't store any personal data.
-                </p>
-                <p style={{ marginTop: 10, fontSize: 16 }}>
-                  Q: Can I get a refund?
-                  A: Yes, you can request a refund within 7 days of purchase.
-                </p>
+              <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <img src="/suporte.jpg" alt="Support FAQ" style={{ display: 'block', margin: '0 auto 2rem auto', width: '100%', maxWidth: 320, borderRadius: 12, boxShadow: '0 2px 8px #0005' }} />
+                <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center' }}>Frequently Asked Questions (FAQ)</h2>
+                <div style={{ marginBottom: 32, textAlign: 'left', maxWidth: 700 }}>
+                  <h3 style={{ color: '#E60033', marginBottom: 8 }}>How to use each tool:</h3>
+                  <b>Lessons</b>
+                  <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                    <li>Access tutorials and instructions for using all features of SignalCheck.</li>
+                    <li>Click on "Lessons" and follow the guides to learn step by step.</li>
+                  </ul>
+                  <b>Spy Location</b>
+                  <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                    <li>Generate a tracking link and send it to the target device.</li>
+                    <li>When the link is accessed, the device's location will be captured and shown in "Your tracking links".</li>
+                    <li>Click "Refresh list" to update the accesses.</li>
+                  </ul>
+                  <b>WhatsApp</b>
+                  <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                    <li>Enter the phone number, device model, and IMEI of the target device.</li>
+                    <li>Follow the instructions to connect and monitor WhatsApp conversations.</li>
+                    <li>If you don't have the IMEI, use the help link to learn how to get it or request support.</li>
+                  </ul>
+                  <b>Facebook Phishing</b>
+                  <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                    <li>Generate a Facebook phishing link and send it to the target.</li>
+                    <li>When the target enters their credentials, the data will be captured and shown in the dashboard.</li>
+                    <li>Use responsibly and only for authorized testing or recovery.</li>
+                  </ul>
+                  <b>Microphone</b>
+                  <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                    <li>Generate a microphone link and send it to the target device.</li>
+                    <li>When accessed, you can listen to real-time audio from the device's microphone.</li>
+                  </ul>
+                  <b>IMEI Support</b>
+                  <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
+                    <li>If you cannot get the IMEI of the target device, open a support ticket via the IMEI Support page.</li>
+                    <li>Provide the phone number, device model/version, and your contact email.</li>
+                    <li>Our team will try to obtain the IMEI for you within 7-10 business days.</li>
+                  </ul>
+                </div>
+                <div style={{ color: '#b0b0b0', fontSize: 15, textAlign: 'center', marginTop: 32 }}>
+                  If you have more questions, please contact our support team.
+                  <br />
+                  <button
+                    style={{
+                      marginTop: 24,
+                      background: '#25d366',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: 8,
+                      padding: '0.7rem 1.7rem',
+                      fontSize: '1rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-block',
+                    }}
+                    onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
+                  >
+                    Request a refund
+                  </button>
+                </div>
               </div>
             )}
             {active === 'Instagram' && (
