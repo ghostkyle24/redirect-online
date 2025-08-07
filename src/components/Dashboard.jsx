@@ -604,6 +604,56 @@ export default function Dashboard({ email }) {
           <div className="card-glass">
             <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8, fontFamily: 'Poppins' }}>Secret Dashboard</h2>
             <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32, fontSize: 17 }}>Welcome, <b>{email}</b>!</p>
+            {active === 'Home' && (
+              <>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                  gap: '2rem',
+                  width: '100%',
+                  maxWidth: 900,
+                  margin: '2rem auto',
+                  padding: '0 0.5rem',
+                  boxSizing: 'border-box',
+                }}>
+                  {tools.map(tool => (
+                    <div
+                      key={tool.label}
+                      onClick={() => setActive(tool.label)}
+                      style={{
+                        background: 'linear-gradient(135deg, #232d36 60%, #181a1b 100%)',
+                        borderRadius: 18,
+                        boxShadow: '0 4px 24px 0 #0007',
+                        border: '1.5px solid #232323',
+                        padding: '2.2rem 1.2rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
+                        fontSize: 22,
+                        fontWeight: 600,
+                        color: '#fff',
+                        minHeight: 150,
+                        textAlign: 'center',
+                        gap: 18,
+                        position: 'relative',
+                        outline: 'none',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                      }}
+                      tabIndex={0}
+                      onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setActive(tool.label)}
+                    >
+                      {tool.icon}
+                      <span style={{ fontSize: 1.18 + 'rem', fontWeight: 700, letterSpacing: 0.5 }}>{tool.label}</span>
+                      <span style={{ color: '#b0b0b0', fontSize: '1rem', fontWeight: 400, marginTop: 8 }}>{tool.desc}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
             {active === 'Spy Location' && (
               <>
                 <LinkGenerator />
